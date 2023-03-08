@@ -1,0 +1,4 @@
+@use '../abstract' as *;
+.category {
+  color:hsl(var(--color-pink-text)); font-weight:200;
+}

@@ -1,0 +1,34 @@
+@use '../abstract' as *;
+.main-grid {
+  padding-inline:pxToRem(32); gap:pxToRem(32);
+  @media #{$break1} {
+    padding-inline:pxToRem(16);
+    &.is-nav-open {
+      .mobile-header-button {
+        &::before, &::after { transform:rotateZ(90deg); }
+      }
+      .side-nav { inset-inline-end:0; }
+    }
+  }
+  @media #{$break2} {
+    display: grid;
+    grid-template-areas:  "nav main"
+                          "nav footer";
+    grid-template-columns: pxToRem(220) 1fr;
+    .side-content { display:none; }
+  }
+  @media #{$break3open} {
+    display: grid;
+    grid-template-areas:  "nav main side"
+                          "nav footer footer";
+    grid-template-columns: pxToRem(220) 1fr pxToRem(220);
+  }
+}
+
+.side-nav     { grid-area:nav;    }
+.main-content { grid-area:main;   }
+.side-content { grid-area:side;   }
+.main-footer  { grid-area:footer; }
+
+.side-content {  }
+.main-content  { }
