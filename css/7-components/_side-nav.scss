@@ -1,9 +1,9 @@
 @use '../abstract' as *;
 .side-nav {
-  position:sticky; inset-block-start:0; padding-block:pxToRem(32); align-self:start;
+  position:sticky; inset-block-start:0; padding-block:pxToRem(30); align-self:start;
   &-list {
-    display:flex; flex-direction:column; gap:pxToRem(8); margin-block-start:pxToRem(16);
-    font-weight:200; font-size: var(--font-size-3);
+    display:flex; flex-direction:column; gap:pxToRem(8); margin-block-start:pxToRem(76);
+    font-weight:200; font-size:pxToRem(21);
   }
   &-item {}
   &-link {}

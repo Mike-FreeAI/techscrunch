@@ -1,6 +1,6 @@
 @use '../abstract' as *;
 .main-grid {
-  padding-inline:pxToRem(32); gap:pxToRem(32);
+  padding-inline:pxToRem(30); gap:pxToRem(30);
   @media #{$break1} {
     padding-inline:pxToRem(16);
     &.is-nav-open {
