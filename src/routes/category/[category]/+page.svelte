@@ -12,7 +12,7 @@
 			index < data.articles.documents.length - 1
 	);
 
-	let hasNextPage = data.articles.documents.length === PageSize.Articles + 1;
+	$: hasNextPage = data.articles.documents.length === PageSize.Articles + 1;
 
 	async function onLoadMore() {
 		const cursor = articles[articles.length-1].$id;
