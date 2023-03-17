@@ -6,7 +6,7 @@
 
 	export let data: PageData;
 
-	let articles = [...data.articles.documents].filter(
+	$: articles = [...data.articles.documents].filter(
 		(_article, index) =>
 			data.articles.documents.length <= PageSize.Articles ||
 			index < data.articles.documents.length - 1
