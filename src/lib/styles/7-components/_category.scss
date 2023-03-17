@@ -1,0 +1,34 @@
+@use '../abstract' as *;
+
+.category-main {
+	padding-bottom: pxToRem(16);
+	border-bottom: 2px solid hsl(var(--color-neutral-10));
+
+	.content {
+		max-width: 630px;
+
+		h1 {
+			color: black;
+			font-size: pxToRem(90);
+			line-height: pxToRem(90);
+			font-weight: 900;
+
+			@media #{$break2} {
+				font-size: pxToRem(40);
+				line-height: pxToRem(40);
+			}
+
+			@media #{$break1} {
+				font-size: pxToRem(40);
+				line-height: pxToRem(40);
+			}
+		}
+
+		h3 {
+			color: black;
+			font-size: pxToRem(18);
+			line-height: pxToRem(28);
+			margin-block-start: pxToRem(16);
+		}
+	}
+}

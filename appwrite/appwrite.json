@@ -1,0 +1,46 @@
+{
+    "projectId": "techCrunchs",
+    "projectName": "TechCrunchs",
+    "collections": [
+        {
+            "$id": "categories",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"team:admins\")",
+                "update(\"team:admins\")",
+                "delete(\"team:admins\")"
+            ],
+            "databaseId": "default",
+            "name": "categories",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 1024,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "teams": [
+        {
+            "$id": "admins",
+            "name": "admins"
+        }
+    ]
+}
