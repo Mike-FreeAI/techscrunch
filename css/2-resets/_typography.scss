@@ -1,0 +1,77 @@
+@use '../abstract' as *;
+
+/* remove bounce affect on Safari mac */
+html, body {
+  overscroll-behavior-y: none;
+}
+
+html {
+  //@include scroll(); //Eldad ask to try to use if without for MacOS affect (hide when not being use)
+  scrollbar-gutter: stable;
+  overflow: overlay; // fallback macOS
+  overflow-x: hidden;
+}
+
+body {
+  --p-body-text-color: var(--color-neutral-100);
+  font-family: var(--content-font);
+  -webkit-font-smoothing: antialiased;
+  font-weight: 400;
+  font-size: 87.5%; /* default equal to 14px */
+  line-height: 1.5;
+  color: hsl(var(--p-body-text-color));
+}
+
+/*
+  Native element affect
+
+  there also utilities classes:
+  - u-small-text
+  - u-font-bold
+*/
+small { font-size:pxToRem(14); }
+b     { font-weight:600; }
+code  {
+  font-family: var(--code-font);
+  font-size: pxToRem(14);
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  white-space: pre-wrap;
+}
+
+/** heading **/
+
+/* color for both heading */
+[class*="heading-"] {
+  --p-heading-text-color: var(--heading-text-color, var(--color-neutral-150));
+  color: hsl(var(--p-heading-text-color));
+  #{$theme-dark} & {
+    --p-heading-text-color: var(--heading-text-color, var(--color-neutral-10));
+  }
+}
+
+[class*="heading-level"] {
+  font-family: var(--heading-font, arial);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.heading-level {
+  @media #{$break1}, #{$break2} {
+    &-1 { font-size:var(--font-size-5); }
+    &-2 { font-size:var(--font-size-3); }
+    &-3 { font-size:var(--font-size-2); }
+    &-4 { font-size:var(--font-size-2); font-weight:600; }
+
+  }
+  @media #{$break3open} {
+    &-1 { font-size:var(--font-size-8); }
+    &-2 { font-size:var(--font-size-4); }
+    &-3 { font-size:var(--font-size-2); }
+  }
+}
+
+:where(body) :focus-visible {
+  /* focus styles */
+  box-shadow: var(--focus-box-shadow);
+}
