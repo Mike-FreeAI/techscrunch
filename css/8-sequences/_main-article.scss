@@ -1,8 +1,0 @@
-@use "../abstract" as *;
-.main-article {
-  max-inline-size:pxToRem(750); margin-inline:auto;
-  &-content {
-    font-size:125%;
-    p { margin-block-start:pxToRem(16); }
-  }
-}

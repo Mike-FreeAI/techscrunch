@@ -3,6 +3,7 @@
 	import type { LayoutData } from './$types';
 
 	let isMenuOpened = false;
+	let footerBanner = true;
 
 	export let data: LayoutData;
 </script>
@@ -94,15 +95,69 @@
 	</nav>
 
 	<main class="main-content">
-		<!-- <section class="u-margin-block-start-12" style="background-color:#ccc; min-height:264px;">
-			[PLACEHOLDER]
-		</section> -->
+		<section
+			class="u-margin-block-start-12"
+			style="background-color:rgba(0,0,0,0.05); color: rgba(0,0,0,0.15); min-height:264px; display: flex; align-items: center; justify-content: center;"
+		>
+			NOT AD
+		</section>
 		<slot />
 	</main>
 	<aside class="side-content">
-		<section class="u-margin-block-start-12" />
+		<section class="side-content-body u-margin-block-start-12">
+			<section class="side-register">
+				<div>
+					<section>
+						<h1>TechsCrunch Early Stage</h1>
+						<p>
+							April 20, 2023
+							<br />
+							Boston, MA
+						</p>
+					</section>
+					<div class="divider" />
+					<button class="u-strike">Register Now</button>
+				</div>
+			</section>
+			<section
+				class="u-margin-block-start-12"
+				style="background-color:rgba(0,0,0,0.05); color: rgba(0,0,0,0.15); min-height:264px; display: flex; align-items: center; justify-content: center;"
+			>
+				NOT AD
+			</section>
+		</section>
 	</aside>
 	<footer class="main-footer">
 		<p>© 2023 Techs Crunch. All rights reserved.</p>
 	</footer>
 </div>
+
+{#if footerBanner}
+<div class="bottom-banner">
+
+	<section>
+
+	<button class="close close-mobile" on:click={() => footerBanner = false}>
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+		  </svg>
+	</button>
+
+		<img src="/img/banner-logo.png" alt="OSS fund" />
+		<div class="divider" />
+		<h1>
+			Have a cool open source project and want to get some support? Join our funding. 
+
+		</h1>
+		<a href="https://appwrite.io/oss-fund"> Apply now </a>
+
+		<button class="close" on:click={() => footerBanner = false}>
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			  </svg>
+		</button>
+		  
+	</section>
+	<div class="divider" />
+</div>
+{/if}

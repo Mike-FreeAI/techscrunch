@@ -1,8 +1,0 @@
-@use '../abstract' as *;
-.sep-sections {
-  > *:where(:not(:first-child)) {
-    padding-block-start: pxToRem(16);
-    margin-block-start: pxToRem(4);
-    border-block-start: solid pxToRem(1) hsl(var(--color-border));
-  }
-}

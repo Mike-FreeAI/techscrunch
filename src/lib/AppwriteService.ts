@@ -9,20 +9,33 @@ export type Category = {
 	description: string;
 } & Models.Document;
 
+export type Author = {
+	articleId: string;
+	name: string;
+} & Models.Document;
+
+export type Promotion = {
+	articleId: string;
+} & Models.Document;
+
+export type Pin = {
+	articleId: string;
+} & Models.Document;
+
 export type Article = {
 	title: string;
-	author: string;
 	content: string;
 	categoryId: string;
 	imageId: string;
 
 	// Front-end only
 	category?: Category;
+	author?: Author;
 	verboseDate: string;
 } & Models.Document;
 
 export const PageSize = {
-	Articles: 2
+	Articles: 10
 };
 
 function getVerboseDate(dateStr: string) {
@@ -33,10 +46,15 @@ function getVerboseDate(dateStr: string) {
 }
 
 export const AppwriteService = {
+	getPins: async () => {
+		return await databases.listDocuments<Pin>('default', 'pins', [
+			Query.limit(4),
+		]);
+	},
 	listCategories: async () => {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.limit(10),
-			Query.orderDesc('$createdAt')
+			Query.equal('hidden', false)
 		]);
 	},
 	getCategories: async (categoryIds: string[]) => {
@@ -47,24 +65,41 @@ export const AppwriteService = {
 	getCategory: async (categoryId: string) => {
 		return await databases.getDocument<Category>('default', 'categories', categoryId);
 	},
+	getAuthor: async (articleId: string) => {
+		const response = await databases.listDocuments<Author>('default', 'authors', [
+			Query.limit(1),
+			Query.orderDesc('$id'),
+			Query.equal('articleId', articleId)
+		]);
+
+		return response.documents[0] ?? undefined;
+	},
+	getAuthors: async (articleIds: string[]) => {
+		return await databases.listDocuments<Author>('default', 'authors', [
+			Query.equal('articleId', articleIds)
+		]);
+	},
 	getArticle: async (articleId: string) => {
 		const article = await databases.getDocument<Article>('default', 'articles', articleId);
 
 		article.verboseDate = getVerboseDate(article.$createdAt);
-		article.category = await AppwriteService.getCategory(article.categoryId);
+
+		const [ category, author ] = await Promise.all([
+			await AppwriteService.getCategory(article.categoryId),
+			await AppwriteService.getAuthor(article.$id),
+		]);
+
+		article.category = category;
+		article.author = author;
 
 		return article;
 	},
-	getArticles: async (categoryId?: string, cursor?: string) => {
-		const queries = [Query.limit(PageSize.Articles + 1), Query.orderDesc('$createdAt')];
-
-		if (cursor) {
-			queries.push(Query.cursorAfter(cursor));
+	getArticles: async (queries?: string[]) => {
+		if(!queries) {
+			queries = [];
 		}
 
-		if (categoryId) {
-			queries.push(Query.equal('categoryId', categoryId));
-		}
+		queries.push(...[Query.limit(PageSize.Articles + 1)]);
 
 		const articles = await databases.listDocuments<Article>('default', 'articles', queries);
 
@@ -76,20 +111,37 @@ export const AppwriteService = {
 		});
 
 		const categoryIds = [...new Set(articles.documents.map((article) => article.categoryId))];
-		if (categoryIds.length > 0) {
-			const categories = await AppwriteService.getCategories(categoryIds);
+		const articleIds = [...new Set(articles.documents.map((article) => article.$id))];
 
-			articles.documents = articles.documents.map((article) => {
-				return {
-					...article,
-					category: categories.documents.find((category) => category.$id === article.categoryId)
-				};
-			});
-		}
+		const [ categories, authors ] = await Promise.all([
+			(async () => {
+				if (categoryIds.length > 0) {
+					return (await AppwriteService.getCategories(categoryIds)).documents;
+				}
+
+				return [];
+			})(),
+
+			(async () => {
+				if (articleIds.length > 0) {
+					return (await AppwriteService.getAuthors(articleIds)).documents;
+				}
+
+				return [];
+			})()
+		]);
+
+		articles.documents = articles.documents.map((article) => {
+			return {
+				...article,
+				category: categories.find((category) => category.$id === article.categoryId),
+				author: authors.find((author) => author.articleId === article.$id),
+			};
+		});
 
 		return articles;
 	},
-	getThumbnail: (fileId: string, size?: number) => {
-		return storage.getFilePreview('thumbnails', fileId, size ? size : 500).toString();
+	getThumbnail: (fileId: string, width?: number, height?: number) => {
+		return storage.getFilePreview('thumbnails', fileId, width ? width : 500, height).toString();
 	}
 };
