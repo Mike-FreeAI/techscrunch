@@ -1,4 +1,21 @@
 @use '../abstract' as *;
 .category {
-  color:hsl(var(--color-pink-text)); font-weight:200;
+	color: hsl(var(--color-pink-text));
+	font-weight: 200;
+	margin-bottom: pxToRem(8);
+}
+
+.category-featured {
+	color: hsl(var(--color-pink-text));
+	font-weight: 600;
+	font-size: pxToRem(20);
+	margin-bottom: pxToRem(8);
+}
+
+.category-heading {
+	margin-bottom: pxToRem(8);
+}
+
+.category-content {
+	margin-bottom: pxToRem(8);
 }
