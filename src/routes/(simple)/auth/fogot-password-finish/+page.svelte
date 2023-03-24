@@ -1,1 +1,1 @@
-<p>Forgot Password Page</p>
+<p>Forgot Password Page - Step2</p>
