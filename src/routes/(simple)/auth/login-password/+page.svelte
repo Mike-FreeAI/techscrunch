@@ -12,7 +12,7 @@
       <img src="/img/techscrunch-logo.svg" class="u-block u-margin-inline-auto" alt="Techs Crunch" width="70">
       <address class="u-block u-text-center u-margin-block-start-16">some-email@gmail.com</address>
       <h1 class="heading-level-2 u-margin-block-start-16 u-text-center">Enter password</h1>
-      <p class="u-text-center">fo Finish sign in</p>
+      <p class="u-text-center">to Finish sign in</p>
 
       <form class="form u-margin-block-start-64">
         <ul class="form-list">
