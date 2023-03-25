@@ -197,6 +197,7 @@
 .u-margin-inline-auto     { margin-inline:auto; }
 .u-margin-inline-56       { margin-inline:pxToRem(65); }
 .u-margin-inline-start-auto { margin-inline-start:auto; }
+.u-margin-inline-end-auto   { margin-inline-end:auto; }
 .u-margin-block-start-auto  { margin-block-start:auto; }
 
 .u-margin-block-start-negative-56 { margin-block-start:pxToRem(-56); }
@@ -232,11 +233,6 @@
 
 .u-aspect-16-9 { aspect-ratio:16 / 9; object-fit:cover; }
 
-//.u-border-radius-4        { border-radius:var(--border-radius-xsmall);   }
-//.u-border-radius-8        { border-radius:var(--border-radius-small);    }
-//.u-border-radius-16       { border-radius:var(--border-radius-medium);   }
-//.u-border-radius-24       { border-radius:var(--border-radius-large);    }
-//.u-border-radius-circle   { border-radius:var(--border-radius-circular); }
 
 /* container queries */
 .u-container-inline-size { container-type: inline-size; }
