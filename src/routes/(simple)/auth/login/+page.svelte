@@ -15,7 +15,7 @@
       <form class="form u-margin-block-start-64">
         <ul class="form-list">
           <li class="form-item">
-            <input class="input-text" type="email" placeholder="Email address">
+            <input class="input-text" type="email" placeholder="Email address" aria-label="Email address">
           </li>
         </ul>
 
