@@ -146,17 +146,17 @@
 		<img src="/img/banner-logo.png" alt="OSS fund" />
 		<div class="divider" />
 		<h1>
-			Have a cool open source project and want to get some support? Join our funding. 
+			Have a cool open source project and want to get some support? Join our funding.
 
 		</h1>
-		<a href="https://appwrite.io/oss-fund"> Apply now </a>
+		<a class="button" href="https://appwrite.io/oss-fund"> Apply now </a>
 
 		<button class="close" on:click={() => footerBanner = false}>
 			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor">
 				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 			  </svg>
 		</button>
-		  
+
 	</section>
 	<div class="divider" />
 </div>
