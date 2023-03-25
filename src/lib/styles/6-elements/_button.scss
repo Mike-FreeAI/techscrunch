@@ -1,0 +1,27 @@
+@use '../abstract' as *;
+
+.button {
+  display:grid; place-content:center;
+  flex-shrink:0; cursor:pointer;
+  background-color:hsl(var(--color-primary-100)); color:white;
+  padding-inline:pxToRem(28);
+  block-size:pxToRem(40);
+  &:hover { opacity:0.8; }
+}
+
+.button-reverse {
+  display:grid; place-content:center;
+  flex-shrink:0; cursor:pointer;
+  background-color:white; color:hsl(var(--color-primary-100));
+  border:solid pxToRem(1) hsl(var(--color-primary-100));
+  padding-inline:pxToRem(28);
+  padding-block:pxToRem(10);
+  block-size:pxToRem(40);
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  background-clip: content-box;
+  background-origin: content-box;
+  &:hover { opacity:0.8; }
+}

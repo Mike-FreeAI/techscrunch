@@ -1,0 +1,19 @@
+@use '../abstract' as *;
+.form {
+  &-list {
+    display:flex; flex-direction:column; gap:pxToRem(24);
+  }
+  &-item {}
+}
+
+
+.input-text {
+  block-size:pxToRem(42); inline-size:100%;
+  padding-inline:pxToRem(12); padding-block-start:pxToRem(12);
+  border-block-end: pxToRem(1) solid #b9bdc5;
+  &:focus {border-block-end-color: hsl(var(--color-primary-100)); box-shadow:none; }
+}
+
+.button {
+
+}

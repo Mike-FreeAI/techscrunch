@@ -167,18 +167,6 @@
 			width: 100%;
 		}
 
-		a {
-			flex-shrink: 0;
-			background-color: rgba(240, 46, 101, 1);
-			color: white;
-			padding: pxToRem(14) pxToRem(28);
-			cursor: pointer;
-
-			&:hover {
-				opacity: 0.8;
-			}
-		}
-
 		.close-mobile {
 			position: absolute;
 			right: pxToRem(12);
