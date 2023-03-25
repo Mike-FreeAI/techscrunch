@@ -6,3 +6,7 @@
 .side-nav-link:hover {
   color: hsl(var(--color-pink-text));
 }
+
+.link-on-hover {
+  &:hover, &:focus { color:hsl(var(--color-pink-text)); }
+}
