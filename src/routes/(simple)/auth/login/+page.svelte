@@ -23,17 +23,6 @@
           <span class="text">Next</span>
         </button>
 
-        <div class="u-flex u-main-space-between u-margin-block-start-24">
-          <label>
-            <input type="checkbox" />
-            <span class="text">Stay signed in</span>
-          </label>
-
-          <a href="" class="link">
-            <span class="text">Forgot username?</span>
-          </a>
-        </div>
-
         <button class="button-reverse u-margin-block-start-24 u-width-full-line">
           <span class="text">Create an account</span>
         </button>
