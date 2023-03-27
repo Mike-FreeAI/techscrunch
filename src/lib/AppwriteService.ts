@@ -1,8 +1,9 @@
-import { Client, Databases, Query, Storage, type Models } from 'appwrite';
+import { Account, Client, Databases, ID, Query, Storage, type Models } from 'appwrite';
 
 const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject('techCrunchs');
 const databases = new Databases(client);
 const storage = new Storage(client);
+const account = new Account(client);
 
 export type Category = {
 	name: string;
@@ -42,15 +43,35 @@ export const PageSize = {
 function getVerboseDate(dateStr: string) {
 	const date = new Date(dateStr);
 	const hours = date.getHours();
-	const verboseDate = `${hours % 12}:${date.getMinutes()} ${hours >= 12 ? 'PM' : 'AM'} • ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+	const verboseDate = `${hours % 12}:${date.getMinutes()} ${
+		hours >= 12 ? 'PM' : 'AM'
+	} • ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
 	return verboseDate;
 }
 
 export const AppwriteService = {
+	oauthLogin: () => {
+		account.createOAuth2Session('github', `${window.location.origin}/`, `${window.location.origin}/auth/login`);
+	},
+	login: async (email: string, password: string) => {
+		return await account.createEmailSession(email, password);
+	},
+	register: async (name: string, email: string, password: string) => {
+		return await account.create(ID.unique(), email, password, name);
+	},
+	logout: async () => {
+		return await account.deleteSession('current');
+	},
+	getAccount: async () => {
+		try {
+			return await account.get();
+		} catch (err) {
+			console.log(err);
+			return null;
+		}
+	},
 	getPins: async () => {
-		return await databases.listDocuments<Pin>('default', 'pins', [
-			Query.limit(4),
-		]);
+		return await databases.listDocuments<Pin>('default', 'pins', [Query.limit(4)]);
 	},
 	listCategories: async () => {
 		return await databases.listDocuments<Category>('default', 'categories', [
@@ -89,8 +110,10 @@ export const AppwriteService = {
 
 		const obj: { [key: string]: boolean } = {};
 
-		for(const articleId of articleIds) {
-			obj[articleId] = response.documents.find((promotion) => promotion.articleId === articleId) ? true : false;
+		for (const articleId of articleIds) {
+			obj[articleId] = response.documents.find((promotion) => promotion.articleId === articleId)
+				? true
+				: false;
 		}
 
 		return obj;
@@ -105,7 +128,7 @@ export const AppwriteService = {
 
 		article.verboseDate = getVerboseDate(article.$createdAt);
 
-		const [ category, author, promoted ] = await Promise.all([
+		const [category, author, promoted] = await Promise.all([
 			await AppwriteService.getCategory(article.categoryId),
 			await AppwriteService.getAuthor(article.$id),
 			await AppwriteService.isPromoted(article.$id)
@@ -118,7 +141,7 @@ export const AppwriteService = {
 		return article;
 	},
 	getArticles: async (queries?: string[]) => {
-		if(!queries) {
+		if (!queries) {
 			queries = [];
 		}
 
@@ -136,7 +159,7 @@ export const AppwriteService = {
 		const categoryIds = [...new Set(articles.documents.map((article) => article.categoryId))];
 		const articleIds = [...new Set(articles.documents.map((article) => article.$id))];
 
-		const [ categories, authors, promotions ] = await Promise.all([
+		const [categories, authors, promotions] = await Promise.all([
 			(async () => {
 				if (categoryIds.length > 0) {
 					return (await AppwriteService.getCategories(categoryIds)).documents;
