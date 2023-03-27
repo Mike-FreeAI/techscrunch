@@ -50,6 +50,9 @@ function getVerboseDate(dateStr: string) {
 }
 
 export const AppwriteService = {
+	resetPassword: async (email: string) => {
+		return await account.createRecovery(email, `${window.location.origin}/auth/password-reset`);
+	},
 	oauthLogin: () => {
 		account.createOAuth2Session('github', `${window.location.origin}/`, `${window.location.origin}/auth/login`);
 	},

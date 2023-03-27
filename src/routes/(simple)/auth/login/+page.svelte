@@ -22,6 +22,15 @@
 			error = err.message;
 		}
 	}
+
+	async function onPasswordReset() {
+		try {
+			await AppwriteService.resetPassword(email);
+			step = 'forgot-finish';
+		} catch (err: any) {
+			error = err.message;
+		}
+	}
 </script>
 
 <img
@@ -58,30 +67,57 @@
 		{/if}
 
 		<div class="u-margin-block-start-24">
-			<button on:click={() => step = 'forgot'} class="link u-block u-width-fit-content u-margin-inline-auto"
-				>Forgot password?</button
+			<button
+				on:click={() => (step = 'forgot')}
+				class="link u-block u-width-fit-content u-margin-inline-auto">Forgot password?</button
 			>
 		</div>
 	</form>
 {:else if step === 'forgot'}
-<address class="u-block u-text-center u-margin-block-start-16">{email}</address>
-<h1 class="heading-level-2 u-margin-block-start-16 u-text-center">Select an Option</h1>
-<p class="u-text-center">to sign in to your account</p>
+	<address class="u-block u-text-center u-margin-block-start-16">{email}</address>
+	<h1 class="heading-level-2 u-margin-block-start-16 u-text-center">Select an Option</h1>
+	<p class="u-text-center">to sign in to your account</p>
 
-<form class="form u-margin-block-start-32">
-	<ul class="form-list">
-		<li class="form-item">
-			<button class="button-reverse u-width-full-line u-text-center" style="block-size:4rem;">
-				<span class="u-block heading-level-3">Email password reset</span>
-				<span class="u-block">{email}</span>
-			</button>
-		</li>
-	</ul>
+	<form class="form u-margin-block-start-32">
+		<ul class="form-list">
+			<li class="form-item">
+				<button
+					on:click={onPasswordReset}
+					class="button-reverse u-width-full-line u-text-center"
+					style="block-size:4rem;"
+				>
+					<span class="u-block heading-level-3">Email password reset</span>
+					<span class="u-block">{email}</span>
+				</button>
+			</li>
+		</ul>
 
-	<button on:click={() => step = 'password'} class="link u-block u-width-fit-content u-margin-inline-auto u-margin-block-start-16"
-		>Go back</button
+		{#if error}
+			<p class="u-margin-block-start-12 u-text-center u-color-text-danger">{error}</p>
+		{/if}
+
+		<button
+			on:click={() => (step = 'password')}
+			class="link u-block u-width-fit-content u-margin-inline-auto u-margin-block-start-16"
+			>Go back</button
+		>
+	</form>
+{:else if step === 'forgot-finish'}
+	<h1 class="heading-level-2 u-margin-block-start-16 u-text-center">Verification email sent</h1>
+	<address class="u-block u-text-center u-margin-block-start-16">to {email}</address>
+
+	<p class="u-margin-block-start-48 u-bold">
+		Click on secure link in the email to set up a new password.
+	</p>
+
+	<!-- <p class="u-margin-block-start-32 u-text-center">Resend verification email in <span>55</span></p> -->
+
+	<button
+		on:click={() => (step = 'forgot')}
+		class="link u-block u-width-fit-content u-margin-inline-auto u-margin-block-start-16"
 	>
-</form>
+		Try another way to sign in
+	</button>
 {:else}
 	<h1 class="heading-level-2 u-margin-block-start-48 u-text-center">Sign in</h1>
 
