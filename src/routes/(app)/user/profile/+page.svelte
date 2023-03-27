@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { AppwriteService } from '$lib/AppwriteService';
 	import { authStore } from '$lib/stores/authStore';
+  import { modalStore } from '$lib/stores/modalStore';
 
 	async function onLogout() {
 		await AppwriteService.logout();
@@ -22,8 +23,8 @@
 <section class="u-margin-block-start-40">
 	<header class="u-flex u-flex-wrap u-gap-32 u-padding-block-12 u-sep-block-end">
 		<h2 class="heading-level-2 u-margin-inline-end-auto">Account Details</h2>
-		<a href="" class="link">Change Password</a>
-		<a href="" class="link">Edit Account</a>
+		<button on:click={() => $modalStore = { type: 'changePassword' }} class="link">Change Password</button>
+		<button on:click={() => $modalStore = { type: 'editAccount' }} class="link">Edit Account</button>
 	</header>
 	<table class="user-table">
 		<tr>
@@ -31,7 +32,7 @@
 			<td class="u-bold">{$authStore?.name}</td>
 		</tr>
 		<th>Email</th>
-		<td><a href={`mailto:${authStore?.email}`} class="link">{$authStore?.email}</a></td>
+		<td><a href={`mailto:${$authStore?.email}`} class="link">{$authStore?.email}</a></td>
 	</table>
 	<div class="u-flex u-margin-block-start-64">
 		<button on:click={onLogout} class="button u-margin-inline-start-auto">

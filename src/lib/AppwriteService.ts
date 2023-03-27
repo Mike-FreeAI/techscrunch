@@ -1,6 +1,6 @@
 import { Account, Client, Databases, ID, Query, Storage, type Models } from 'appwrite';
 
-const client = new Client().setEndpoint('https://cloud.appwrite.io/v1').setProject('techCrunchs');
+const client = new Client().setEndpoint('https://appwrite.techscrunch.dev/v1').setProject('techCrunchs');
 const databases = new Databases(client);
 const storage = new Storage(client);
 const account = new Account(client);
@@ -52,6 +52,9 @@ function getVerboseDate(dateStr: string) {
 export const AppwriteService = {
 	resetPassword: async (email: string) => {
 		return await account.createRecovery(email, `${window.location.origin}/auth/password-reset`);
+	},
+	resetPasswordFinish: async (userId: string, secret: string, password: string, passwordAgain: string) => {
+		return await account.updateRecovery(userId, secret, password, passwordAgain)
 	},
 	oauthLogin: () => {
 		account.createOAuth2Session('github', `${window.location.origin}/`, `${window.location.origin}/auth/login`);

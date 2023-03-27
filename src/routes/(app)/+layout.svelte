@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { AppwriteService } from '$lib/AppwriteService';
+  import Modal from '$lib/components/Modal.svelte';
 	import { authStore } from '$lib/stores/authStore';
 	import '$lib/styles/index.scss';
 	import { onMount } from 'svelte';
@@ -190,3 +191,6 @@
 		<div class="divider" />
 	</div>
 {/if}
+
+
+<Modal />
