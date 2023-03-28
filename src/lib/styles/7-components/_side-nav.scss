@@ -20,10 +20,10 @@
   &-join {
     display: block;
     color: hsl(var(--color-warning-100));
-    &:hover,
-    &:focus {
-      color: hsl(var(--color-warning-120));
-    }
+    //&:hover,
+    //&:focus {
+    //  color: hsl(var(--color-warning-120));
+    //}
   }
 
   @media #{$break1} {

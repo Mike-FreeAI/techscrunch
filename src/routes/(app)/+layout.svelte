@@ -53,8 +53,8 @@
 			<a href="/" class="u-block is-not-mobile">
 				<img src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="Tech Scrunch" width="70" />
 			</a>
-			<a class="side-nav-join heading-level-3 u-margin-block-start-20" href="/"
-				>TechScrunch</a
+			<div class="side-nav-join heading-level-3 u-margin-block-start-20"
+				>Tech News</div
 			>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
 				{#if !$authStore}
