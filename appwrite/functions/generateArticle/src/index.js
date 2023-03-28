@@ -12,7 +12,7 @@ async function generateThumbnail(topic, storage, req) {
 		}),
 		{
 			headers: {
-				Authorization: 'Bearer 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',
+				Authorization: 'Bearer ' + req.variables['OPEN_API_KEY'],
 				'Content-Type': 'application/json'
 			}
 		}

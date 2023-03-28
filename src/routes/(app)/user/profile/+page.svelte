@@ -37,6 +37,7 @@
 	<label for="file-upload" class="u-cursor-pointer">
 		{#if $authStore?.prefs?.imageId}
 			<img
+				loading="lazy"
 				class="u-block u-margin-block-start-40 u-rounded-full"
 				width="64"
 				src={AppwriteService.getProfileImage($authStore.prefs.imageId, 64, 64)}

@@ -26,6 +26,7 @@
 	<div class="main-article-content u-margin-block-start-24">
 		<figure class="">
 			<img
+				loading="lazy"
 				class="u-margin-block-start-4"
 				alt=""
 				src={AppwriteService.getThumbnail(data.article.imageId, 750, 400)}

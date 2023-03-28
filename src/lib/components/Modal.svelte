@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { AppwriteService, type Category } from '$lib/AppwriteService';
 	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
@@ -47,7 +47,7 @@
 	const unsub2 = modalStore.subscribe(async (snapshot) => {
 		isLoading = false;
 		error = '';
-		
+
 		if (snapshot?.type === 'addArticle') {
 			if (categories.length <= 0) {
 				categories = (await AppwriteService.listCategories()).documents;
@@ -60,7 +60,7 @@
 	});
 
 	async function onSubmit() {
-		if(isLoading) {
+		if (isLoading) {
 			return;
 		}
 
@@ -76,6 +76,10 @@
 				await AppwriteService.changePassword(oldPassword, password);
 				error = '';
 				$modalStore = null;
+
+				oldPassword = '';
+				password = '';
+				passwordAgain = '';
 			} catch (err: any) {
 				error = err.message;
 			} finally {
@@ -96,7 +100,7 @@
 			} finally {
 				isLoading = false;
 			}
-		} else if($modalStore?.type === 'addArticle') {
+		} else if ($modalStore?.type === 'addArticle') {
 			try {
 				const res = await AppwriteService.generateArticle(title, category);
 
@@ -105,6 +109,9 @@
 
 				error = '';
 				$modalStore = null;
+
+				title = '';
+				category = '';
 
 				goto(url);
 			} catch (err: any) {
@@ -258,9 +265,14 @@
 					<div class="u-flex u-main-end u-gap-16">
 						<button type="submit" class="button is-text">
 							{#if isLoading}
-							<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+								<div class="lds-ring">
+									<div />
+									<div />
+									<div />
+									<div />
+								</div>
 							{:else}
-							<span class="text">{modals[$modalStore.type]?.action ?? 'Save'}</span>
+								<span class="text">{modals[$modalStore.type]?.action ?? 'Save'}</span>
 							{/if}
 						</button>
 					</div>

@@ -68,6 +68,7 @@
 						<a class="link-on-hover u-flex u-gap-8 u-cross-center" href="/user/profile">
 							{#if $authStore?.prefs?.imageId}
 								<img
+									loading="lazy"
 									class="u-block u-rounded-full"
 									width="32"
 									src={AppwriteService.getProfileImage($authStore.prefs.imageId, 32, 32)}
@@ -136,9 +137,9 @@
 	</nav>
 
 	<main class="main-content">
-		<section class="u-margin-block-start-12">
+		<!-- <section class="u-margin-block-start-12">
 			<img src="/img/appwrite-banner.png" class="u-aspect-wide" alt="Cloud banner" />
-		</section>
+		</section> -->
 		<slot />
 	</main>
 	<aside class="side-content">
@@ -148,9 +149,9 @@
 					<section>
 						<h1>Appwrite Cloud Private Beta</h1>
 						<p>
-							Join Now
+							Join the
 							<br />
-							Free Credits
+							Waiting List
 						</p>
 					</section>
 					<div class="divider" />

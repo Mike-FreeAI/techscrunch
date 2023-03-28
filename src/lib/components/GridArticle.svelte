@@ -23,6 +23,7 @@
 				</p>
 				<figure class="articles-grid-item-image">
 					<img
+						loading="lazy"
 						class="u-margin-block-start-4"
 						src={AppwriteService.getThumbnail(article.imageId, 300, 160)}
 						alt=""
@@ -47,6 +48,7 @@
 				</header>
 				<figure class="articles-grid-item-image">
 					<img
+						loading="lazy"
 						class="u-margin-block-start-4"
 						src={AppwriteService.getThumbnail(article.imageId, 600, 300)}
 						alt=""
