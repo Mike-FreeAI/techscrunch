@@ -5,6 +5,8 @@
 	gap: pxToRem(32);
 	&-item {
 		display: contents;
+    .category { margin-block-end:pxToRem(8); }
+    .heading-level-2 { font-size:pxToRem(27); line-height:1.2; }
 		&-article {
 			display: contents;
 		}
