@@ -32,6 +32,7 @@
 	class="u-block u-margin-inline-auto"
 	alt="Tech Scrunch"
 	width="70"
+	height="43"
 />
 
 <p class="u-margin-block-start-16 u-text-center">Hi, there!</p>

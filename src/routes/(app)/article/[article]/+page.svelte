@@ -30,6 +30,8 @@
 				class="u-margin-block-start-4"
 				alt=""
 				src={AppwriteService.getThumbnail(data.article.imageId, 750, 400)}
+				width="750"
+				height="400"
 			/>
 			<!-- <figcaption>Took by the greatest Pikachu</figcaption> -->
 		</figure>

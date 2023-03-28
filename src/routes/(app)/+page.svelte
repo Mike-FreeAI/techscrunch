@@ -25,6 +25,8 @@
 						class="u-margin-block-start-4"
 						alt=""
 						src={AppwriteService.getThumbnail(topArticle.imageId, 560, 350)}
+						width="560"
+						height="350"
 					/>
 				</a>
 			</article>

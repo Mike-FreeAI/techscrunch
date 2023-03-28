@@ -16,7 +16,7 @@
         <h6 class="writer-profession">Reporter</h6>
       </div>
       <div>
-        <img loading="lazy" class="u-block" width="200" src={data.author.image} alt="">
+        <img loading="lazy" class="u-block" width="200" height="200" src={data.author.image} alt="">
       </div>
     </div>
     <p class="u-margin-block-start-20">{data.author.bio}</p>

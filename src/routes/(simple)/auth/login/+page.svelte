@@ -38,6 +38,7 @@
 	class="u-block u-margin-inline-auto"
 	alt="Tech Scrunch"
 	width="70"
+	height="43"
 />
 {#if step === 'password'}
 	<address class="u-block u-text-center u-margin-block-start-16">{email}</address>

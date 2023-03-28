@@ -3,7 +3,7 @@
 	import { AppwriteService } from '$lib/AppwriteService';
 	import Modal from '$lib/components/Modal.svelte';
 	import { authStore } from '$lib/stores/authStore';
-  import { modalStore } from '$lib/stores/modalStore';
+	import { modalStore } from '$lib/stores/modalStore';
 	import '$lib/styles/index.scss';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
@@ -28,9 +28,14 @@
 				class="mobile-header-logo"
 				alt="Tech Scrunch"
 				width="70"
+				height="43"
 			/>
 		</a>
-		<button class="mobile-header-button" on:click={() => (isMenuOpened = !isMenuOpened)}>
+		<button
+			aria-label="Toggle menu"
+			class="mobile-header-button"
+			on:click={() => (isMenuOpened = !isMenuOpened)}
+		>
 			<span class="hamburger-icon" />
 		</button>
 	</header>
@@ -42,20 +47,29 @@
 					class="mobile-header-logo"
 					alt="Tech Scrunch"
 					width="70"
+					height="43"
 				/>
 			</a>
-			<button class="mobile-header-button" on:click={() => (isMenuOpened = !isMenuOpened)}>
+			<button
+				aria-label="Toggle menu"
+				class="mobile-header-button"
+				on:click={() => (isMenuOpened = !isMenuOpened)}
+			>
 				<span class="hamburger-icon" />
 			</button>
 		</header>
 
 		<div class="side-nav-content">
 			<a href="/" class="u-block is-not-mobile">
-				<img src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="Tech Scrunch" width="70" />
+				<img
+					height="43"
+					src="/img/techscrunch-logo.svg"
+					class="side-nav-logo"
+					alt="Tech Scrunch"
+					width="70"
+				/>
 			</a>
-			<div class="side-nav-join heading-level-3 u-margin-block-start-20"
-				>Tech News</div
-			>
+			<div class="side-nav-join heading-level-3 u-margin-block-start-20">Tech News</div>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
 				{#if !$authStore}
 					<li class="side-nav-item">
@@ -71,23 +85,22 @@
 									loading="lazy"
 									class="u-block u-rounded-full"
 									width="32"
+									height="32"
 									src={AppwriteService.getProfileImage($authStore.prefs.imageId, 32, 32)}
 									alt=""
 								/>
 							{:else}
-								<img
-									class="u-block"
-									width="32"
-									src="/img/profile.jpg"
-									alt=""
-								/>
+								<img class="u-block" width="32" height="32" src="/img/profile.webp" alt="" />
 							{/if}
 
 							<span class="text">{$authStore?.name}</span>
 						</a>
 					</li>
 					<li class="side-nav-item">
-						<button on:click={() => $modalStore = { type: 'addArticle' }} class="side-nav-link u-color-text-pink">
+						<button
+							on:click={() => ($modalStore = { type: 'addArticle' })}
+							class="side-nav-link u-color-text-pink"
+						>
 							<span class="text">Add Article</span>
 						</button>
 					</li>
@@ -138,7 +151,7 @@
 
 	<main class="main-content">
 		<!-- <section class="u-margin-block-start-12">
-			<img src="/img/appwrite-banner.png" class="u-aspect-wide" alt="Cloud banner" />
+			<img src="/img/appwrite-banner.webp" class="u-aspect-wide" alt="Cloud banner" />
 		</section> -->
 		<slot />
 	</main>
@@ -159,7 +172,13 @@
 				</div>
 			</section>
 			<section class="u-margin-block-start-12">
-				<img src="/img/cloud-banner.png" class="u-aspect-1-1" alt="Cloud banner" />
+				<img
+					height="270"
+					width="270"
+					src="/img/cloud-banner.webp"
+					class="u-aspect-1-1"
+					alt="Cloud banner"
+				/>
 			</section>
 		</section>
 	</aside>
@@ -171,7 +190,11 @@
 {#if footerBanner}
 	<div class="bottom-banner">
 		<section>
-			<button class="close close-mobile" on:click={() => (footerBanner = false)}>
+			<button
+				aria-label="Hide banner"
+				class="close close-mobile"
+				on:click={() => (footerBanner = false)}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"
@@ -183,12 +206,12 @@
 				</svg>
 			</button>
 
-			<img src="/img/banner-logo.png" alt="OSS fund" />
+			<img width="114" height="20" src="/img/banner-logo.webp" alt="OSS fund" />
 			<div class="divider" />
 			<h1>Have a cool open source project and want to get some support? Join our funding.</h1>
 			<a class="button" href="https://appwrite.io/oss-fund"> Apply now </a>
 
-			<button class="close" on:click={() => (footerBanner = false)}>
+			<button aria-label="Hide banner" class="close" on:click={() => (footerBanner = false)}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					fill="none"

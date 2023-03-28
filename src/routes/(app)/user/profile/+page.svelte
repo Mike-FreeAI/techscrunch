@@ -40,11 +40,12 @@
 				loading="lazy"
 				class="u-block u-margin-block-start-40 u-rounded-full"
 				width="64"
+				height="64"
 				src={AppwriteService.getProfileImage($authStore.prefs.imageId, 64, 64)}
 				alt=""
 			/>
 		{:else}
-			<img class="u-block u-margin-block-start-40" width="64" src="/img/profile.jpg" alt="" />
+			<img class="u-block u-margin-block-start-40" width="64" height="64" src="/img/profile.webp" alt="" />
 		{/if}
 	</label>
 	<input
