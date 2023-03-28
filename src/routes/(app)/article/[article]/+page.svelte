@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { AppwriteService } from '$lib/AppwriteService';
+  import Tags from '$lib/components/Tags.svelte';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -44,3 +45,5 @@
 		</div>
 	</div>
 </article>
+
+<Tags title={'TechsCrunch | ' + data.article.title} cover={AppwriteService.getThumbnail(data.article.imageId, 1280)} description={data.article.content.substring(0,150) + '...'} />

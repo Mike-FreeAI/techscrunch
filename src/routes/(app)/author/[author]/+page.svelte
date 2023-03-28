@@ -1,5 +1,6 @@
 <script lang="ts">
 	import GridArticles from '$lib/components/GridArticles.svelte';
+  import Tags from '$lib/components/Tags.svelte';
 	import { Query } from 'appwrite';
 
 	import type { PageData } from './$types';
@@ -24,3 +25,6 @@
 
   <GridArticles queries={[Query.equal('authorId', data.author.id)]} initData={data.articles} />
 </section>
+
+
+<Tags title={'TechsCrunch | ' + data.author.name} description={data.author.bio} />

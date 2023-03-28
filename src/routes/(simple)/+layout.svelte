@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Tags from '$lib/components/Tags.svelte';
 	import '$lib/styles/index.scss';
 </script>
 
@@ -12,3 +13,5 @@
 		</div>
 	</div>
 </div>
+
+<Tags />

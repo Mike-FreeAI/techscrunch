@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { AppwriteService } from '$lib/AppwriteService';
 	import Modal from '$lib/components/Modal.svelte';
+  import Tags from '$lib/components/Tags.svelte';
 	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
 	import '$lib/styles/index.scss';
@@ -228,3 +229,5 @@
 {/if}
 
 <Modal />
+
+<Tags />
