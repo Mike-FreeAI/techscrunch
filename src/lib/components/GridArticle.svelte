@@ -32,7 +32,7 @@
 		</article>
 	{:else}
 		<article class="articles-grid-item-article">
-			<a href={`/article/${article.$id}`} class="articles-grid-item-link">
+			<a href={`/article/${article.$id}`} class="articles-grid-item-link is-double-image">
 				<header class="articles-grid-item-header">
 					<p class="category-featured">Featured Article</p>
 
