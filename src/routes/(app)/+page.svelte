@@ -5,25 +5,25 @@
 
 	export let data: PageData;
 
-	const topArticle = data.topArticles[0] ?? null;
-	const topSideArticles = data.topArticles.filter((_article, index) => index > 0);
+	const topArticle = data.topArticles.documents[0] ?? null;
+	const topSideArticles = data.topArticles.documents.filter((_article, index) => index > 0);
 </script>
 
-{#if data.topArticles.length > 0}
+{#if data.topArticles.documents.length > 0}
 	<section class="grid-2-1 u-margin-block-start-16">
 		{#if topArticle}
 			<article class="promo-main-article">
-				<a href="/">
+				<a href={`/article/${topArticle.$id}`}>
 					<h2 class="heading-level-1">
 						{topArticle.title}
 					</h2>
-					<a href={`/author/${topArticle.author?.$id}`} class="author u-margin-block-start-12">
-						By <span>{topArticle.author?.name ?? 'Unknown Author'}</span>
+					<a href={`/author/${topArticle.authorId}`} class="author u-margin-block-start-12">
+						By <span>{topArticle.authorName}</span>
 					</a>
 					<img
-						class="u-aspect-16-9 u-margin-block-start-4"
+						class="u-margin-block-start-4"
 						alt=""
-						src={AppwriteService.getThumbnail(topArticle.imageId, 500, 280)}
+						src={AppwriteService.getThumbnail(topArticle.imageId, 560, 350)}
 					/>
 				</a>
 			</article>
@@ -32,13 +32,13 @@
 			{#each topSideArticles as topSideArticle}
 				<li>
 					<article class="article-level-2">
-						<a href="/" class="u-flex-vertical u-gap-8">
+						<a href={`/article/${topSideArticle.$id}`} class="u-flex-vertical u-gap-8">
 							<div class="category">{topSideArticle.category?.name ?? 'Unknown Category'}</div>
 							<h3 class="heading-level-2">
 								{topSideArticle.title}
 							</h3>
-							<a href={`/author/${topSideArticle.author?.$id}`} class="author">
-								By <span>{topSideArticle.author?.name ?? 'Unknown Author'}</span>
+							<a href={`/author/${topSideArticle.authorId}`} class="author">
+								By <span>{topSideArticle.authorName}</span>
 							</a>
 						</a>
 					</article>

@@ -16,7 +16,7 @@
 
 		<div class="u-padding-block-24">
 			<address>
-				<a href={`/author/${data.article.author?.$id}`} class="author">{data.article.author?.name ?? 'Unknown Author'}</a>
+				<a href={`/author/${data.article.authorId}`} class="author">{data.article.authorName}</a>
 				<!-- <a href="https://twitter.com/eladsc" target="_blank">@eladsc</a> -->
 				<span class="u-color-text-pink">/</span>
 				<time class="date-time">{data.article.verboseDate}</time>
@@ -26,9 +26,9 @@
 	<div class="main-article-content u-margin-block-start-24">
 		<figure class="">
 			<img
-				class="u-aspect-16-9 u-margin-block-start-4"
+				class="u-margin-block-start-4"
 				alt=""
-				src={AppwriteService.getThumbnail(data.article.imageId, 1000)}
+				src={AppwriteService.getThumbnail(data.article.imageId, 750, 400)}
 			/>
 			<!-- <figcaption>Took by the greatest Pikachu</figcaption> -->
 		</figure>

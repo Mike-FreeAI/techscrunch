@@ -5,4 +5,6 @@ export type Modal = {
     data?: any;
 }
 
-export const modalStore = writable<Modal | null>(null);
+export const modalStore = writable<Modal | null>({
+    type: 'changePassword'
+});

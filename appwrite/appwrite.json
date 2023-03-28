@@ -106,6 +106,49 @@
                     "array": false,
                     "size": 255,
                     "default": null
+                },
+                {
+                    "key": "authorName",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPromoted",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "isPinned",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "authorId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "authorImage",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
                 }
             ],
             "indexes": [
@@ -119,125 +162,13 @@
                     "orders": [
                         "ASC"
                     ]
-                }
-            ]
-        },
-        {
-            "$id": "pins",
-            "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admins\")",
-                "read(\"team:admins\")",
-                "update(\"team:admins\")",
-                "delete(\"team:admins\")"
-            ],
-            "databaseId": "default",
-            "name": "pins",
-            "enabled": true,
-            "documentSecurity": false,
-            "attributes": [
-                {
-                    "key": "articleId",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                }
-            ],
-            "indexes": [
-                {
-                    "key": "index_1",
-                    "type": "key",
-                    "status": "available",
-                    "attributes": [
-                        "articleId"
-                    ],
-                    "orders": [
-                        "ASC"
-                    ]
-                }
-            ]
-        },
-        {
-            "$id": "promotions",
-            "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admins\")",
-                "read(\"team:admins\")",
-                "update(\"team:admins\")",
-                "delete(\"team:admins\")"
-            ],
-            "databaseId": "default",
-            "name": "promotions",
-            "enabled": true,
-            "documentSecurity": false,
-            "attributes": [
-                {
-                    "key": "articleId",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                }
-            ],
-            "indexes": [
-                {
-                    "key": "index_1",
-                    "type": "key",
-                    "status": "available",
-                    "attributes": [
-                        "articleId"
-                    ],
-                    "orders": [
-                        "ASC"
-                    ]
-                }
-            ]
-        },
-        {
-            "$id": "authors",
-            "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admins\")",
-                "read(\"team:admins\")",
-                "update(\"team:admins\")",
-                "delete(\"team:admins\")"
-            ],
-            "databaseId": "default",
-            "name": "authors",
-            "enabled": true,
-            "documentSecurity": false,
-            "attributes": [
-                {
-                    "key": "articleId",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
                 },
                 {
-                    "key": "name",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                }
-            ],
-            "indexes": [
-                {
-                    "key": "index_1",
+                    "key": "index_2",
                     "type": "key",
                     "status": "available",
                     "attributes": [
-                        "articleId"
+                        "isPinned"
                     ],
                     "orders": [
                         "ASC"

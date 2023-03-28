@@ -10,29 +10,18 @@ export type Category = {
 	description: string;
 } & Models.Document;
 
-export type Author = {
-	articleId: string;
-	name: string;
-} & Models.Document;
-
-export type Promotion = {
-	articleId: string;
-} & Models.Document;
-
-export type Pin = {
-	articleId: string;
-} & Models.Document;
-
 export type Article = {
 	title: string;
 	content: string;
 	categoryId: string;
 	imageId: string;
+	
+	authorName: string;
+	authorId: string;
+	authorImage: string;
 
 	// Front-end only
-	promoted?: boolean;
 	category?: Category;
-	author?: Author;
 	verboseDate: string;
 } & Models.Document;
 
@@ -76,9 +65,6 @@ export const AppwriteService = {
 			return null;
 		}
 	},
-	getPins: async () => {
-		return await databases.listDocuments<Pin>('default', 'pins', [Query.limit(4)]);
-	},
 	listCategories: async () => {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.limit(10),
@@ -93,57 +79,12 @@ export const AppwriteService = {
 	getCategory: async (categoryId: string) => {
 		return await databases.getDocument<Category>('default', 'categories', categoryId);
 	},
-	getAuthor: async (articleId: string) => {
-		const response = await databases.listDocuments<Author>('default', 'authors', [
-			Query.limit(1),
-			Query.equal('articleId', articleId)
-		]);
-
-		return response.documents[0] ?? undefined;
-	},
-	isPromoted: async (articleId: string) => {
-		const response = await databases.listDocuments<Author>('default', 'promotions', [
-			Query.limit(1),
-			Query.equal('articleId', articleId)
-		]);
-
-		return response.documents.length > 0;
-	},
-	arePromoted: async (articleIds: string[]) => {
-		const response = await databases.listDocuments<Author>('default', 'promotions', [
-			Query.equal('articleId', articleIds)
-		]);
-
-		const obj: { [key: string]: boolean } = {};
-
-		for (const articleId of articleIds) {
-			obj[articleId] = response.documents.find((promotion) => promotion.articleId === articleId)
-				? true
-				: false;
-		}
-
-		return obj;
-	},
-	getAuthors: async (articleIds: string[]) => {
-		return await databases.listDocuments<Author>('default', 'authors', [
-			Query.equal('articleId', articleIds)
-		]);
-	},
 	getArticle: async (articleId: string) => {
 		const article = await databases.getDocument<Article>('default', 'articles', articleId);
 
 		article.verboseDate = getVerboseDate(article.$createdAt);
-
-		const [category, author, promoted] = await Promise.all([
-			await AppwriteService.getCategory(article.categoryId),
-			await AppwriteService.getAuthor(article.$id),
-			await AppwriteService.isPromoted(article.$id)
-		]);
-
-		article.category = category;
-		article.author = author;
-		article.promoted = promoted;
-
+		article.category = await AppwriteService.getCategory(article.categoryId);
+		
 		return article;
 	},
 	getArticles: async (queries?: string[]) => {
@@ -155,54 +96,25 @@ export const AppwriteService = {
 
 		const articles = await databases.listDocuments<Article>('default', 'articles', queries);
 
-		articles.documents = articles.documents.map((article) => {
-			return {
-				...article,
-				verboseDate: getVerboseDate(article.$createdAt)
-			};
-		});
-
 		const categoryIds = [...new Set(articles.documents.map((article) => article.categoryId))];
-		const articleIds = [...new Set(articles.documents.map((article) => article.$id))];
+		
+		let categories: Category[] = []; 
 
-		const [categories, authors, promotions] = await Promise.all([
-			(async () => {
-				if (categoryIds.length > 0) {
-					return (await AppwriteService.getCategories(categoryIds)).documents;
-				}
-
-				return [];
-			})(),
-
-			(async () => {
-				if (articleIds.length > 0) {
-					return (await AppwriteService.getAuthors(articleIds)).documents;
-				}
-
-				return [];
-			})(),
-
-			(async () => {
-				if (articleIds.length > 0) {
-					return await AppwriteService.arePromoted(articleIds);
-				}
-
-				return {};
-			})()
-		]);
+		if (categoryIds.length > 0) {
+			categories = (await AppwriteService.getCategories(categoryIds)).documents;
+		}
 
 		articles.documents = articles.documents.map((article) => {
 			return {
 				...article,
 				category: categories.find((category) => category.$id === article.categoryId),
-				author: authors.find((author) => author.articleId === article.$id),
-				promoted: promotions[article.$id]
+				verboseDate: getVerboseDate(article.$createdAt)
 			};
 		});
 
 		return articles;
 	},
 	getThumbnail: (fileId: string, width?: number, height?: number) => {
-		return storage.getFilePreview('thumbnails', fileId, width ? width : 500, height).toString();
+		return storage.getFilePreview('thumbnails', fileId, width ? width : 500, height, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString();
 	}
 };

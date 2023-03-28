@@ -25,7 +25,7 @@
 				<header class="modal-header">
 					<div class="u-flex u-gap-16 u-main-space-between">
 						<h4 class="heading-level-3">{modals[$modalStore.type]?.title ?? ''}</h4>
-						<button on:click={() => $modalStore = null} class="" aria-label="Close modal">
+						<button on:click={() => ($modalStore = null)} class="" aria-label="Close modal">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -45,57 +45,53 @@
 					</div>
 				</header>
 				<div class="modal-content">
-                    {#if $modalStore.type === 'changePassword'}
-					<form class="form">
+					{#if $modalStore.type === 'changePassword'}
 						<ul class="form-list">
 							<li class="form-item">
 								<input
-                                    class="input-text"
-                                    type="password"
-                                    placeholder="Old Password"
-                                    aria-label="Old Password"
+									class="input-text"
+									type="password"
+									placeholder="Old Password"
+									aria-label="Old Password"
 								/>
 							</li>
 							<li class="form-item">
 								<input
-                                    class="input-text"
-                                    type="password"
-                                    placeholder="New Password"
-                                    aria-label="Password"
+									class="input-text"
+									type="password"
+									placeholder="New Password"
+									aria-label="Password"
 								/>
 							</li>
 							<li class="form-item">
 								<input
-                                    class="input-text"
-                                    type="password"
-                                    placeholder="New Password Again"
-                                    aria-label="Repeat Password"
+									class="input-text"
+									type="password"
+									placeholder="New Password Again"
+									aria-label="Repeat Password"
 								/>
 							</li>
 						</ul>
-					</form>
-                    {:else if $modalStore.type === 'editAccount'}
-                    <form class="form">
+					{:else if $modalStore.type === 'editAccount'}
 						<ul class="form-list">
 							<li class="form-item">
 								<input
-                                    class="input-text"
-                                    type="text"
-                                    placeholder="Full Name"
-                                    aria-label="Full Name"
+									class="input-text"
+									type="text"
+									placeholder="Full Name"
+									aria-label="Full Name"
 								/>
 							</li>
 							<li class="form-item">
 								<input
-                                    class="input-text"
-                                    type="email"
-                                    placeholder="Public Email"
-                                    aria-label="Public Email"
+									class="input-text"
+									type="email"
+									placeholder="Public Email"
+									aria-label="Public Email"
 								/>
 							</li>
 						</ul>
-					</form>
-                    {/if}
+					{/if}
 				</div>
 				<div class="modal-footer">
 					<div class="u-flex u-main-end u-gap-16">
