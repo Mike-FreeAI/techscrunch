@@ -39,7 +39,7 @@ async function generateContent(category, topic, req) {
 		category +
 		'" about "' +
 		topic +
-		". Make it funny and use real names. At the end say it's 1st april fool. Please make it 15 paragraphs long.";
+		". Make it funny and use real names. At the end say it's 1st april fool. Make it at least 500 words long.";
 	const res = await axios.default.post(
 		'https://api.openai.com/v1/chat/completions',
 		JSON.stringify({
