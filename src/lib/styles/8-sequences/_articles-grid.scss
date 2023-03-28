@@ -25,7 +25,6 @@
         padding-block-start:pxToRem(32);
         .articles-grid-item-header { margin-block-start:pxToRem(16); }
         img {inline-size:100%; }
-        &::before {display:none;}
       }
 		}
 		&:first-child ::before {
@@ -64,8 +63,9 @@
 		grid-template-columns: repeat(2, 1fr);
     &-item-link {
       &.is-double-image {
-        display:flex; flex-direction:column;
+        display:flex; flex-direction:column; margin-block-start:0;
         .articles-grid-item-image { order:-1; }
+        &::before {display:none;}
       }
     }
 		&-item-link::before {

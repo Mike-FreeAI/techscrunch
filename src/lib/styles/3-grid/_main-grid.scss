@@ -49,8 +49,7 @@
 }
 
 .side-content {
-	margin-block-start: pxToRem(288);
-
+  margin-block-start: pxToRem(48);
 	.side-content-body {
 		position: sticky;
 		top: pxToRem(12);
@@ -115,6 +114,8 @@
 			}
 		}
 	}
+
+  @media #{$break3open} { margin-block-start:pxToRem(288); }
 }
 .main-content {
 }
