@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { AppwriteService } from '$lib/AppwriteService';
+  import { goto } from '$app/navigation';
+	import { AppwriteService, type Category } from '$lib/AppwriteService';
 	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
+	import { onDestroy } from 'svelte';
 
 	const modals: {
 		[key: string]: {
@@ -16,8 +18,14 @@
 		editAccount: {
 			title: 'Edit Account',
 			action: 'Save Changes'
+		},
+		addArticle: {
+			title: 'Add Article',
+			action: 'Generate'
 		}
 	};
+
+	let isLoading = false;
 
 	let oldPassword = '';
 	let password = '';
@@ -26,14 +34,38 @@
 	let fullName = '';
 	let profileBio = '';
 
-	$: if($authStore) {
-		fullName = $authStore?.name ?? '';
-		profileBio = $authStore?.prefs.bio ?? '';
-	}
+	let categories: Category[] = [];
+	let title = '';
+	let category = '';
 
 	let error = '';
 
+	const unsub1 = authStore.subscribe((snapshot) => {
+		fullName = snapshot?.name ?? '';
+		profileBio = snapshot?.prefs.bio ?? '';
+	});
+	const unsub2 = modalStore.subscribe(async (snapshot) => {
+		isLoading = false;
+		error = '';
+		
+		if (snapshot?.type === 'addArticle') {
+			if (categories.length <= 0) {
+				categories = (await AppwriteService.listCategories()).documents;
+			}
+		}
+	});
+	onDestroy(() => {
+		unsub1();
+		unsub2();
+	});
+
 	async function onSubmit() {
+		if(isLoading) {
+			return;
+		}
+
+		isLoading = true;
+
 		if ($modalStore?.type === 'changePassword') {
 			if (password !== passwordAgain) {
 				error = 'Passwords do not match.';
@@ -46,6 +78,8 @@
 				$modalStore = null;
 			} catch (err: any) {
 				error = err.message;
+			} finally {
+				isLoading = false;
 			}
 		} else if ($modalStore?.type === 'editAccount') {
 			try {
@@ -59,6 +93,25 @@
 				$modalStore = null;
 			} catch (err: any) {
 				error = err.message;
+			} finally {
+				isLoading = false;
+			}
+		} else if($modalStore?.type === 'addArticle') {
+			try {
+				const res = await AppwriteService.generateArticle(title, category);
+
+				const json = JSON.parse(res.response);
+				const url = `/article/${json.id}`;
+
+				error = '';
+				$modalStore = null;
+
+				goto(url);
+			} catch (err: any) {
+				console.log(err);
+				error = err.message;
+			} finally {
+				isLoading = false;
 			}
 		}
 	}
@@ -151,12 +204,64 @@
 								/>
 							</li>
 						</ul>
+					{:else if $modalStore.type === 'editAccount'}
+						<ul class="form-list">
+							<li class="form-item">
+								<input
+									required={true}
+									bind:value={fullName}
+									class="input-text"
+									type="text"
+									placeholder="Full Name"
+									aria-label="Full Name"
+								/>
+							</li>
+							<li class="form-item">
+								<textarea
+									required={true}
+									bind:value={profileBio}
+									style="block-size: auto;"
+									rows="3"
+									class="input-text"
+									placeholder="Profile Bio"
+									aria-label="Profile Bio"
+								/>
+							</li>
+						</ul>
+					{:else if $modalStore.type === 'addArticle'}
+						<ul class="form-list">
+							<li class="form-item">
+								<input
+									bind:value={title}
+									class="input-text"
+									type="text"
+									required={true}
+									placeholder="Article Title"
+									aria-label="Article Title"
+								/>
+							</li>
+							<li class="form-item">
+								<label for="cars">Category:</label>
+								<div class="u-margin-block-start-8">
+									<select class="input-text" required={true} bind:value={category}>
+										<option selected disabled value="">Select Category</option>
+										{#each categories as category}
+											<option value={category.$id}>{category.name}</option>
+										{/each}
+									</select>
+								</div>
+							</li>
+						</ul>
 					{/if}
 				</div>
 				<div class="modal-footer">
 					<div class="u-flex u-main-end u-gap-16">
 						<button type="submit" class="button is-text">
+							{#if isLoading}
+							<div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+							{:else}
 							<span class="text">{modals[$modalStore.type]?.action ?? 'Save'}</span>
+							{/if}
 						</button>
 					</div>
 					{#if error}

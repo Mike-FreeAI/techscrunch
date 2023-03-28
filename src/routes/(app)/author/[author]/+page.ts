@@ -10,7 +10,8 @@ export const load = (async ({ params }) => {
 	const author = {
 		name: articles.documents[0]?.authorName,
 		id: articles.documents[0]?.authorId,
-		image: articles.documents[0]?.authorImage,
+		bio: articles.documents[0]?.authorBio,
+		image: AppwriteService.getProfileImage(articles.documents[0]?.authorImage, 200, 200) ?? 'img/profile.jpg',
 	}
 
 	return { author, articles };

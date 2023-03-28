@@ -3,6 +3,7 @@
 	import { AppwriteService } from '$lib/AppwriteService';
 	import Modal from '$lib/components/Modal.svelte';
 	import { authStore } from '$lib/stores/authStore';
+  import { modalStore } from '$lib/stores/modalStore';
 	import '$lib/styles/index.scss';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
@@ -52,8 +53,8 @@
 			<a href="/" class="u-block is-not-mobile">
 				<img src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="Tech Scrunch" width="70" />
 			</a>
-			<a class="side-nav-join heading-level-3 u-margin-block-start-20 u-strike" href="/"
-				>Join TechScrunch+</a
+			<a class="side-nav-join heading-level-3 u-margin-block-start-20" href="/"
+				>TechScrunch</a
 			>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
 				{#if !$authStore}
@@ -83,6 +84,11 @@
 
 							<span class="text">{$authStore?.name}</span>
 						</a>
+					</li>
+					<li class="side-nav-item">
+						<button on:click={() => $modalStore = { type: 'addArticle' }} class="side-nav-link u-color-text-pink">
+							<span class="text">Add Article</span>
+						</button>
 					</li>
 				{/if}
 			</ul>

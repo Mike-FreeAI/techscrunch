@@ -4,13 +4,18 @@ Welcome to the documentation of this function 👋 We strongly recommend keeping
 
 ## 🤖 Documentation
 
-Simple function similar to typical "hello world" example, but instead, we return a simple JSON that tells everyone how awesome developers are.
+Function to generate article with Open AI. Content, as well as thunbmail.
 
 <!-- Update with your description, for example 'Create Stripe payment and return payment URL' -->
 
 _Example input:_
 
-This function expects no input
+```json
+{
+    "title": "Google crashed stocks",
+    "categoryId": "stocks"
+}
+```
 
 <!-- If input is expected, add example -->
 
@@ -20,7 +25,15 @@ _Example output:_
 
 ```json
 {
- "areDevelopersAwesome": true
+ "success": true,
+ "id": "documentId"
+}
+```
+
+```json
+{
+ "success": false,
+ "message": "Some error."
 }
 ```
 
@@ -28,6 +41,7 @@ _Example output:_
 
 List of environment variables used by this cloud function:
 
+- **OPEN_API_KEY** - [Open AI](https://platform.openai.com/docs/api-reference) API key
 - **APPWRITE_FUNCTION_ENDPOINT** - Endpoint of Appwrite project
 - **APPWRITE_FUNCTION_API_KEY** - Appwrite API Key
 <!-- Add your custom environment variables -->

@@ -46,10 +46,9 @@
 					<time class="date-time">{article.verboseDate}</time>
 				</header>
 				<figure class="articles-grid-item-image">
-					<!-- TODO: Stretch -->
 					<img
 						class="u-margin-block-start-4"
-						src={AppwriteService.getThumbnail(article.imageId, 600, 160)}
+						src={AppwriteService.getThumbnail(article.imageId, 600, 300)}
 						alt=""
 					/>
 				</figure>

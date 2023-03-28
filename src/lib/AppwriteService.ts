@@ -1,9 +1,10 @@
-import { Account, Client, Databases, ID, Query, Storage, type Models } from 'appwrite';
+import { Account, Client, Databases, Functions, ID, Query, Storage, type Models } from 'appwrite';
 
 const client = new Client().setEndpoint('https://appwrite.techscrunch.dev/v1').setProject('techCrunchs');
 const databases = new Databases(client);
 const storage = new Storage(client);
 const account = new Account(client);
+const functions = new Functions(client);
 
 export type Category = {
 	name: string;
@@ -17,6 +18,7 @@ export type Article = {
 	imageId: string;
 	
 	authorName: string;
+	authorBio: string;
 	authorId: string;
 	authorImage: string;
 
@@ -39,6 +41,21 @@ function getVerboseDate(dateStr: string) {
 }
 
 export const AppwriteService = {
+	generateArticle: async (title: string, category: string) => {
+		const res = await functions.createExecution('generateArticle', JSON.stringify({title, categoryId: category}));
+
+		if(res.status === 'failed') {
+			throw new Error('Internal Error. Try again later.');
+		}
+		if(res.response) {
+			const json = JSON.parse(res.response);
+			if(json.success === false) {
+				throw new Error(json.msg);
+			}
+		}
+
+		return res;
+	},
 	updateName: async (name: string) => {
 		return await account.updateName(name);
 	},
@@ -80,12 +97,14 @@ export const AppwriteService = {
 	listCategories: async () => {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.limit(10),
-			Query.equal('hidden', false)
+			Query.equal('hidden', false),
+			Query.orderDesc('$createdAt')
 		]);
 	},
 	getCategories: async (categoryIds: string[]) => {
 		return await databases.listDocuments<Category>('default', 'categories', [
-			Query.equal('$id', categoryIds)
+			Query.equal('$id', categoryIds),
+			Query.orderDesc('$createdAt')
 		]);
 	},
 	getCategory: async (categoryId: string) => {
@@ -104,7 +123,7 @@ export const AppwriteService = {
 			queries = [];
 		}
 
-		queries.push(...[Query.limit(PageSize.Articles + 1)]);
+		queries.push(...[Query.limit(PageSize.Articles + 1), Query.orderDesc('$createdAt')]);
 
 		const articles = await databases.listDocuments<Article>('default', 'articles', queries);
 
