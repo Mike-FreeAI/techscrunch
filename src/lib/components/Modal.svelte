@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { AppwriteService } from '$lib/AppwriteService';
+	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
 
 	const modals: {
@@ -16,16 +18,65 @@
 			action: 'Save Changes'
 		}
 	};
+
+	let oldPassword = '';
+	let password = '';
+	let passwordAgain = '';
+
+	let fullName = '';
+	let profileBio = '';
+
+	$: if($authStore) {
+		fullName = $authStore?.name ?? '';
+		profileBio = $authStore?.prefs.bio ?? '';
+	}
+
+	let error = '';
+
+	async function onSubmit() {
+		if ($modalStore?.type === 'changePassword') {
+			if (password !== passwordAgain) {
+				error = 'Passwords do not match.';
+				return;
+			}
+
+			try {
+				await AppwriteService.changePassword(oldPassword, password);
+				error = '';
+				$modalStore = null;
+			} catch (err: any) {
+				error = err.message;
+			}
+		} else if ($modalStore?.type === 'editAccount') {
+			try {
+				await AppwriteService.updateName(fullName);
+
+				const prefs = $authStore?.prefs ?? {};
+				prefs.bio = profileBio;
+				$authStore = await AppwriteService.updatePrefs(prefs);
+
+				error = '';
+				$modalStore = null;
+			} catch (err: any) {
+				error = err.message;
+			}
+		}
+	}
 </script>
 
 {#if $modalStore}
 	<div class="modal-wrapper">
-		<dialog class="modal">
-			<form class="modal-form" method="dialog">
+		<div class="modal">
+			<form class="modal-form" on:submit|preventDefault={onSubmit}>
 				<header class="modal-header">
 					<div class="u-flex u-gap-16 u-main-space-between">
 						<h4 class="heading-level-3">{modals[$modalStore.type]?.title ?? ''}</h4>
-						<button on:click={() => ($modalStore = null)} class="" aria-label="Close modal">
+						<button
+							type="button"
+							on:click={() => ($modalStore = null)}
+							class=""
+							aria-label="Close modal"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -49,6 +100,8 @@
 						<ul class="form-list">
 							<li class="form-item">
 								<input
+									required={true}
+									bind:value={oldPassword}
 									class="input-text"
 									type="password"
 									placeholder="Old Password"
@@ -57,6 +110,8 @@
 							</li>
 							<li class="form-item">
 								<input
+									required={true}
+									bind:value={password}
 									class="input-text"
 									type="password"
 									placeholder="New Password"
@@ -65,6 +120,8 @@
 							</li>
 							<li class="form-item">
 								<input
+									required={true}
+									bind:value={passwordAgain}
 									class="input-text"
 									type="password"
 									placeholder="New Password Again"
@@ -76,6 +133,7 @@
 						<ul class="form-list">
 							<li class="form-item">
 								<input
+									bind:value={fullName}
 									class="input-text"
 									type="text"
 									placeholder="Full Name"
@@ -83,11 +141,13 @@
 								/>
 							</li>
 							<li class="form-item">
-								<input
+								<textarea
+									bind:value={profileBio}
+									style="block-size: auto;"
+									rows="3"
 									class="input-text"
-									type="email"
-									placeholder="Public Email"
-									aria-label="Public Email"
+									placeholder="Profile Bio"
+									aria-label="Profile Bio"
 								/>
 							</li>
 						</ul>
@@ -95,12 +155,15 @@
 				</div>
 				<div class="modal-footer">
 					<div class="u-flex u-main-end u-gap-16">
-						<button type="button" class="button is-text">
+						<button type="submit" class="button is-text">
 							<span class="text">{modals[$modalStore.type]?.action ?? 'Save'}</span>
 						</button>
 					</div>
+					{#if error}
+						<p class="u-text-end u-color-text-danger">{error}</p>
+					{/if}
 				</div>
 			</form>
-		</dialog>
+		</div>
 	</div>
 {/if}

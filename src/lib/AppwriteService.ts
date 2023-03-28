@@ -39,6 +39,18 @@ function getVerboseDate(dateStr: string) {
 }
 
 export const AppwriteService = {
+	updateName: async (name: string) => {
+		return await account.updateName(name);
+	},
+	updatePrefs: async (prefs: any) => {
+		return await account.updatePrefs(prefs);
+	},
+	uploadProfilePicture: async (file: any) => {
+		return await storage.createFile('profilePictures', ID.unique(), file);
+	},
+	changePassword: async (oldPassword: string, newPassword: string) => {
+		return await account.updatePassword(newPassword, oldPassword);
+	},
 	resetPassword: async (email: string) => {
 		return await account.createRecovery(email, `${window.location.origin}/auth/password-reset`);
 	},
@@ -116,5 +128,8 @@ export const AppwriteService = {
 	},
 	getThumbnail: (fileId: string, width?: number, height?: number) => {
 		return storage.getFilePreview('thumbnails', fileId, width ? width : 500, height, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString();
+	},
+	getProfileImage: (fileId: string, width?: number, height?: number) => {
+		return storage.getFilePreview('profilePictures', fileId, width ? width : 500, height, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString();
 	}
 };

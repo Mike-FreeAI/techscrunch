@@ -17,15 +17,6 @@
             "documentSecurity": true,
             "attributes": [
                 {
-                    "key": "name",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
                     "key": "hidden",
                     "type": "boolean",
                     "status": "available",
@@ -40,6 +31,15 @@
                     "required": true,
                     "array": false,
                     "size": 1024,
+                    "default": null
+                },
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
                     "default": null
                 }
             ],
@@ -72,24 +72,6 @@
             "documentSecurity": true,
             "attributes": [
                 {
-                    "key": "title",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "categoryId",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
                     "key": "content",
                     "type": "string",
                     "status": "available",
@@ -100,6 +82,24 @@
                 },
                 {
                     "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "title",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "categoryId",
                     "type": "string",
                     "status": "available",
                     "required": true,
@@ -125,20 +125,20 @@
                     "default": null
                 },
                 {
-                    "key": "isPinned",
-                    "type": "boolean",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "default": null
-                },
-                {
                     "key": "authorId",
                     "type": "string",
                     "status": "available",
                     "required": true,
                     "array": false,
                     "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPinned",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
                     "default": null
                 },
                 {
@@ -173,6 +173,17 @@
                     "orders": [
                         "ASC"
                     ]
+                },
+                {
+                    "key": "index_3",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "authorId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
                 }
             ]
         }
@@ -181,6 +192,23 @@
         {
             "$id": "admins",
             "name": "admins"
+        }
+    ],
+    "functions": [
+        {
+            "$id": "generateArticle",
+            "name": "generateArticle",
+            "runtime": "node-16.0",
+            "path": "functions/generateArticle",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [],
+            "events": [],
+            "schedule": "",
+            "timeout": 15
         }
     ]
 }

@@ -3,7 +3,8 @@
 # Schema Setup
 
 appwrite deploy collection --all --yes
-appwrite storage createBucket --bucketId 'thumbnails' --name 'thumbnails' --fileSecurity 'true' --permissions 'read("any")' --permissions 'create("users")' --permissions 'update("team:admins")' --permissions 'delete("team:admins")'  --maximumFileSize '5242880' --allowedFileExtensions 'png' --allowedFileExtensions 'jpg' --allowedFileExtensions 'jpeg'
+appwrite storage createBucket --bucketId 'thumbnails' --name 'thumbnails' --fileSecurity 'true' --permissions 'read("any")' --permissions 'update("team:admins")' --permissions 'delete("team:admins")'  --maximumFileSize '5242880' --allowedFileExtensions 'png' --allowedFileExtensions 'jpg' --allowedFileExtensions 'jpeg'
+appwrite storage createBucket --bucketId 'profilePictures' --name 'profilePictures' --fileSecurity 'true' --permissions 'read("any")' --permissions 'create("users")' --permissions 'update("team:admins")' --permissions 'delete("team:admins")'  --maximumFileSize '5242880' --allowedFileExtensions 'png' --allowedFileExtensions 'jpg' --allowedFileExtensions 'jpeg'
 
 # Categories
 
@@ -27,7 +28,8 @@ appwrite databases createDocument --databaseId 'default' --collectionId 'categor
 
 # Thumbnails
 
-appwrite storage createFile --bucketId 'thumbnails' --fileId 'how-to-improve-your-life' --file './images/how-to-improve-your-life.png'
+appwrite storage createFile --buc
+ketId 'thumbnails' --fileId 'how-to-improve-your-life' --file './images/how-to-improve-your-life.png'
 appwrite storage createFile --bucketId 'thumbnails' --fileId 'the-power-of-positive-self-talk' --file './images/the-power-of-positive-self-talk.png'
 appwrite storage createFile --bucketId 'thumbnails' --fileId 'the-rise-of-low-code-development' --file './images/the-rise-of-low-code-development.png'
 appwrite storage createFile --bucketId 'thumbnails' --fileId 'the-surprising-benefits-of-solitude' --file './images/the-surprising-benefits-of-solitude.png'

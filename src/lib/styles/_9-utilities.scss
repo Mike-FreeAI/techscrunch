@@ -22,6 +22,7 @@
 .u-bold             { font-weight:600; }
 .u-normal           { font-weight:normal; }
 .u-text-center      { text-align:center; }
+.u-text-end      { text-align:end; }
 .u-line-height-1    { line-height:1; }
 .u-line-height-1-25 { line-height:1.25; }
 .u-line-height-1-5  { line-height:1.5; }
@@ -232,6 +233,9 @@
 .u-mobile-border-width-0  { @media #{$break1} { border-width:0!important; } }
 
 .u-aspect-16-9 { aspect-ratio:16 / 9; object-fit:cover; }
+.u-aspect-1-1 { aspect-ratio:1 / 1; object-fit:cover; }
+.u-aspect-wide { aspect-ratio: 25 / 8; object-fit:cover; }
+.u-rounded-full { border-radius: 100%; }
 
 
 /* container queries */
