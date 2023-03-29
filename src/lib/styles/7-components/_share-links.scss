@@ -4,6 +4,10 @@
   &-item {
     > * {
       display:grid; place-content:center; inline-size:pxToRem(50); block-size:pxToRem(50);
+      transition:0.3s;
+      &:hover, &:focus {
+        filter: saturate(1.2);
+      }
     }
     @for $i from 1 through 6 {
       &:nth-child(#{$i}) {
@@ -13,6 +17,7 @@
         }
       }
     }
+
   }
   @media #{$break1}, #{$break2} {
     &-list { display:flex;}
