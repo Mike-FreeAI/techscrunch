@@ -1,6 +1,6 @@
 @use '../abstract' as *;
 .main-footer {
-  padding-block-start: pxToRem(8);
+  padding-block-start: pxToRem(16);
   padding-block-end: pxToRem(16);
   border-block-start: solid pxToRem(2) hsl(var(--color-border));
   margin-block-start: pxToRem(32);
