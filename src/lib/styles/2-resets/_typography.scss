@@ -56,6 +56,8 @@ code  {
   font-weight: 700;
 }
 
+a:visited [class*="heading-level"]{ opacity:0.8; }
+
 .heading-level {
   @media #{$break1}, #{$break2} {
     &-1 { font-size:var(--font-size-5); }
