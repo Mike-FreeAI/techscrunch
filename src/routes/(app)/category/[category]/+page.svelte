@@ -9,17 +9,15 @@
 </script>
 
 <section class="category-main u-margin-block-start-16">
-	<div class="content">
-		<h1>{data.category.name}</h1>
-		<h3>
-			{data.category.description}
-		</h3>
-	</div>
+  <header class="category-main-header">
+    <div class="u-stretch">
+      <h1 class="writer-name">{data.category.name}</h1>
+    </div>
+    <p class="u-margin-block-start-20">{data.category.description}</p>
+  </header>
+  <GridArticles queries={[Query.equal('categoryId', data.category.$id)]} initData={data.articles} />
 </section>
 
-<section>
-	<GridArticles queries={[Query.equal('categoryId', data.category.$id)]} initData={data.articles} />
-</section>
 
 
 <Tags title={'TechsCrunch | ' + data.category.name} description={data.category.description} />
