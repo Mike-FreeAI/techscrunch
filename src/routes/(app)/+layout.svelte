@@ -183,7 +183,13 @@
 		</section>
 	</aside>
 	<footer class="main-footer">
-		<p>© 2023 Tech Scrunch. All rights reserved.</p>
+    <div class="u-flex u-gap-8 u-flex-wrap">
+      <p class="u-margin-inline-end-auto">© 2023 Tech Scrunch. All rights reserved.</p>
+      <p class="u-flex u-gap-8 u-flex-shrink-0">
+        <img width="26" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNjAwMzkgMTUuMkMyLjI4MDc5IDE1LjIgMC40MDAzOTEgMTMuMzE5NiAwLjQwMDM5MSAxMUMwLjQwMDM5MSA4LjgzIDIuMDQ2MTUgNy4wNDQzNCA0LjE1NzYxIDYuODIzMTFDNC4wNTUwMiA2LjQzMjYzIDQuMDAwMzkgNi4wMjI3MiA0LjAwMDM5IDUuNjAwMDVDNC4wMDAzOSAyLjk0OTA4IDYuMTQ5NDIgMC44MDAwNDkgOC44MDAzOSAwLjgwMDA0OUMxMS4wNTUgMC44MDAwNDkgMTIuOTQ2NSAyLjM1NDUgMTMuNDYxOCA0LjQ1MDE0QzEzLjcwMzMgNC40MTcxMSAxMy45NDk4IDQuNDAwMDUgMTQuMjAwNCA0LjQwMDA1QzE3LjE4MjcgNC40MDAwNSAxOS42MDA0IDYuODE3NzEgMTkuNjAwNCA5LjgwMDA1QzE5LjYwMDQgMTIuNzgyNCAxNy4xODI3IDE1LjIgMTQuMjAwNCAxNS4ySDQuNjAwMzlaIiBmaWxsPSIjMzczQjREIi8+Cjwvc3ZnPgo=" />
+        <span class="text u-flex-shrink-0">Built with <b>Appwrite Cloud</b></span>
+      </p>
+    </div>
 	</footer>
 </div>
 
