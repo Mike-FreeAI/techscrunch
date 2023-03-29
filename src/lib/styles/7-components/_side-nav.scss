@@ -28,6 +28,7 @@
 
   @media #{$break1} {
     position: fixed;
+    z-index: 100;
     inset-block: 0;
     inset-inline-end: -100%;
     inline-size: 100%;
@@ -51,6 +52,9 @@
     &-link {
       color: hsl(var(--color-neutral-0));
     }
+    .link-on-hover,
+    .side-nav-link { color:#fff; }
+    .side-nav-link { font-weight:bold; }
     .mobile-header-logo,
     .mobile-header-button {
       filter: brightness(10);
