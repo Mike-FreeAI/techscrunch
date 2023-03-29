@@ -63,11 +63,10 @@
 		<div class="side-nav-content">
 			<a href="/" class="u-block is-not-mobile">
 				<img
-					height="43"
+					height="35"
 					src="/img/techscrunch-logo.svg"
 					class="side-nav-logo"
 					alt="Tech Scrunch"
-					width="70"
 				/>
 			</a>
 			<div class="side-nav-join heading-level-3 u-margin-block-start-20">Tech News</div>
