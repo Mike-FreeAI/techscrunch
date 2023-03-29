@@ -95,7 +95,8 @@
 				background: linear-gradient(90deg, rgba(192, 13, 83, 1) 0%, rgba(240, 46, 101, 1) 100%);
 			}
 
-			button {
+			a {
+        display: block;
 				font-family: var(--heading-font, arial);
 				color: black;
 				font-weight: bolder;

@@ -168,7 +168,7 @@
 						</p>
 					</section>
 					<div class="divider" />
-					<a href="https://appwrite.io/cloud"><button class="">Register Now</button></a>
+					<a href="https://appwrite.io/cloud" target="_blank">Register Now</a>
 				</div>
 			</section>
 			<section class="u-margin-block-start-12">
