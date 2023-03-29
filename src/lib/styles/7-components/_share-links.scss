@@ -1,0 +1,20 @@
+@use "../abstract" as *;
+.share-links {
+  &-list {}
+  &-item {
+    > * {
+      display:grid; place-content:center; inline-size:pxToRem(50); block-size:pxToRem(50);
+    }
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        $a: calc(1 - (0.1 * #{$i}));
+        > * {
+          background-color: hsl(var(--color-primary-100) / #{$a});
+        }
+      }
+    }
+  }
+  @media #{$break1}, #{$break2} {
+    &-list { display:flex;}
+  }
+}

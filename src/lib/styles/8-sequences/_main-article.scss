@@ -1,8 +1,16 @@
 @use "../abstract" as *;
 .main-article {
+  display:grid; gap:pxToRem(32);
   max-inline-size:pxToRem(750); margin-inline:auto;
   &-content {
     font-size:125%;
     p { margin-block-start:pxToRem(16); }
+  }
+  @media #{$break1}, #{$break2} {
+    .share-links { order:1; }
+  }
+  @media #{$break3open} {
+    grid-template-columns:1fr auto;
+    .share-links { position: sticky; inset-block-start:pxToRem(32);}
   }
 }
