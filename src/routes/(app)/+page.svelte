@@ -10,7 +10,7 @@
 </script>
 
 {#if data.topArticles.documents.length > 0}
-	<section class="grid-2-1 u-margin-block-start-16">
+	<section class="grid-2-1 u-margin-block-start-32">
 		{#if topArticle}
 			<article class="promo-main-article">
 				<a href={`/article/${topArticle.$id}`}>

@@ -2,5 +2,5 @@
 .grid-2-1 {
   gap:pxToRem(32);
   @media #{$break1}, #{$break2} { display:flex; flex-direction:column; }
-  @media #{$break3open} { display:grid; grid-template-columns:2fr pxToRem(306); }
+  @media #{$break3open} { display:grid; grid-template-columns:2fr 1fr; }
 }
