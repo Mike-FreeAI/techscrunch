@@ -22,11 +22,10 @@
 					</a>
 					<img
 						loading="lazy"
-						class="u-margin-block-start-4"
+						class="u-margin-block-start-4 u-width-full-line"
 						alt=""
 						src={AppwriteService.getThumbnail(topArticle.imageId, 560, 350)}
 						width="560"
-						height="350"
 					/>
 				</a>
 			</article>
