@@ -1,6 +1,6 @@
 @use '../abstract' as *;
 .mobile-header {
-  position:sticky; inset-block-start:0;
+  position:sticky; z-index:50; inset-block-start:0;
   display:flex; justify-content:space-between; padding-block:pxToRem(20);
   background-color:hsl(var(--color-neutral-0));
   &-button { padding:pxToRem(16); cursor:pointer; }

@@ -6,7 +6,15 @@
 
 .category-featured {
 	color: hsl(var(--color-pink-text));
-	font-weight: 600;
+  background-image: linear-gradient(135deg, rgb(240, 46, 101) 0%, rgb(192, 13, 83) 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+
+
+  font-weight: 600;
 	font-size: pxToRem(20);
 	margin-bottom: pxToRem(8);
 }
