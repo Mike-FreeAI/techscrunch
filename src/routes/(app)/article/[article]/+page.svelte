@@ -66,7 +66,7 @@
 
     </ul>
   </aside>
-	<div class="main-article-content u-margin-block-start-24">
+	<div class="main-article-content">
 		<figure class="">
 			<img
 				loading="lazy"
@@ -74,7 +74,6 @@
 				alt=""
 				src={AppwriteService.getThumbnail(data.article.imageId, 750, 400)}
 				width="750"
-				height="400"
 			/>
 			<!-- <figcaption>Took by the greatest Pikachu</figcaption> -->
 		</figure>

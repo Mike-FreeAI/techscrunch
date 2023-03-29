@@ -11,6 +11,6 @@
   }
   @media #{$break3open} {
     grid-template-columns:1fr auto;
-    .share-links { position: sticky; inset-block-start:pxToRem(32);}
+    .share-links { grid-row: span 2; align-self:start; position: sticky; inset-block-start:pxToRem(32);}
   }
 }

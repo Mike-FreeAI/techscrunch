@@ -54,9 +54,13 @@ code  {
   font-family: var(--heading-font, arial);
   line-height: 1.1;
   font-weight: 700;
+  transition: 0.2s;
 }
 
-a:visited [class*="heading-level"]{ opacity:0.6; }
+a {
+  &:hover [class*="heading-level"]{ opacity:0.6; }
+  &:visited [class*="heading-level"]{ opacity:0.6; }
+}
 
 .heading-level {
   @media #{$break1}, #{$break2} {
