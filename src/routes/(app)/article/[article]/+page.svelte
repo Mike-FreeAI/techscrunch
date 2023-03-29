@@ -16,12 +16,12 @@
 		<h1 class="heading-level-1">{data.article.title}</h1>
 
 		<div class="u-padding-block-24">
-			<address>
+			<div class="u-flex u-gap-4">
 				<a href={`/author/${data.article.authorId}`} class="author">{data.article.authorName}</a>
 				<!-- <a href="https://twitter.com/eladsc" target="_blank">@eladsc</a> -->
 				<span class="u-color-text-pink">/</span>
 				<time class="date-time">{data.article.verboseDate}</time>
-			</address>
+			</div>
 		</div>
 	</header>
   <aside class="share-links u-margin-block-end-20">
