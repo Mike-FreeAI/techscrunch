@@ -78,8 +78,8 @@
 						</a>
 					</li>
 				{:else}
-					<li>
-						<a class="link-on-hover u-flex u-gap-8 u-cross-center" href="/user/profile">
+					<li class="u-min-height-32">
+						<a class="link-on-hover u-flex u-gap-8 u-cross-center u-trim-1" href="/user/profile">
 							{#if $authStore?.prefs?.imageId}
 								<img
 									loading="lazy"

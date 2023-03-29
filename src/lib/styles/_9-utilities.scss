@@ -149,6 +149,7 @@
 
 .u-height-100-percent { block-size:100%; }
 
+.u-min-height-32    { min-block-size:pxToRem(32);  }
 .u-min-height-100   { min-block-size:pxToRem(100); }
 .u-min-height-184   { min-block-size:pxToRem(184); }
 .u-min-height-100-percent { min-block-size:100%;   }
