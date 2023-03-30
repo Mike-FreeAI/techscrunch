@@ -1,5 +1,3 @@
-<!-- ![TechScrunch Cover](public/cover.png) -->
-
 # 📰 Tech Scrunch
 
 > Reporting on the business of technology, startups, venture capital funding, and Silicon Valley
@@ -32,17 +30,17 @@
 ## 🚀 Deploy client
 
 1. Deploy frontend and backend on the same domain. For example, `myapp.com` and `appwrite.myapp.com`
-2. Add frontend hostname as a platform in Appwrite project
+2. Add frontend hostname as a platform in the Appwrite project
 
 ## 🚨 Moderation
 
-All moderation can be done in Appwrite Console. `mods` team is present, but frontend does not provide you with the logic for editing/deleting articles nor categories.
+All moderation can be done in Appwrite Console. `mods` team is present, but the frontend does not provide you with the logic for editing/deleting articles nor categories.
 
 ## 🤝 Contributing
 
-To contribute to styles, update SCSS files in `src/lib/styles`. For state management we use Svelte stores in `src/lib/stores`, and all Appwrite communication is kept in `src/lib/AppwriteService.ts`. To prevent code duplication, we make components out of reusable blocks in `src/lib/components`.
+To contribute to styles, update SCSS files in `src/lib/styles`. For state management, we use Svelte stores in `src/lib/stores`, and all Appwrite communication is kept in `src/lib/AppwriteService.ts`. To prevent code duplication, we make components out of reusable blocks in `src/lib/components`.
 
-When contributing to backend-related logic, make sure to sync-up `appwrite/appwrite.json` by running the `appwrite init` commands in the `appwrite` folder. Also make sure to keep `appwrite/seeds.json` up to date with seeding logic for collections and buckets.
+When contributing to backend-related logic, sync up `appwrite/appwrite.json` by running the `appwrite init` commands in the `appwrite` folder. Also, make sure to keep `appwrite/seeds.json` up to date with seeding logic for collections and buckets.
 
 ## 🖼️ Screenshots
 
