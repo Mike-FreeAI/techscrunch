@@ -17,7 +17,7 @@
 		>
 		<h1 class="heading-level-1">{data.article.title}</h1>
 
-		<div class="u-padding-block-24">
+		<div class="u-padding-block-start-24">
 			<div class="u-flex u-gap-4">
 				<a href={`/author/${data.article.authorId}`} class="author"
 					>{data.article.author?.name ?? 'Anonymous'}</a
