@@ -19,8 +19,14 @@
 
 		<div class="u-padding-block-24">
 			<div class="u-flex u-gap-4">
-				<a href={`/author/${data.article.authorId}`} class="author">{data.article.authorName}</a>
-				<!-- <a href="https://twitter.com/eladsc" target="_blank">@eladsc</a> -->
+				<a href={`/author/${data.article.authorId}`} class="author"
+					>{data.article.author?.name ?? 'Anonymous'}</a
+				>
+				{#if data.article.author?.twitter}
+					<a href={`https://twitter.com/${data.article.author?.twitter ?? ''}`} target="_blank"
+						>@{data.article.author?.twitter ?? ''}</a
+					>
+				{/if}
 				<span class="u-color-text-pink">/</span>
 				<time class="date-time">{data.article.verboseDate}</time>
 			</div>

@@ -18,7 +18,7 @@
 						{topArticle.title}
 					</h2>
 					<a href={`/author/${topArticle.authorId}`} class="author u-margin-block-start-12">
-						<span>{topArticle.authorName}</span>
+						<span>{topArticle.author?.name ?? 'Anonymous'}</span>
 					</a>
 					<img
 						loading="lazy"
@@ -40,7 +40,7 @@
 								{topSideArticle.title}
 							</h3>
 							<a href={`/author/${topSideArticle.authorId}`} class="author">
-								<span>{topSideArticle.authorName}</span>
+								<span>{topSideArticle.author?.name ?? 'Anonymous'}</span>
 							</a>
 						</a>
 					</article>

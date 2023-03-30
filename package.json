@@ -30,6 +30,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"appwrite": "^10.2.0"
+		"appwrite": "^10.2.0",
+		"moment": "^2.29.4"
 	}
 }

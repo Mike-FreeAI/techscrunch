@@ -17,11 +17,12 @@
             "documentSecurity": true,
             "attributes": [
                 {
-                    "key": "hidden",
-                    "type": "boolean",
+                    "key": "name",
+                    "type": "string",
                     "status": "available",
                     "required": true,
                     "array": false,
+                    "size": 255,
                     "default": null
                 },
                 {
@@ -34,12 +35,11 @@
                     "default": null
                 },
                 {
-                    "key": "name",
-                    "type": "string",
+                    "key": "hidden",
+                    "type": "boolean",
                     "status": "available",
                     "required": true,
                     "array": false,
-                    "size": 255,
                     "default": null
                 }
             ],
@@ -72,6 +72,23 @@
             "documentSecurity": true,
             "attributes": [
                 {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPromoted",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
                     "key": "content",
                     "type": "string",
                     "status": "available",
@@ -81,7 +98,7 @@
                     "default": null
                 },
                 {
-                    "key": "imageId",
+                    "key": "categoryId",
                     "type": "string",
                     "status": "available",
                     "required": true,
@@ -99,25 +116,7 @@
                     "default": null
                 },
                 {
-                    "key": "categoryId",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "authorName",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "isPromoted",
+                    "key": "isPinned",
                     "type": "boolean",
                     "status": "available",
                     "required": true,
@@ -131,32 +130,6 @@
                     "required": true,
                     "array": false,
                     "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "isPinned",
-                    "type": "boolean",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "default": null
-                },
-                {
-                    "key": "authorImage",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 255,
-                    "default": null
-                },
-                {
-                    "key": "authorBio",
-                    "type": "string",
-                    "status": "available",
-                    "required": true,
-                    "array": false,
-                    "size": 2048,
                     "default": null
                 }
             ],
@@ -182,19 +155,67 @@
                     "orders": [
                         "ASC"
                     ]
-                },
-                {
-                    "key": "index_3",
-                    "type": "key",
-                    "status": "available",
-                    "attributes": [
-                        "authorId"
-                    ],
-                    "orders": [
-                        "ASC"
-                    ]
                 }
             ]
+        },
+        {
+            "$id": "authors",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "authors",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "twitter",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "bio",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 2048,
+                    "default": null
+                },
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
         }
     ],
     "teams": [
@@ -219,7 +240,7 @@
             ],
             "events": [],
             "schedule": "",
-            "timeout": 60
+            "timeout": 120
         }
     ]
 }

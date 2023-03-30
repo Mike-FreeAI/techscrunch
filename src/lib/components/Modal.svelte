@@ -3,6 +3,7 @@
 	import { AppwriteService, type Category } from '$lib/AppwriteService';
 	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
+  import { profileStore } from '$lib/stores/profileStore';
 	import { onDestroy } from 'svelte';
 
 	const modals: {
@@ -33,6 +34,8 @@
 
 	let fullName = '';
 	let profileBio = '';
+	let email = '';
+	let twitter = '';
 
 	let categories: Category[] = [];
 	let title = '';
@@ -40,9 +43,11 @@
 
 	let error = '';
 
-	const unsub1 = authStore.subscribe((snapshot) => {
+	const unsub1 = profileStore.subscribe((snapshot) => {
 		fullName = snapshot?.name ?? '';
-		profileBio = snapshot?.prefs?.bio ?? '';
+		profileBio = snapshot?.bio ?? '';
+		twitter = snapshot?.twitter ?? '';
+		email = snapshot?.email ?? '';
 	});
 	const unsub2 = modalStore.subscribe(async (snapshot) => {
 		isLoading = false;
@@ -87,11 +92,12 @@
 			}
 		} else if ($modalStore?.type === 'editAccount') {
 			try {
-				await AppwriteService.updateName(fullName);
-
-				const prefs = $authStore?.prefs ?? {};
-				prefs.bio = profileBio;
-				$authStore = await AppwriteService.updatePrefs(prefs);
+				$profileStore = await AppwriteService.updateProfile($profileStore?.$id ?? '', {
+					name: fullName,
+					bio: profileBio,
+					email: email,
+					twitter: twitter
+				});
 
 				error = '';
 				$modalStore = null;
@@ -193,6 +199,7 @@
 						<ul class="form-list">
 							<li class="form-item">
 								<input
+									required={false}
 									bind:value={fullName}
 									class="input-text"
 									type="text"
@@ -200,32 +207,30 @@
 									aria-label="Full Name"
 								/>
 							</li>
-							<li class="form-item">
-								<textarea
-									bind:value={profileBio}
-									style="block-size: auto;"
-									rows="3"
-									class="input-text"
-									placeholder="Profile Bio"
-									aria-label="Profile Bio"
-								/>
-							</li>
-						</ul>
-					{:else if $modalStore.type === 'editAccount'}
-						<ul class="form-list">
 							<li class="form-item">
 								<input
-									required={true}
-									bind:value={fullName}
+									required={false}
+									bind:value={email}
+									class="input-text"
+									type="email"
+									placeholder="E-mail"
+									aria-label="E-mail"
+								/>
+							</li>
+							<li class="form-item u-flex u-cross-end u-gap-4">
+								<span>@</span>
+								<input
+									required={false}
+									bind:value={twitter}
 									class="input-text"
 									type="text"
-									placeholder="Full Name"
-									aria-label="Full Name"
+									placeholder="Twitter"
+									aria-label="Twitter"
 								/>
 							</li>
 							<li class="form-item">
 								<textarea
-									required={true}
+									required={false}
 									bind:value={profileBio}
 									style="block-size: auto;"
 									rows="3"

@@ -118,11 +118,6 @@ async function handle(req, res) {
 
 	const userId = req.variables['APPWRITE_FUNCTION_USER_ID'];
 	const user = await users.get(userId);
-	const prefs = user.prefs;
-
-	const userName = user.name ?? 'Anonymous';
-	const userBio = prefs.bio ?? 'No bio.';
-	const userImage = prefs.imageId ?? '';
 
 	const [content, imageId] = await Promise.all([
 		generateContent(category.name, title, req),
@@ -134,12 +129,9 @@ async function handle(req, res) {
 		imageId,
 		title,
 		categoryId,
-		authorName: userName,
-		authorImage: userImage,
-		authorBio: userBio,
 		isPromoted: Math.random() < 0.2,
 		isPinned: false,
-		authorId: userId
+		authorId: user.prefs.profileId
 	});
 
 	res.json({

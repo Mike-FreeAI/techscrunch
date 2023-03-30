@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import { goto } from '$app/navigation';
 	import { AppwriteService } from '$lib/AppwriteService';
 	import Modal from '$lib/components/Modal.svelte';
-  import Tags from '$lib/components/Tags.svelte';
+	import Tags from '$lib/components/Tags.svelte';
 	import { authStore } from '$lib/stores/authStore';
 	import { modalStore } from '$lib/stores/modalStore';
+	import { profileStore } from '$lib/stores/profileStore';
 	import '$lib/styles/index.scss';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
@@ -16,7 +18,14 @@
 
 	onMount(async () => {
 		if (browser) {
-			authStore.set(await AppwriteService.getAccount());
+			$authStore = await AppwriteService.getAccount();
+			if ($authStore) {
+				if (!$authStore.prefs.profileId) {
+					goto('/user/onboarding');
+				} else {
+					$profileStore = await AppwriteService.getProfile($authStore.prefs.profileId);
+				}
+			}
 		}
 	});
 </script>
@@ -62,12 +71,7 @@
 
 		<div class="side-nav-content">
 			<a href="/" class="u-block is-not-mobile">
-				<img
-					height="35"
-					src="/img/techscrunch-logo.svg"
-					class="side-nav-logo"
-					alt="Tech Scrunch"
-				/>
+				<img height="35" src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="Tech Scrunch" />
 			</a>
 			<div class="side-nav-join heading-level-3 u-margin-block-start-20">Tech News</div>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
@@ -77,23 +81,29 @@
 							<span class="text">Login</span>
 						</a>
 					</li>
+				{:else if !$profileStore}
+					<li class="side-nav-item" style="margin-block-end: 2.5rem">
+						<a href="/user/onboarding" class="side-nav-link">
+							<span class="text">Onboarding</span>
+						</a>
+					</li>
 				{:else}
 					<li class="u-min-height-32">
 						<a class="link-on-hover u-flex u-gap-8 u-cross-center u-trim-1" href="/user/profile">
-							{#if $authStore?.prefs?.imageId}
+							{#if $profileStore?.imageId}
 								<img
 									loading="lazy"
 									class="u-block u-rounded-full"
 									width="32"
 									height="32"
-									src={AppwriteService.getProfileImage($authStore.prefs?.imageId, 32, 32)}
+									src={AppwriteService.getProfileImage($profileStore?.imageId, 32, 32)}
 									alt=""
 								/>
 							{:else}
 								<img class="u-block" width="32" height="32" src="/img/profile.webp" alt="" />
 							{/if}
 
-							<span class="text">{$authStore?.name}</span>
+							<span class="text">{$profileStore?.name ?? ''}</span>
 						</a>
 					</li>
 					<li class="side-nav-item">
@@ -183,17 +193,24 @@
 		</section>
 	</aside>
 	<footer class="main-footer">
-    <div class="u-flex u-gap-8 u-flex-wrap">
-      <p class="u-margin-inline-end-auto">© 2023 Tech Scrunch. All rights reserved.
-		<a href="https://github.com/appwrite/techscrunch" target="_blank" class="u-bold u-underline">Star Us on GitHub</a>
-	  </p>
-      <p class="u-flex u-flex-shrink-0">
-        <a class="u-flex u-gap-8 u-flex-shrink-0" href="https://appwrite.io/cloud" target="_blank">
-          <img alt="" width="26" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNjAwMzkgMTUuMkMyLjI4MDc5IDE1LjIgMC40MDAzOTEgMTMuMzE5NiAwLjQwMDM5MSAxMUMwLjQwMDM5MSA4LjgzIDIuMDQ2MTUgNy4wNDQzNCA0LjE1NzYxIDYuODIzMTFDNC4wNTUwMiA2LjQzMjYzIDQuMDAwMzkgNi4wMjI3MiA0LjAwMDM5IDUuNjAwMDVDNC4wMDAzOSAyLjk0OTA4IDYuMTQ5NDIgMC44MDAwNDkgOC44MDAzOSAwLjgwMDA0OUMxMS4wNTUgMC44MDAwNDkgMTIuOTQ2NSAyLjM1NDUgMTMuNDYxOCA0LjQ1MDE0QzEzLjcwMzMgNC40MTcxMSAxMy45NDk4IDQuNDAwMDUgMTQuMjAwNCA0LjQwMDA1QzE3LjE4MjcgNC40MDAwNSAxOS42MDA0IDYuODE3NzEgMTkuNjAwNCA5LjgwMDA1QzE5LjYwMDQgMTIuNzgyNCAxNy4xODI3IDE1LjIgMTQuMjAwNCAxNS4ySDQuNjAwMzlaIiBmaWxsPSIjMzczQjREIi8+Cjwvc3ZnPgo=" />
-          <span class="text u-flex-shrink-0">Built with <b>Appwrite Cloud</b></span>
-        </a>
-      </p>
-    </div>
+		<div class="u-flex u-gap-8 u-flex-wrap">
+			<p class="u-margin-inline-end-auto">
+				© 2023 Tech Scrunch. All rights reserved.
+				<a href="https://github.com/appwrite/techscrunch" target="_blank" class="u-bold u-underline"
+					>Star Us on GitHub</a
+				>
+			</p>
+			<p class="u-flex u-flex-shrink-0">
+				<a class="u-flex u-gap-8 u-flex-shrink-0" href="https://appwrite.io/cloud" target="_blank">
+					<img
+						alt=""
+						width="26"
+						src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMCAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNjAwMzkgMTUuMkMyLjI4MDc5IDE1LjIgMC40MDAzOTEgMTMuMzE5NiAwLjQwMDM5MSAxMUMwLjQwMDM5MSA4LjgzIDIuMDQ2MTUgNy4wNDQzNCA0LjE1NzYxIDYuODIzMTFDNC4wNTUwMiA2LjQzMjYzIDQuMDAwMzkgNi4wMjI3MiA0LjAwMDM5IDUuNjAwMDVDNC4wMDAzOSAyLjk0OTA4IDYuMTQ5NDIgMC44MDAwNDkgOC44MDAzOSAwLjgwMDA0OUMxMS4wNTUgMC44MDAwNDkgMTIuOTQ2NSAyLjM1NDUgMTMuNDYxOCA0LjQ1MDE0QzEzLjcwMzMgNC40MTcxMSAxMy45NDk4IDQuNDAwMDUgMTQuMjAwNCA0LjQwMDA1QzE3LjE4MjcgNC40MDAwNSAxOS42MDA0IDYuODE3NzEgMTkuNjAwNCA5LjgwMDA1QzE5LjYwMDQgMTIuNzgyNCAxNy4xODI3IDE1LjIgMTQuMjAwNCAxNS4ySDQuNjAwMzlaIiBmaWxsPSIjMzczQjREIi8+Cjwvc3ZnPgo="
+					/>
+					<span class="text u-flex-shrink-0">Built with <b>Appwrite Cloud</b></span>
+				</a>
+			</p>
+		</div>
 	</footer>
 </div>
 

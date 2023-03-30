@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { AppwriteService } from '$lib/AppwriteService';
 	import { authStore } from '$lib/stores/authStore';
+	import { profileStore } from '$lib/stores/profileStore';
 
 	let step = 'email';
 	let email = '';
@@ -17,6 +18,7 @@
 		try {
 			await AppwriteService.login(email, password);
 			$authStore = await AppwriteService.getAccount();
+			$profileStore = await AppwriteService.getProfile($authStore?.$id ?? '');
 			goto('/');
 		} catch (err: any) {
 			error = err.message;

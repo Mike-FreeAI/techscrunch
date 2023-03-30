@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { goto } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { AppwriteService } from '$lib/AppwriteService';
-  import { authStore } from '$lib/stores/authStore';
+	import { authStore } from '$lib/stores/authStore';
+	import { profileStore } from '$lib/stores/profileStore';
 
 	let name = '';
 	let email = '';
@@ -20,6 +21,7 @@
 			await AppwriteService.register(name, email, password);
 			await AppwriteService.login(email, password);
 			$authStore = await AppwriteService.getAccount();
+			$profileStore = await AppwriteService.getProfile($authStore?.$id ?? '');
 			goto('/');
 		} catch (err: any) {
 			error = err.message;

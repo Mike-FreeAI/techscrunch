@@ -1,6 +1,9 @@
 import { Account, Client, Databases, Functions, ID, Query, Storage, type Models } from 'appwrite';
+import moment from 'moment';
 
-const client = new Client().setEndpoint('https://appwrite.techscrunch.dev/v1').setProject('techCrunchs');
+const client = new Client()
+	.setEndpoint('https://appwrite.techscrunch.dev/v1')
+	.setProject('techCrunchs');
 const databases = new Databases(client);
 const storage = new Storage(client);
 const account = new Account(client);
@@ -9,6 +12,15 @@ const functions = new Functions(client);
 export type Category = {
 	name: string;
 	description: string;
+	hidden: boolean;
+} & Models.Document;
+
+export type Author = {
+	name: string;
+	imageId?: string;
+	bio?: string;
+	twitter?: string;
+	email?: string;
 } & Models.Document;
 
 export type Article = {
@@ -16,14 +28,11 @@ export type Article = {
 	content: string;
 	categoryId: string;
 	imageId: string;
-	
-	authorName: string;
-	authorBio: string;
 	authorId: string;
-	authorImage: string;
 
 	// Front-end only
 	category?: Category;
+	author?: Author;
 	verboseDate: string;
 } & Models.Document;
 
@@ -32,32 +41,36 @@ export const PageSize = {
 };
 
 function getVerboseDate(dateStr: string) {
-	const date = new Date(dateStr);
-	const hours = date.getHours();
-	const verboseDate = `${hours % 12}:${date.getMinutes()} ${
-		hours >= 12 ? 'PM' : 'AM'
-	} • ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-	return verboseDate;
+	return moment(dateStr).format('m:ss A G\\MTZ • MMMM D, YYYY');
 }
 
 export const AppwriteService = {
+	createProfile: async () => {
+		const user = await AppwriteService.getAccount();
+		return await databases.createDocument<Author>('default', 'authors', ID.unique(), {
+			name: user?.name ?? 'Anonymous'
+		});
+	},
+	updateProfile: async (profileId: string, changes: Partial<Author>) => {
+		return await databases.updateDocument<Author>('default', 'authors', profileId, changes);
+	},
 	generateArticle: async (title: string, category: string) => {
-		const res = await functions.createExecution('generateArticle', JSON.stringify({title, categoryId: category}));
+		const res = await functions.createExecution(
+			'generateArticle',
+			JSON.stringify({ title, categoryId: category })
+		);
 
-		if(res.status === 'failed') {
+		if (res.status === 'failed') {
 			throw new Error('Internal Error. Try again later.');
 		}
-		if(res.response) {
+		if (res.response) {
 			const json = JSON.parse(res.response);
-			if(json.success === false) {
+			if (json.success === false) {
 				throw new Error(json.msg);
 			}
 		}
 
 		return res;
-	},
-	updateName: async (name: string) => {
-		return await account.updateName(name);
 	},
 	updatePrefs: async (prefs: any) => {
 		return await account.updatePrefs(prefs);
@@ -71,11 +84,20 @@ export const AppwriteService = {
 	resetPassword: async (email: string) => {
 		return await account.createRecovery(email, `${window.location.origin}/auth/password-reset`);
 	},
-	resetPasswordFinish: async (userId: string, secret: string, password: string, passwordAgain: string) => {
-		return await account.updateRecovery(userId, secret, password, passwordAgain)
+	resetPasswordFinish: async (
+		userId: string,
+		secret: string,
+		password: string,
+		passwordAgain: string
+	) => {
+		return await account.updateRecovery(userId, secret, password, passwordAgain);
 	},
 	oauthLogin: () => {
-		account.createOAuth2Session('github', `${window.location.origin}/`, `${window.location.origin}/auth/login`);
+		account.createOAuth2Session(
+			'github',
+			`${window.location.origin}/`,
+			`${window.location.origin}/auth/login`
+		);
 	},
 	login: async (email: string, password: string) => {
 		return await account.createEmailSession(email, password);
@@ -94,6 +116,14 @@ export const AppwriteService = {
 			return null;
 		}
 	},
+	getProfile: async (profileId: string) => {
+		try {
+			return await databases.getDocument<Author>('default', 'authors', profileId);
+		} catch (err) {
+			console.log(err);
+			return null;
+		}
+	},
 	listCategories: async () => {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.limit(10),
@@ -107,15 +137,25 @@ export const AppwriteService = {
 			Query.orderAsc('$createdAt')
 		]);
 	},
+	getAuthors: async (authorIds: string[]) => {
+		return await databases.listDocuments<Author>('default', 'authors', [
+			Query.equal('$id', authorIds),
+			Query.orderAsc('$createdAt')
+		]);
+	},
 	getCategory: async (categoryId: string) => {
 		return await databases.getDocument<Category>('default', 'categories', categoryId);
+	},
+	getAuthor: async (authorId: string) => {
+		return await databases.getDocument<Author>('default', 'authors', authorId);
 	},
 	getArticle: async (articleId: string) => {
 		const article = await databases.getDocument<Article>('default', 'articles', articleId);
 
 		article.verboseDate = getVerboseDate(article.$createdAt);
 		article.category = await AppwriteService.getCategory(article.categoryId);
-		
+		article.author = await AppwriteService.getAuthor(article.authorId);
+
 		return article;
 	},
 	getArticles: async (queries?: string[]) => {
@@ -128,17 +168,29 @@ export const AppwriteService = {
 		const articles = await databases.listDocuments<Article>('default', 'articles', queries);
 
 		const categoryIds = [...new Set(articles.documents.map((article) => article.categoryId))];
-		
-		let categories: Category[] = []; 
+		const authorIds = [...new Set(articles.documents.map((article) => article.authorId))];
 
-		if (categoryIds.length > 0) {
-			categories = (await AppwriteService.getCategories(categoryIds)).documents;
-		}
+		let categories: Category[] = [];
+		let authors: Author[] = [];
+
+		await Promise.all([
+			(async () => {
+				if (categoryIds.length > 0) {
+					categories = (await AppwriteService.getCategories(categoryIds)).documents;
+				}
+			})(),
+			(async () => {
+				if (authorIds.length > 0) {
+					authors = (await AppwriteService.getAuthors(authorIds)).documents;
+				}
+			})()
+		]);
 
 		articles.documents = articles.documents.map((article) => {
 			return {
 				...article,
 				category: categories.find((category) => category.$id === article.categoryId),
+				author: authors.find((author) => author.$id === article.authorId),
 				verboseDate: getVerboseDate(article.$createdAt)
 			};
 		});
@@ -146,9 +198,41 @@ export const AppwriteService = {
 		return articles;
 	},
 	getThumbnail: (fileId: string, width?: number, height?: number) => {
-		return storage.getFilePreview('thumbnails', fileId, width ? width : 500, height, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString();
+		return storage
+			.getFilePreview(
+				'thumbnails',
+				fileId,
+				width ? width : 500,
+				height,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				'webp'
+			)
+			.toString();
 	},
 	getProfileImage: (fileId: string, width?: number, height?: number) => {
-		return storage.getFilePreview('profilePictures', fileId, width ? width : 500, height, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 'webp').toString();
+		return storage
+			.getFilePreview(
+				'profilePictures',
+				fileId,
+				width ? width : 500,
+				height,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				undefined,
+				'webp'
+			)
+			.toString();
 	}
 };
