@@ -13,20 +13,18 @@
 	let files: any = [];
 	let error = '';
 
-	$: {
+	async function onChange() {
 		const file = files[0] ?? null;
 		if (file) {
-			(async () => {
-				try {
-					const { $id: fileId } = await AppwriteService.uploadProfilePicture(file);
-					const prefs = $authStore?.prefs ?? {};
+			try {
+				const { $id: fileId } = await AppwriteService.uploadProfilePicture(file);
+				const prefs = $authStore?.prefs ?? {};
 
-					prefs.imageId = fileId;
-					$authStore = await AppwriteService.updatePrefs(prefs);
-				} catch (err: any) {
-					error = err.message;
-				}
-			})();
+				prefs.imageId = fileId;
+				$authStore = await AppwriteService.updatePrefs(prefs);
+			} catch (err: any) {
+				error = err.message;
+			}
 		}
 	}
 </script>
@@ -41,7 +39,7 @@
 				class="u-block u-margin-block-start-40 u-rounded-full"
 				width="64"
 				height="64"
-				src={AppwriteService.getProfileImage($authStore.prefs.imageId, 64, 64)}
+				src={AppwriteService.getProfileImage($authStore.prefs?.imageId, 64, 64)}
 				alt=""
 			/>
 		{:else}
@@ -55,6 +53,7 @@
 		accept="image/png, image/jpeg, image/jpg"
 		multiple={false}
 		bind:files
+		on:change={onChange}
 	/>
 </div>
 
@@ -75,10 +74,12 @@
 	<table class="user-table">
 		<tr>
 			<th style="width:100px">Name</th>
-			<td class="u-bold">{$authStore?.name}</td>
+			<td class="u-bold">{$authStore?.name ?? ''}</td>
 		</tr>
-		<th>Email</th>
-		<td><a href={`mailto:${$authStore?.email}`} class="link">{$authStore?.email}</a></td>
+		<tr>
+			<th style="width:100px">Bio</th>
+			<td class="u-bold">{$authStore?.prefs?.bio ?? ''}</td>
+		</tr>
 	</table>
 	<div class="u-flex u-margin-block-start-64">
 		<button on:click={onLogout} class="button u-margin-inline-start-auto">

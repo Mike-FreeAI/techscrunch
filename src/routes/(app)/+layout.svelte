@@ -72,7 +72,7 @@
 			<div class="side-nav-join heading-level-3 u-margin-block-start-20">Tech News</div>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
 				{#if !$authStore}
-					<li class="side-nav-item">
+					<li class="side-nav-item" style="margin-block-end: 2.5rem">
 						<a href="/auth/login" class="side-nav-link">
 							<span class="text">Login</span>
 						</a>
@@ -86,7 +86,7 @@
 									class="u-block u-rounded-full"
 									width="32"
 									height="32"
-									src={AppwriteService.getProfileImage($authStore.prefs.imageId, 32, 32)}
+									src={AppwriteService.getProfileImage($authStore.prefs?.imageId, 32, 32)}
 									alt=""
 								/>
 							{:else}

@@ -149,6 +149,15 @@
                     "array": false,
                     "size": 255,
                     "default": null
+                },
+                {
+                    "key": "authorBio",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 2048,
+                    "default": null
                 }
             ],
             "indexes": [
@@ -205,7 +214,9 @@
                 "node_modules",
                 ".npm"
             ],
-            "execute": ["users"],
+            "execute": [
+                "users"
+            ],
             "events": [],
             "schedule": "",
             "timeout": 60

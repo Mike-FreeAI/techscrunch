@@ -98,13 +98,13 @@ export const AppwriteService = {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.limit(10),
 			Query.equal('hidden', false),
-			Query.orderDesc('$createdAt')
+			Query.orderAsc('$createdAt')
 		]);
 	},
 	getCategories: async (categoryIds: string[]) => {
 		return await databases.listDocuments<Category>('default', 'categories', [
 			Query.equal('$id', categoryIds),
-			Query.orderDesc('$createdAt')
+			Query.orderAsc('$createdAt')
 		]);
 	},
 	getCategory: async (categoryId: string) => {
