@@ -2,6 +2,12 @@
 .category {
 	color: hsl(var(--color-pink-text));
 	font-weight: 200;
+  background-image: linear-gradient(90deg, rgb(192, 13, 83) 0%, rgb(240, 46, 101) 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
 .category-featured {
