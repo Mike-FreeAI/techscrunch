@@ -2,6 +2,8 @@
 :root {
   /** Primary **/
   --color-primary-hue: 343;
+
+  --color-primary-dark: calc(var(--color-primary-hue) - 7) 88% 40%;
   --color-primary-100: var(--color-primary-hue) 87% 56%;            /* #f02e65 */
   --color-primary-200: calc(var(--color-primary-hue) - 3) 79% 48%;  /* #DA1A5B */
   --color-primary-300: calc(var(--color-primary-hue) - 6) 87% 40%;  /* #c00D53 */

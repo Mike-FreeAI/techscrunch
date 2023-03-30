@@ -6,14 +6,14 @@
       display:grid; place-content:center; inline-size:pxToRem(50); block-size:pxToRem(50);
       transition:0.3s;
       &:hover, &:focus {
-        filter: saturate(1.2);
+        filter: saturate(1.35);
       }
     }
     @for $i from 1 through 6 {
       &:nth-child(#{$i}) {
         $a: calc(1 - (0.1 * #{$i}));
         > * {
-          background-color: hsl(var(--color-primary-100) / #{$a});
+          background-color: hsl(var(--color-primary-dark) / #{$a});
         }
       }
     }
