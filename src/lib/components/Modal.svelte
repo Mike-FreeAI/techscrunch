@@ -42,7 +42,7 @@
 
 	const unsub1 = authStore.subscribe((snapshot) => {
 		fullName = snapshot?.name ?? '';
-		profileBio = snapshot?.prefs.bio ?? '';
+		profileBio = snapshot?.prefs?.bio ?? '';
 	});
 	const unsub2 = modalStore.subscribe(async (snapshot) => {
 		isLoading = false;

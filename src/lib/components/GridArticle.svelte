@@ -14,7 +14,7 @@
 					>
 					<h3 class="heading-level-2 category-heading">{article.title}</h3>
 					<a href={`/author/${article.authorId}`} class="author u-margin-block-start-12">
-						By <span>{article.authorName}</span>
+						<span>{article.authorName}</span>
 					</a>
 					<time class="date-time">{article.verboseDate}</time>
 				</header>
@@ -44,7 +44,7 @@
 					<p class="u-trim-6 category-content">{article.content}</p>
 
 					<a href={`/author/${article.authorId}`} class="author u-margin-block-start-12">
-						By <span>{article.authorName}</span>
+						<span>{article.authorName}</span>
 					</a>
 					<time class="date-time">{article.verboseDate}</time>
 				</header>

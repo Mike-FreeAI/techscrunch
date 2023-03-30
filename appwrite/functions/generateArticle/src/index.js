@@ -3,10 +3,30 @@ const sdk = require('node-appwrite');
 const { Readable } = require('stream');
 
 async function generateThumbnail(topic, storage, req) {
+	const question = 'stock picture in 2 words for article with title: ' + topic;
+
+	const res0 = await axios.default.post(
+		'https://api.openai.com/v1/chat/completions',
+		JSON.stringify({
+			model: 'gpt-3.5-turbo',
+			messages: [{ role: 'user', content: question }]
+		}),
+		{
+			headers: {
+				Authorization: 'Bearer ' + req.variables['OPEN_API_KEY'],
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	const imgTopic = res0.data.choices[0].message.content;
+
+	console.log(imgTopic); 
+
 	const res = await axios.default.post(
 		'https://api.openai.com/v1/images/generations',
 		JSON.stringify({
-			prompt: topic,
+			prompt: imgTopic,
 			size: '1024x1024',
 			response_format: 'url'
 		}),
@@ -23,7 +43,7 @@ async function generateThumbnail(topic, storage, req) {
 		responseType: 'arraybuffer'
 	});
 
-  const stream = Readable.from(bufferFile.data);
+	const stream = Readable.from(bufferFile.data);
 
 	const file = await storage.createFile(
 		'thumbnails',
@@ -100,8 +120,8 @@ async function handle(req, res) {
 	const user = await users.get(userId);
 	const prefs = user.prefs;
 
-	const userName = user.name;
-	const userBio = prefs.bio ?? '';
+	const userName = user.name ?? 'Anonymous';
+	const userBio = prefs.bio ?? 'No bio.';
 	const userImage = prefs.imageId ?? '';
 
 	const [content, imageId] = await Promise.all([
@@ -132,7 +152,7 @@ module.exports = async function (req, res) {
 	try {
 		await handle(req, res);
 	} catch (err) {
-    console.log(err);
+		console.log(err);
 		res.json({
 			success: false,
 			msg: err.message
