@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { onVisible } from '$lib/actions/isVisible';
+	import { onVisible } from '$lib/actions/onVisible';
+	import { scrollingProgress } from '$lib/actions/scrollingProgress';
 	import { AppwriteService, type Article } from '$lib/AppwriteService';
 	import { readingArticle } from '$routes/(app)/readingArticle';
 	import { onDestroy } from 'svelte';
@@ -53,10 +54,17 @@
 		// Change the url to the article's shortId
 		window.history.replaceState({}, '', prevUrl);
 	});
+
+	let progress = 0;
 </script>
 
-<article class="main-article u-margin-block-start-32" use:onVisible={handleVisible}>
+<article
+	class="main-article u-margin-block-start-32"
+	use:onVisible={handleVisible}
+	use:scrollingProgress={(p) => (progress = p)}
+>
 	<header class="main-article-header">
+		Progress: {progress}
 		{#if article.isPlus}
 			<div class="ts-plus">
 				<span class="ts-plus-title">TechScrunch</span>
@@ -106,12 +114,13 @@
 						stroke-dasharray="100, 100"
 						d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
 					/>
-
-					<path
-						class="percent"
-						stroke-dasharray="30, 100"
-						d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-					/>
+					{#if progress > 0}
+						<path
+							class="percent"
+							stroke-dasharray={`${progress * 100}, 100`}
+							d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+						/>
+					{/if}
 				</svg>
 
 				<svg
