@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { AppwriteService } from '$lib/AppwriteService';
 	import GridArticles from '$lib/components/GridArticles.svelte';
+	import { Query } from 'appwrite';
 	import type { PageData } from './$types';
 
 	export let data: PageData;
@@ -76,5 +77,5 @@
 	<h2 class="heading-level-3 u-padding-block-12 u-sep-block-end u-margin-block-start-32">
 		The Latest
 	</h2>
-	<GridArticles initData={data.latestArticles} queries={[]} />
+	<GridArticles initData={data.latestArticles} queries={[Query.equal('isPinned', false)]} />
 </section>
