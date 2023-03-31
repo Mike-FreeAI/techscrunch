@@ -5,6 +5,7 @@
 	import { AppwriteService, type Article } from '$lib/AppwriteService';
 	import { readingArticle } from '$routes/(app)/readingArticle';
 	import { onDestroy, onMount, tick } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	export let article: Article;
 	export let changesUrl = true;
@@ -302,7 +303,7 @@
 					</button>
 				</li>
 				{#if asideCopied}
-					<li class="share-links-item u-margin-block-start-12 u-text-color-black">
+					<li transition:fade class="share-links-item u-margin-block-start-12 u-text-color-black">
 						<div class="u-flex u-main-center" style="block-size: auto;">
 							<svg
 								class="u-color-text-success"
@@ -346,9 +347,9 @@
 								<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="TechScrunch" />
 							</div>
 							<div class="register-box-content">
-								<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
+								<h5 class="heading-level-2 u-color-text-pink">Sign Up for TS!</h5>
 								<p class="heading-level-2 u-margin-block-start-12">
-									Generate your own fake AI news fool your friends and followers!
+									Generate your own fake AI news and fool your friends and followers!
 								</p>
 
 								<a href="/auth/login">
