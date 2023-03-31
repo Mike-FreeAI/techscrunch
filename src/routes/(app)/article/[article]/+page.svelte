@@ -30,7 +30,7 @@
 			<div class="ts-plus">
 				<span class="ts-plus-title">TechScrunch</span>
 				<span class="ts-plus-sign" />
-				<a href={`/category/${data.article.categoryId}`} class="category"
+				<a href={`/category/${data.article.categoryId}`}
 					><span class="ts-plus-text">{data.article.category?.name ?? 'Unknown Category'}</span></a
 				>
 			</div>
