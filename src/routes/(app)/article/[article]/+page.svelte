@@ -208,7 +208,7 @@
 
 </article>
 <div class="u-max-width-750 u-margin-block-start-40 u-margin-inline-auto">
-  <section class="u-flex share-links u-sep-block-end u-padding-block-end-4" style="grid-column:span 2">
+  <section class="u-flex u-flex-wrap share-links u-sep-block-end u-padding-block-end-4" style="grid-column:span 2">
     <ul class="share-links-list is-horizontal">
       <li class="share-links-item">
         <a
