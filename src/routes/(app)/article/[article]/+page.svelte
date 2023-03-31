@@ -187,6 +187,16 @@
 			{/each}
 		</div>
 	</div>
+
+  <section class="">
+    <h2 class="heading-level-2">Tags</h2>
+    <ul class="u-flex u-flex-wrap u-gap-16 u-margin-block-16">
+      <li><a href="" class="link">3cx</a></li>
+      <li><a href="" class="link">cyber</a></li>
+      <li><a href="" class="link">hackers</a></li>
+    </ul>
+  </section>
+
 </article>
 
 <section>
