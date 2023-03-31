@@ -4,7 +4,7 @@ import { Query } from 'appwrite';
 
 export const load = (async () => {
 	const [ latestArticles, topArticles ] = await Promise.all([
-		AppwriteService.getArticles([]),
+		AppwriteService.getArticles([ Query.equal("isPinned", false) ]),
 		AppwriteService.getArticles([ Query.equal("isPinned", true) ])
 	]);
 
