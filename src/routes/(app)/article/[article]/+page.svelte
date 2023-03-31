@@ -468,7 +468,7 @@
 	</div>
 {/if}
 
-<section class="register-box">
+<section class="register-box u-max-width-750 u-margin-inline-auto">
 	<div class="register-box-side">
 		<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
 	</div>
