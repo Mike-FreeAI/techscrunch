@@ -180,7 +180,7 @@ async function handle(req, res) {
 	const user = await users.get(userId);
 
 	const doc = await databases.createDocument('default', 'articles', sdk.ID.unique(), {
-		published: false,
+		isPublished: false,
 		content: '',
 		imageId: '',
 		title,
@@ -219,7 +219,7 @@ async function handle(req, res) {
 		}
 
 		await databases.updateDocument('default', 'articles', doc.$id, {
-			published: true,
+			isPublished: true,
 			content,
 			imageId
 		});

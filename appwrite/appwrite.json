@@ -5,16 +5,12 @@
         {
             "$id": "categories",
             "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admins\")",
-                "read(\"team:admins\")",
-                "update(\"team:admins\")",
-                "delete(\"team:admins\")"
+                "read(\"any\")"
             ],
             "databaseId": "default",
             "name": "categories",
             "enabled": true,
-            "documentSecurity": true,
+            "documentSecurity": false,
             "attributes": [
                 {
                     "key": "name",
@@ -60,16 +56,12 @@
         {
             "$id": "articles",
             "$permissions": [
-                "read(\"any\")",
-                "create(\"team:admins\")",
-                "read(\"team:admins\")",
-                "update(\"team:admins\")",
-                "delete(\"team:admins\")"
+                "read(\"any\")"
             ],
             "databaseId": "default",
             "name": "articles",
             "enabled": true,
-            "documentSecurity": true,
+            "documentSecurity": false,
             "attributes": [
                 {
                     "key": "imageId",
@@ -131,6 +123,31 @@
                     "array": false,
                     "size": 255,
                     "default": null
+                },
+                {
+                    "key": "shortId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPlus",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "isPublished",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
                 }
             ],
             "indexes": [
@@ -139,9 +156,11 @@
                     "type": "key",
                     "status": "available",
                     "attributes": [
+                        "isPublished",
                         "categoryId"
                     ],
                     "orders": [
+                        "ASC",
                         "ASC"
                     ]
                 },
@@ -150,7 +169,57 @@
                     "type": "key",
                     "status": "available",
                     "attributes": [
+                        "isPublished",
                         "isPinned"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_3",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "isPublished",
+                        "authorId"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_4",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "isPublished",
+                        "$id"
+                    ],
+                    "orders": [
+                        "ASC",
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_5",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "isPublished"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_6",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "shortId"
                     ],
                     "orders": [
                         "ASC"
@@ -216,6 +285,94 @@
                 }
             ],
             "indexes": []
+        },
+        {
+            "$id": "tags",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "tags",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "name"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "articleTags",
+            "$permissions": [
+                "read(\"any\")"
+            ],
+            "databaseId": "default",
+            "name": "articleTags",
+            "enabled": true,
+            "documentSecurity": false,
+            "attributes": [
+                {
+                    "key": "articleId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "tagId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "articleId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_2",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "tagId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
         }
     ],
     "teams": [

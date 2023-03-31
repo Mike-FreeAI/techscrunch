@@ -30,7 +30,7 @@
 			<div class="ts-plus">
 				<span class="ts-plus-title">TechScrunch</span>
 				<span class="ts-plus-sign" />
-				<a href={`/category/${data.article.categoryId}`} class="category"
+				<a href={`/category/${data.article.categoryId}`}
 					><span class="ts-plus-text">{data.article.category?.name ?? 'Unknown Category'}</span></a
 				>
 			</div>
@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</header>
-	{#if data.article.published}
+	{#if data.article.isPublished}
 		<aside class="share-links u-margin-block-end-20 is-only-desktop">
 			<button class="share-links-x-button">
 				<svg viewBox="0 0 36 36" class="circle-svg">
@@ -73,107 +73,24 @@
 					/>
 				</svg>
 
-				<svg
-					class="share-links-x-icon"
-					viewBox="0 0 500 500"
-					xmlns="http://www.w3.org/2000/svg"
-					xmlns:bx="https://boxy-svg.com"
-					height="35%"
-					width="35%"
-				>
-					<defs>
-						<bx:grid x="0" y="0" width="71.301" height="71.369" />
-					</defs>
-					<g>
-						<rect
-							x="356.505"
-							y="356.845"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-						<rect
-							x="427.806"
-							y="428.214"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(220, 121, 154);"
-						/>
-						<rect
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(172, 13, 75);"
-						/>
-						<rect
-							x="142.602"
-							y="142.738"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(207, 74, 119);"
-						/>
-						<rect
-							x="213.903"
-							y="214.107"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-						<rect
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(172, 13, 75);"
-							x="71.301"
-							y="71.369"
-						/>
-						<rect
-							x="285.204"
-							y="285.476"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-						<rect
-							x="285.204"
-							y="142.738"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-						<rect
-							x="356.505"
-							y="71.369"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-						<rect
-							x="427.806"
-							width="71.301"
-							height="71.369"
-							style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						/>
-					</g>
-					<rect
-						y="428.214"
-						width="71.301"
-						height="71.369"
-						style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-					/>
-					<rect
-						x="71.301"
-						y="356.845"
-						width="71.301"
-						height="71.369"
-						style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-					/>
-					<rect
-						x="142.602"
-						width="71.301"
-						height="71.369"
-						style="stroke: rgb(0, 0, 0); stroke-width: 0px; fill: rgb(213, 97, 135);"
-						y="285.476"
-					/>
-				</svg>
+
+
+        <svg class="share-links-x-icon" height="35%" width="35%"  viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+          <defs>
+            <bx:grid x="0" y="0" width="71.301" height="71.369"/>
+            <linearGradient id="color-0" bx:pinned="true">
+              <stop style="stop-color: rgb(193, 15, 83);" offset="0"/>
+              <stop style="stop-color: rgb(239, 45, 100);" offset="1"/>
+            </linearGradient>
+            <linearGradient gradientUnits="userSpaceOnUse" x1="249.553" y1="0" x2="249.553" y2="499.583" id="gradient-0" gradientTransform="matrix(0.676007, -0.736895, 0.999047, 1, -168.699618, 183.894391)">
+              <stop offset="0" style="stop-color: rgb(193, 15, 83);"/>
+              <stop offset="1" style="stop-color: rgb(239, 45, 100);"/>
+            </linearGradient>
+          </defs>
+          <g>
+            <path d="M 427.806 428.214 L 499.107 428.214 L 499.107 499.583 L 427.806 499.583 Z M 356.505 356.845 L 427.806 356.845 L 427.806 428.214 L 356.505 428.214 Z M 285.204 285.476 L 356.505 285.476 L 356.505 356.845 L 285.204 356.845 Z M 213.903 214.107 L 285.204 214.107 L 285.204 285.476 L 213.903 285.476 Z M 285.204 142.738 L 356.505 142.738 L 356.505 214.107 L 285.204 214.107 Z M 356.505 71.369 L 427.806 71.369 L 427.806 142.738 L 356.505 142.738 Z M 427.806 0 L 499.107 0 L 499.107 71.369 L 427.806 71.369 Z M 142.602 142.738 L 213.903 142.738 L 213.903 214.107 L 142.602 214.107 Z M 71.301 71.369 L 142.602 71.369 L 142.602 142.738 L 71.301 142.738 Z M 0 0 L 71.301 0 L 71.301 71.369 L 0 71.369 Z M 142.602 285.476 L 213.903 285.476 L 213.903 356.845 L 142.602 356.845 Z M 71.301 356.845 L 142.602 356.845 L 142.602 428.214 L 71.301 428.214 Z M 0 428.214 L 71.301 428.214 L 71.301 499.583 L 0 499.583 Z" style="stroke: rgb(0, 0, 0); stroke-width: 0px; paint-order: fill; fill-rule: evenodd; fill: url(#gradient-0);"/>
+          </g>
+        </svg>
 			</button>
 			<ul class="share-links-list">
 				<li class="share-links-item">
@@ -318,14 +235,14 @@
 	{:else}
 		<aside class="share-links u-margin-block-end-20 is-only-desktop" />
 		<div class="main-article-content">
-			<div class="u-color-text-pink u-margin-block-start-16">
-				Your article is being generated...
+			<div class="u-color-text-pink u-margin-block-start-16 u-margin-block-end-20">
+				Your article is being generated. This can take up to a few minutes.
 			</div>
 		</div>
 	{/if}
 </article>
 
-{#if data.article.published}
+{#if data.article.isPublished}
 	<div class="u-max-width-750 u-margin-block-start-40 u-margin-inline-auto">
 		<section
 			class="u-flex u-flex-wrap share-links u-sep-block-end u-padding-block-end-4"

@@ -35,7 +35,29 @@
 				<li>
 					<article class="article-level-2">
 						<a href={`/article/${topSideArticle.$id}`} class="u-flex-vertical u-gap-8">
-							<div class="category">{topSideArticle.category?.name ?? 'Unknown Category'}</div>
+							{#if topSideArticle.isPlus}
+								<div class="ts-plus is-small">
+									<span class="ts-plus-title">
+										<img
+											height="12"
+											src="/img/techscrunch-logo.svg"
+											class="logo"
+											alt="Tech Scrunch"
+										/>
+									</span>
+									<span class="ts-plus-sign" />
+									<a href={`/category/${topSideArticle.categoryId}`} class="category">
+										<span class="ts-plus-text"
+											>{topSideArticle.category?.name ?? 'Unknown Category'}</span
+										></a
+									>
+								</div>
+							{:else}
+								<a href={`/category/${topSideArticle.categoryId}`} class="category"
+									>{topSideArticle.category?.name ?? 'Unknown Category'}</a
+								>
+							{/if}
+
 							<h3 class="heading-level-2">
 								{topSideArticle.title}
 							</h3>
