@@ -26,16 +26,20 @@
 
 <article class="main-article u-margin-block-start-32">
 	<header class="main-article-header">
-    <div class="ts-plus">
-      <span class="ts-plus-title">TechScrunch</span>
-      <span class="ts-plus-sign"></span>
-      <span class="ts-plus-text">Yellow text</span>
-    </div>
-
-		<a href={`/category/${data.article.categoryId}`} class="category"
-			>{data.article.category?.name ?? 'Unknown Category'}</a
-		>
-		<h1 class="heading-level-1">{data.article.title}</h1>
+		{#if data.article.isPlus}
+			<div class="ts-plus">
+				<span class="ts-plus-title">TechScrunch</span>
+				<span class="ts-plus-sign" />
+				<a href={`/category/${data.article.categoryId}`} class="category"
+					><span class="ts-plus-text">{data.article.category?.name ?? 'Unknown Category'}</span></a
+				>
+			</div>
+		{:else}
+			<a href={`/category/${data.article.categoryId}`} class="category"
+				>{data.article.category?.name ?? 'Unknown Category'}</a
+			>
+		{/if}
+		<h1 class="heading-level-1 u-padding-block-start-16">{data.article.title}</h1>
 
 		<div class="u-padding-block-start-24">
 			<div class="u-flex u-gap-4">
