@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+  import Tags from '$lib/components/Tags.svelte';
 	import { authStore } from '$lib/stores/authStore';
 	import { onDestroy } from 'svelte';
 
@@ -23,3 +24,6 @@
 {#if loaded}
 	<slot />
 {/if}
+
+
+<Tags />

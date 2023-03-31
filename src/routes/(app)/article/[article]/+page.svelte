@@ -11,6 +11,7 @@
 
 	let copyClasses = '';
 	let copyText = 'copy';
+	let asideCopied = false;
 	function onCopy() {
 		copyClasses = 'is-copy';
 		copyText = 'copied';
@@ -20,6 +21,16 @@
 		setTimeout(() => {
 			copyClasses = '';
 			copyText = 'copy';
+		}, 1500);
+	}
+
+	function onCopyAside() {
+		asideCopied = true;
+
+		navigator.clipboard.writeText(`https://tsrn.ch/${data.article.shortId}`);
+
+		setTimeout(() => {
+			asideCopied = false;
 		}, 1500);
 	}
 </script>
@@ -73,24 +84,40 @@
 					/>
 				</svg>
 
-
-
-        <svg class="share-links-x-icon" height="35%" width="35%"  viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-          <defs>
-            <bx:grid x="0" y="0" width="71.301" height="71.369"/>
-            <linearGradient id="color-0" bx:pinned="true">
-              <stop style="stop-color: rgb(193, 15, 83);" offset="0"/>
-              <stop style="stop-color: rgb(239, 45, 100);" offset="1"/>
-            </linearGradient>
-            <linearGradient gradientUnits="userSpaceOnUse" x1="249.553" y1="0" x2="249.553" y2="499.583" id="gradient-0" gradientTransform="matrix(0.676007, -0.736895, 0.999047, 1, -168.699618, 183.894391)">
-              <stop offset="0" style="stop-color: rgb(193, 15, 83);"/>
-              <stop offset="1" style="stop-color: rgb(239, 45, 100);"/>
-            </linearGradient>
-          </defs>
-          <g>
-            <path d="M 427.806 428.214 L 499.107 428.214 L 499.107 499.583 L 427.806 499.583 Z M 356.505 356.845 L 427.806 356.845 L 427.806 428.214 L 356.505 428.214 Z M 285.204 285.476 L 356.505 285.476 L 356.505 356.845 L 285.204 356.845 Z M 213.903 214.107 L 285.204 214.107 L 285.204 285.476 L 213.903 285.476 Z M 285.204 142.738 L 356.505 142.738 L 356.505 214.107 L 285.204 214.107 Z M 356.505 71.369 L 427.806 71.369 L 427.806 142.738 L 356.505 142.738 Z M 427.806 0 L 499.107 0 L 499.107 71.369 L 427.806 71.369 Z M 142.602 142.738 L 213.903 142.738 L 213.903 214.107 L 142.602 214.107 Z M 71.301 71.369 L 142.602 71.369 L 142.602 142.738 L 71.301 142.738 Z M 0 0 L 71.301 0 L 71.301 71.369 L 0 71.369 Z M 142.602 285.476 L 213.903 285.476 L 213.903 356.845 L 142.602 356.845 Z M 71.301 356.845 L 142.602 356.845 L 142.602 428.214 L 71.301 428.214 Z M 0 428.214 L 71.301 428.214 L 71.301 499.583 L 0 499.583 Z" style="stroke: rgb(0, 0, 0); stroke-width: 0px; paint-order: fill; fill-rule: evenodd; fill: url(#gradient-0);"/>
-          </g>
-        </svg>
+				<svg
+					class="share-links-x-icon"
+					height="35%"
+					width="35%"
+					viewBox="0 0 500 500"
+					xmlns="http://www.w3.org/2000/svg"
+					xmlns:bx="https://boxy-svg.com"
+				>
+					<defs>
+						<bx:grid x="0" y="0" width="71.301" height="71.369" />
+						<linearGradient id="color-0" bx:pinned="true">
+							<stop style="stop-color: rgb(193, 15, 83);" offset="0" />
+							<stop style="stop-color: rgb(239, 45, 100);" offset="1" />
+						</linearGradient>
+						<linearGradient
+							gradientUnits="userSpaceOnUse"
+							x1="249.553"
+							y1="0"
+							x2="249.553"
+							y2="499.583"
+							id="gradient-0"
+							gradientTransform="matrix(0.676007, -0.736895, 0.999047, 1, -168.699618, 183.894391)"
+						>
+							<stop offset="0" style="stop-color: rgb(193, 15, 83);" />
+							<stop offset="1" style="stop-color: rgb(239, 45, 100);" />
+						</linearGradient>
+					</defs>
+					<g>
+						<path
+							d="M 427.806 428.214 L 499.107 428.214 L 499.107 499.583 L 427.806 499.583 Z M 356.505 356.845 L 427.806 356.845 L 427.806 428.214 L 356.505 428.214 Z M 285.204 285.476 L 356.505 285.476 L 356.505 356.845 L 285.204 356.845 Z M 213.903 214.107 L 285.204 214.107 L 285.204 285.476 L 213.903 285.476 Z M 285.204 142.738 L 356.505 142.738 L 356.505 214.107 L 285.204 214.107 Z M 356.505 71.369 L 427.806 71.369 L 427.806 142.738 L 356.505 142.738 Z M 427.806 0 L 499.107 0 L 499.107 71.369 L 427.806 71.369 Z M 142.602 142.738 L 213.903 142.738 L 213.903 214.107 L 142.602 214.107 Z M 71.301 71.369 L 142.602 71.369 L 142.602 142.738 L 71.301 142.738 Z M 0 0 L 71.301 0 L 71.301 71.369 L 0 71.369 Z M 142.602 285.476 L 213.903 285.476 L 213.903 356.845 L 142.602 356.845 Z M 71.301 356.845 L 142.602 356.845 L 142.602 428.214 L 71.301 428.214 Z M 0 428.214 L 71.301 428.214 L 71.301 499.583 L 0 499.583 Z"
+							style="stroke: rgb(0, 0, 0); stroke-width: 0px; paint-order: fill; fill-rule: evenodd; fill: url(#gradient-0);"
+						/>
+					</g>
+				</svg>
 			</button>
 			<ul class="share-links-list">
 				<li class="share-links-item">
@@ -211,6 +238,35 @@
 						</svg>
 					</a>
 				</li>
+				<li class="share-links-item">
+					<button on:click={onCopyAside} aria-label="Share in email">
+						<svg width="18" height="18" viewBox="0 0 20 20" version="1.1" aria-labelledby="title"
+							><path
+								d="M4.8 20c-1 0-2.1-.4-2.8-1.2l-.7-.6c-1.6-1.6-1.6-4.1 0-5.7l4.9-4.8c1.6-1.6 4.1-1.6 5.7 0l.7.7c.3.3.3.9 0 1.2-.3.3-.9.3-1.2 0l-.7-.7c-.9-.9-2.4-.9-3.3 0l-4.9 4.8c-.9.9-.9 2.4 0 3.3l.7.6c1 1 2.4 1 3.4 0l3.3-3.3c.3-.3.9-.3 1.2 0 .3.3.3.9 0 1.2l-3.3 3.3c-1 .8-2 1.2-3 1.2zm9.1-7.5 4.9-4.8c1.6-1.6 1.6-4.1 0-5.7l-.7-.7C17.3.5 16.3 0 15.2 0c-1.1 0-2.2.5-2.8 1.2L9.1 4.6c-.3.3-.3.9 0 1.2.3.3.9.3 1.2 0l3.4-3.4c.4-.5 1-.7 1.6-.7.6 0 1.2.3 1.7.7l.7.7c.9.9.9 2.4 0 3.3l-4.9 4.8c-.8.8-2.5.8-3.3 0l-.7-.7c-.3-.3-.9-.3-1.2 0-.3.3-.3.9 0 1.2l.7.7c.7.7 1.8 1.2 2.8 1.2s2.1-.4 2.8-1.1z"
+								fill="#ffffff"
+							/></svg
+						>
+					</button>
+				</li>
+				{#if asideCopied}
+					<li class="share-links-item u-margin-block-start-12 u-text-color-black">
+						<div class="u-flex u-main-center" style="block-size: auto;">
+							<svg
+								class="u-color-text-success"
+								style="width: 24px;"
+								viewBox="0 0 20 20"
+								version="1.1"
+								aria-labelledby="title"
+								><path
+									d="M10 18.2c-4.5 0-8.2-3.7-8.2-8.2S5.5 1.8 10 1.8s8.2 3.7 8.2 8.2-3.7 8.2-8.2 8.2zm0-15c-3.7 0-6.8 3-6.8 6.8 0 3.7 3 6.8 6.8 6.8 3.7 0 6.8-3 6.8-6.8 0-3.7-3.1-6.8-6.8-6.8zm-.9 10.6c.5 0 .9-.3 1.2-.7l3.6-4.8c.2-.3.2-.8-.1-1.1-.3-.2-.8-.2-1.1.2l-3.6 4.8-.1.1c-.1 0-.1 0-.1-.1L7 10.4c-.3-.3-.8-.3-1.1 0s-.3.8 0 1.1l1.9 1.9c.3.3.7.5 1.2.5 0-.1 0-.1.1-.1z"
+									fill="currentColor"
+								/></svg
+							>
+						</div>
+						<p class="u-margin-block-start-8" style="block-size: auto;">Link</p>
+						<p style="block-size: auto;">Copied</p>
+					</li>
+				{/if}
 			</ul>
 		</aside>
 		<div class="main-article-content">
@@ -366,6 +422,17 @@
 							/>
 						</svg>
 					</a>
+				</li>
+
+				<li class="share-links-item">
+					<button on:click={onCopy} aria-label="Share in email">
+						<svg width="18" height="18" viewBox="0 0 20 20" version="1.1" aria-labelledby="title"
+							><path
+								d="M4.8 20c-1 0-2.1-.4-2.8-1.2l-.7-.6c-1.6-1.6-1.6-4.1 0-5.7l4.9-4.8c1.6-1.6 4.1-1.6 5.7 0l.7.7c.3.3.3.9 0 1.2-.3.3-.9.3-1.2 0l-.7-.7c-.9-.9-2.4-.9-3.3 0l-4.9 4.8c-.9.9-.9 2.4 0 3.3l.7.6c1 1 2.4 1 3.4 0l3.3-3.3c.3-.3.9-.3 1.2 0 .3.3.3.9 0 1.2l-3.3 3.3c-1 .8-2 1.2-3 1.2zm9.1-7.5 4.9-4.8c1.6-1.6 1.6-4.1 0-5.7l-.7-.7C17.3.5 16.3 0 15.2 0c-1.1 0-2.2.5-2.8 1.2L9.1 4.6c-.3.3-.3.9 0 1.2.3.3.9.3 1.2 0l3.4-3.4c.4-.5 1-.7 1.6-.7.6 0 1.2.3 1.7.7l.7.7c.9.9.9 2.4 0 3.3l-4.9 4.8c-.8.8-2.5.8-3.3 0l-.7-.7c-.3-.3-.9-.3-1.2 0-.3.3-.3.9 0 1.2l.7.7c.7.7 1.8 1.2 2.8 1.2s2.1-.4 2.8-1.1z"
+								fill="#ffffff"
+							/></svg
+						>
+					</button>
 				</li>
 			</ul>
 			<div class="input-copy">
