@@ -459,25 +459,27 @@
 				</ul>
 			</section>
 		{/if}
-		<section class="register-box">
-			<div class="register-box-side">
-				<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
-			</div>
-			<div class="register-box-content">
-				<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
-				<p class="heading-level-2 u-margin-block-start-12">
-					Generate your own fake AI news fool your friends and followers!
-				</p>
-
-				<a href="/auth/login">
-					<button class="button u-margin-block-start-16">
-						<span class="u-padding-inline-32">Register Now</span>
-					</button></a
-				>
-			</div>
-		</section>
 	</div>
 {/if}
+
+<section class="register-box">
+	<div class="register-box-side">
+		<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
+	</div>
+	<div class="register-box-content">
+		<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
+		<p class="heading-level-2 u-margin-block-start-12">
+			Generate your own fake AI news fool your friends and followers!
+		</p>
+
+		<a href="/auth/login">
+			<button class="button u-margin-block-start-16">
+				<span class="u-padding-inline-32">Register Now</span>
+			</button></a
+		>
+	</div>
+</section>
+
 <section>
 	<h2 class="heading-level-3 u-padding-block-12 u-sep-block-end u-margin-block-start-32">
 		Read More
