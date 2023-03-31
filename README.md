@@ -1,6 +1,6 @@
 # 📰 Tech Scrunch
 
-> Reporting on the business of technology, startups, venture capital funding, and Silicon Valley
+> Website for all your very reliable tech news.
 
 ![TechScrunch logo](static/favicon.png)
 

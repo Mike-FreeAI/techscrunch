@@ -2,6 +2,64 @@ const axios = require('axios');
 const sdk = require('node-appwrite');
 const { Readable } = require('stream');
 
+async function generateTags(topic, req) {
+	const question = 'I need you to generate 3 tech single word news related tags based on this title: `' + topic + '`. Separate them by comma and make words spearated by dash.';
+
+	const res = await axios.default.post(
+		'https://api.openai.com/v1/chat/completions',
+		JSON.stringify({
+			model: 'gpt-3.5-turbo',
+			messages: [{ role: 'user', content: question }]
+		}),
+		{
+			headers: {
+				Authorization: 'Bearer ' + req.variables['OPEN_API_KEY'],
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	const tags = res.data.choices[0].message.content.split(',').map((tag) => {
+		return tag.trim().split(' ').join('-').toLowerCase();
+	});
+
+	return tags;
+}
+
+async function getPixabayUrl(topic, req) {
+	try {
+		const url = `https://pixabay.com/api/?key=${req.variables['PIXABAY_KEY']}&q=${topic.split(' ').join('+')}&image_type=photo`;
+		const res = await axios.default.get(
+			url,
+		);
+	
+		return res.data?.hits[0]?.largeImageURL ?? null;
+	} catch(err) {
+		console.log(err);
+	}
+
+	return null;
+}
+
+async function getDalleUrl(topic, req) {
+	const res = await axios.default.post(
+		'https://api.openai.com/v1/images/generations',
+		JSON.stringify({
+			prompt: topic,
+			size: '1024x1024',
+			response_format: 'url'
+		}),
+		{
+			headers: {
+				Authorization: 'Bearer ' + req.variables['OPEN_API_KEY'],
+				'Content-Type': 'application/json'
+			}
+		}
+	);
+
+	return res.data.data[0].url;
+}
+
 async function generateThumbnail(topic, storage, req) {
 	const question = 'stock picture in 2 words for article with title: ' + topic;
 
@@ -21,24 +79,12 @@ async function generateThumbnail(topic, storage, req) {
 
 	const imgTopic = res0.data.choices[0].message.content;
 
-	console.log(imgTopic); 
+	let url = await getPixabayUrl(imgTopic, req);
 
-	const res = await axios.default.post(
-		'https://api.openai.com/v1/images/generations',
-		JSON.stringify({
-			prompt: imgTopic,
-			size: '1024x1024',
-			response_format: 'url'
-		}),
-		{
-			headers: {
-				Authorization: 'Bearer ' + req.variables['OPEN_API_KEY'],
-				'Content-Type': 'application/json'
-			}
-		}
-	);
+	if(!url) {
+		url = await getDalleUrl(imgTopic, req);
+	}
 
-	const url = res.data.data[0].url;
 	const bufferFile = await axios.default.get(url, {
 		responseType: 'arraybuffer'
 	});
@@ -59,7 +105,7 @@ async function generateContent(category, topic, req) {
 		category +
 		'" about "' +
 		topic +
-		". Make it funny and use real names. At the end say it's 1st april fool. Make it at least 500 words long.";
+		". Make it funny and use real names. Make it at least 500 words long. In last paragraph, mention it's 1st april fool.";
 	const res = await axios.default.post(
 		'https://api.openai.com/v1/chat/completions',
 		JSON.stringify({
@@ -119,20 +165,49 @@ async function handle(req, res) {
 	const userId = req.variables['APPWRITE_FUNCTION_USER_ID'];
 	const user = await users.get(userId);
 
-	const [content, imageId] = await Promise.all([
-		generateContent(category.name, title, req),
-		generateThumbnail(title, storage, req)
-	]);
-
 	const doc = await databases.createDocument('default', 'articles', sdk.ID.unique(), {
-		content,
-		imageId,
+		published: false,
+		content: '',
+		imageId: '',
 		title,
 		categoryId,
 		isPromoted: Math.random() < 0.2,
 		isPinned: false,
 		authorId: user.prefs.profileId
 	});
+
+	(async () => {
+		const [content, imageId, tags] = await Promise.all([
+			generateContent(category.name, title, req),
+			generateThumbnail(title, storage, req),
+			generateTags(title, req)
+		]);
+
+		for(const tag of tags) {
+			let tagId;
+
+			const tagResponse = await databases.listDocuments('default', 'tags', [ sdk.Query.limit(1), sdk.Query.equal('name', tag) ]);
+			if(tagResponse.documents.length <= 0) {
+				const tagDoc = await databases.createDocument('default', 'tags', sdk.ID.unique(), {
+					name: tag
+				});
+				tagId = tagDoc.$id;
+			} else {
+				tagId = tagResponse.documents[0].$id;
+			}
+
+			await databases.createDocument('default', 'articleTags', sdk.ID.unique(), {
+				articleId: doc.$id,
+				tagId
+			});
+		}
+
+		await databases.updateDocument('default', 'articles', doc.$id, {
+			published: true,
+			content,
+			imageId
+		});
+	})()
 
 	res.json({
 		success: true,

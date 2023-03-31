@@ -41,6 +41,7 @@ _Example output:_
 
 List of environment variables used by this cloud function:
 
+- **PIXABAY_KEY** - [Pixabay](https://pixabay.com/api/docs/) API key
 - **OPEN_API_KEY** - [Open AI](https://platform.openai.com/docs/api-reference) API key
 - **APPWRITE_FUNCTION_ENDPOINT** - Endpoint of Appwrite project
 - **APPWRITE_FUNCTION_API_KEY** - Appwrite API Key

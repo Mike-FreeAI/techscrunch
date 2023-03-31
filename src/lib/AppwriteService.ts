@@ -15,6 +15,15 @@ export type Category = {
 	hidden: boolean;
 } & Models.Document;
 
+export type Tag = {
+	name: string;
+} & Models.Document;
+
+export type ArticleTag = {
+	articleId: string;
+	tagId: string;
+} & Models.Document;
+
 export type Author = {
 	name: string;
 	imageId?: string;
@@ -29,11 +38,16 @@ export type Article = {
 	categoryId: string;
 	imageId: string;
 	authorId: string;
+	published: boolean;
+	shortId: string;
 
 	// Front-end only
 	category?: Category;
 	author?: Author;
 	verboseDate: string;
+
+	// Front-end only, only in article detail (getArticle)
+	tags?: Tag[];
 } & Models.Document;
 
 export const PageSize = {
@@ -149,12 +163,37 @@ export const AppwriteService = {
 	getAuthor: async (authorId: string) => {
 		return await databases.getDocument<Author>('default', 'authors', authorId);
 	},
+	getArticleTags: async (articleId: string) => {
+		return await databases.listDocuments<ArticleTag>('default', 'articleTags', [
+			Query.equal('articleId', articleId)
+		]);
+	},
+	getTags: async (tagIds: string[]) => {
+		return await databases.listDocuments<Tag>('default', 'tags', [Query.equal('$id', tagIds)]);
+	},
 	getArticle: async (articleId: string) => {
 		const article = await databases.getDocument<Article>('default', 'articles', articleId);
 
 		article.verboseDate = getVerboseDate(article.$createdAt);
-		article.category = await AppwriteService.getCategory(article.categoryId);
-		article.author = await AppwriteService.getAuthor(article.authorId);
+
+		const [category, author, tags] = await Promise.all([
+			AppwriteService.getCategory(article.categoryId),
+			AppwriteService.getAuthor(article.authorId),
+			(async () => {
+				const relationships = await AppwriteService.getArticleTags(article.$id);
+
+				const tagIds = [
+					...new Set(relationships.documents.map((relationship) => relationship.tagId))
+				];
+
+				const tags = await AppwriteService.getTags(tagIds);
+				return tags.documents;
+			})()
+		]);
+
+		article.category = category;
+		article.author = author;
+		article.tags = tags;
 
 		return article;
 	},
@@ -163,7 +202,13 @@ export const AppwriteService = {
 			queries = [];
 		}
 
-		queries.push(...[Query.limit(PageSize.Articles + 1), Query.orderDesc('$createdAt')]);
+		queries.push(
+			...[
+				Query.limit(PageSize.Articles + 1),
+				Query.orderDesc('$createdAt'),
+				Query.equal('published', true)
+			]
+		);
 
 		const articles = await databases.listDocuments<Article>('default', 'articles', queries);
 
