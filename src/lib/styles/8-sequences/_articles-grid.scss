@@ -64,6 +64,7 @@
 	}
 	@media #{$break1}, #{$break2} {
 		grid-template-columns: repeat(2, 1fr);
+    .heading-level-2 { font-size:pxToRem(22); }
     &-item-link {
       &.is-double-image {
         display:flex; flex-direction:column; margin-block-start:0;
@@ -78,6 +79,9 @@
 			display: none !important;
 		}
 	}
+  @media #{$break1} {
+    grid-template-columns: 1fr pxToRem(117);
+  }
   @media #{$break3open} {
     &-item-link {
       &.is-double-image {
