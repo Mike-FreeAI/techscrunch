@@ -18,7 +18,7 @@
 </section>
 
 <Tags
-	title={'TechsCrunch | ' + data.article.title}
+	title={'TechScrunch | ' + data.article.title}
 	cover={AppwriteService.getThumbnail(data.article.imageId, 1280)}
 	description={data.article.content.substring(0, 150) + '...'}
 />

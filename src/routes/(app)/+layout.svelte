@@ -36,7 +36,7 @@
 			<img
 				src="/img/techscrunch-logo.svg"
 				class="mobile-header-logo"
-				alt="Tech Scrunch"
+				alt="TechScrunch"
 				width="70"
 				height="43"
 			/>
@@ -55,7 +55,7 @@
 				<img
 					src="/img/techscrunch-logo.svg"
 					class="mobile-header-logo"
-					alt="Tech Scrunch"
+					alt="TechScrunch"
 					width="70"
 					height="43"
 				/>
@@ -71,7 +71,7 @@
 
 		<div class="side-nav-content">
 			<a href="/" class="u-block is-not-mobile">
-				<img height="35" src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="Tech Scrunch" />
+				<img height="35" src="/img/techscrunch-logo.svg" class="side-nav-logo" alt="TechScrunch" />
 			</a>
 			<div class="side-nav-join heading-level-3 u-margin-block-start-20">Tech News</div>
 			<ul class="side-nav-list" style="margin-block-start: 0.8rem; font-size: 1.2rem;">
@@ -103,7 +103,7 @@
 								<img class="u-block" width="32" height="32" src="/img/profile.webp" alt="" />
 							{/if}
 
-							<span class="text">{$profileStore?.name ?? ''}</span>
+							<span class="text side-nav-item">{$profileStore?.name ?? ''}</span>
 						</a>
 					</li>
 					<li class="side-nav-item">
@@ -195,7 +195,7 @@
 	<footer class="main-footer">
 		<div class="u-flex u-gap-8 u-flex-wrap">
 			<p class="u-margin-inline-end-auto">
-				© 2023 Tech Scrunch. All rights reserved.
+				© 2023 TechScrunch. All rights reserved.
 			</p>
 
       <div class="u-flex u-gap-16">

@@ -20,4 +20,4 @@
 
 
 
-<Tags title={'TechsCrunch | ' + data.category.name} description={data.category.description} />
+<Tags title={'TechScrunch | ' + data.category.name} description={data.category.description} />

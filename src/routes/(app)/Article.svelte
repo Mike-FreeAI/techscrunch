@@ -9,7 +9,7 @@
 	export let article: Article;
 	export let changesUrl = true;
 
-	$: parahraphs = article.content.split('\n');
+	$: parahraphs = article.content.split('\n').filter((p) => p === '' ? false : true);
 
 	let copyClasses = '';
 	let copyText = 'copy';
@@ -70,7 +70,7 @@
 				<span class="ts-plus-title">TechScrunch</span>
 				<span class="ts-plus-sign" />
 				<a href={`/category/${article.categoryId}`}
-					><span class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
+					><span style="color: #dca946;" class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
 				>
 			</div>
 		{:else}
@@ -317,10 +317,29 @@
 				<!-- <figcaption>Took by the greatest Pikachu</figcaption> -->
 			</figure>
 			<div class="u-margin-block-start-16">
-				{#each parahraphs as parahraph}
+				{#each parahraphs as parahraph, index}
 					<p>
 						{parahraph}
 					</p>
+					{#if index === 3}
+					<section class="register-box u-max-width-750 u-margin-inline-auto u-margin-block-start-32 u-margin-block-end-32">
+						<div class="register-box-side">
+							<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="TechScrunch" />
+						</div>
+						<div class="register-box-content">
+							<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
+							<p class="heading-level-2 u-margin-block-start-12">
+								Generate your own fake AI news fool your friends and followers!
+							</p>
+					
+							<a href="/auth/login">
+								<button class="button u-margin-block-start-16">
+									<span class="u-padding-inline-32">Register Now</span>
+								</button></a
+							>
+						</div>
+					</section>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -489,34 +508,3 @@
 		{/if}
 	</div>
 {/if}
-
-<section class="register-box u-max-width-750 u-margin-inline-auto">
-	<div class="register-box-side">
-		<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
-	</div>
-	<div class="register-box-content">
-		<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
-		<p class="heading-level-2 u-margin-block-start-12">
-			Generate your own fake AI news fool your friends and followers!
-		</p>
-
-		<a href="/auth/login">
-			<button class="button u-margin-block-start-16">
-				<span class="u-padding-inline-32">Register Now</span>
-			</button></a
-		>
-	</div>
-</section>
-<!-- 
-<section>
-	<h2 class="heading-level-3 u-padding-block-12 u-sep-block-end u-margin-block-start-32">
-		Read More
-	</h2>
-	<GridArticles initData={data.moreArticles} queries={[]} />
-</section> -->
-
-<!-- <Tags
-	title={'TechsCrunch | ' + article.title}
-	cover={AppwriteService.getThumbnail(article.imageId, 1280)}
-	description={article.content.substring(0, 150) + '...'}
-/> -->

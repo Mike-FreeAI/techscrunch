@@ -1,4 +1,4 @@
-# 📰 Tech Scrunch
+# 📰 TechScrunch
 
 > Website for all your very reliable tech news.
 

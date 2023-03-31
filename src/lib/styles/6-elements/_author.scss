@@ -1,6 +1,10 @@
 @use '../abstract' as *;
 .author {
   display: block;
-  font-size: pxToRem(14);
+  font-size: pxToRem(16);
   font-weight: 700;
+}
+
+.article-short-content {
+	font-size: pxToRem(16);
 }

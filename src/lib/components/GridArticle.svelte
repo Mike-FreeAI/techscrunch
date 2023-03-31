@@ -31,7 +31,7 @@
 					{#if article.isPlus}
 						<div class="ts-plus is-small">
 							<span class="ts-plus-title">
-								<img height="12" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
+								<img height="12" src="/img/techscrunch-logo.svg" class="logo" alt="TechScrunch" />
 							</span>
 							<span class="ts-plus-sign" />
 							<a href={`/category/${article.categoryId}`} style="font-weight:300">
@@ -49,7 +49,7 @@
 					</a>
 					<time class="date-time">{article.verboseDate}</time>
 				</header>
-				<p class="articles-grid-item-content u-trim-6 u-cross-child-start">
+				<p class="articles-grid-item-content u-trim-6 u-cross-child-start article-short-content">
 					{article.content}
 				</p>
 				<figure class="articles-grid-item-image">
