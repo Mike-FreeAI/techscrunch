@@ -56,9 +56,9 @@
 					<img
 						loading="lazy"
 						class="u-margin-block-start-4"
-						src={AppwriteService.getThumbnail(article.imageId, 300, 160)}
+						src={AppwriteService.getThumbnail(article.imageId, 720, 380)}
 						alt=""
-						width="300"
+						width="720"
 					/>
 				</figure>
 			</a>
@@ -86,9 +86,9 @@
 					<img
 						loading="lazy"
 						class="u-margin-block-start-4"
-						src={AppwriteService.getThumbnail(article.imageId, 600, 300)}
+						src={AppwriteService.getThumbnail(article.imageId, 1280, 640)}
 						alt=""
-						width="600"
+						width="1280"
 					/>
 				</figure>
 			</a>
