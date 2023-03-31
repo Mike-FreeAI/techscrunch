@@ -56,7 +56,7 @@
 			</div>
 		</div>
 	</header>
-	{#if data.article.published}
+	{#if data.article.isPublished}
 		<aside class="share-links u-margin-block-end-20 is-only-desktop">
 			<button class="share-links-x-button">
 				<svg viewBox="0 0 36 36" class="circle-svg">
@@ -235,14 +235,14 @@
 	{:else}
 		<aside class="share-links u-margin-block-end-20 is-only-desktop" />
 		<div class="main-article-content">
-			<div class="u-color-text-pink u-margin-block-start-16">
-				Your article is being generated...
+			<div class="u-color-text-pink u-margin-block-start-16 u-margin-block-end-20">
+				Your article is being generated. This can take up to a few minutes.
 			</div>
 		</div>
 	{/if}
 </article>
 
-{#if data.article.published}
+{#if data.article.isPublished}
 	<div class="u-max-width-750 u-margin-block-start-40 u-margin-inline-auto">
 		<section
 			class="u-flex u-flex-wrap share-links u-sep-block-end u-padding-block-end-4"

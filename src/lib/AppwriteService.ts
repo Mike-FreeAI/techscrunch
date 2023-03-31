@@ -40,7 +40,7 @@ export type Article = {
 	title: string;
 	authorId: string;
 	isPinned: boolean;
-	published: boolean;
+	isPublished: boolean;
 	shortId: string;
 	isPlus: boolean;
 
@@ -58,7 +58,7 @@ export const PageSize = {
 };
 
 function getVerboseDate(dateStr: string) {
-	return moment(dateStr).format('m:ss A G\\MTZ • MMMM D, YYYY');
+	return moment(dateStr).format('h:mm A G\\MTZ • MMMM D, YYYY');
 }
 
 export const AppwriteService = {
@@ -197,6 +197,10 @@ export const AppwriteService = {
 					...new Set(relationships.documents.map((relationship) => relationship.tagId))
 				];
 
+				if(tagIds.length <= 0) {
+					return [];
+				}
+
 				const tags = await AppwriteService.getTags(tagIds);
 				return tags.documents;
 			})()
@@ -217,7 +221,7 @@ export const AppwriteService = {
 			...[
 				Query.limit(PageSize.Articles + 1),
 				Query.orderDesc('$createdAt'),
-				Query.equal('published', true)
+				Query.equal('isPublished', true)
 			]
 		);
 
@@ -268,7 +272,7 @@ export const AppwriteService = {
 				undefined,
 				undefined,
 				undefined,
-				'png'
+				'webp'
 			)
 			.toString();
 	},
@@ -287,7 +291,7 @@ export const AppwriteService = {
 				undefined,
 				undefined,
 				undefined,
-				'png'
+				'webp'
 			)
 			.toString();
 	}
