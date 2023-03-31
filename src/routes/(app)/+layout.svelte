@@ -108,7 +108,7 @@
 								<img class="u-block" width="32" height="32" src="/img/profile.webp" alt="" />
 							{/if}
 
-							<span class="text side-nav-item">{$profileStore?.name ?? ''}</span>
+							<span class="text side-nav-item">{$profileStore?.name ?? 'Anonymous'}</span>
 						</a>
 					</li>
 					<li class="side-nav-item">

@@ -60,7 +60,7 @@
 
 {#if $profileStore}
 	<h1 class="heading-level-1 u-color-text-pink u-margin-block-start-40">
-		Hi, {$profileStore.name}.
+		Hi, {$profileStore.name ?? 'Anonymous'}.
 	</h1>
 
 	<div class="profile-uploader">
@@ -112,7 +112,7 @@
 		<table class="user-table">
 			<tr>
 				<th style="width:100px">Name</th>
-				<td class="u-bold">{$profileStore.name ?? ''}</td>
+				<td class="u-bold">{$profileStore.name ?? 'Anonymous'}</td>
 			</tr>
 			<tr>
 				<th style="width:100px">E-mail</th>
@@ -136,7 +136,7 @@
 
 	<section>
 		<h2 class="heading-level-1 u-padding-block-12 u-sep-block-end u-margin-block-start-32">
-			The Latest from {$profileStore.name}
+			The Latest from {$profileStore.name ?? 'Anonymous'}
 		</h2>
 
 		{#if initArticles}
