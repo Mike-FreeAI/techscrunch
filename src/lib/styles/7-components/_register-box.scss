@@ -1,0 +1,22 @@
+@use "../abstract" as *;
+.register-box {
+  display:flex;
+  &-side {
+    padding:pxToRem(16);
+    background-image: linear-gradient(180deg, rgb(192, 13, 83) 0%, rgb(240, 46, 101) 100%);
+    .logo { filter:brightness(10); }
+  }
+  &-content {
+    padding-block:pxToRem(32); padding-inline:pxToRem(48);
+    border:solid pxToRem(1) hsl(var(--color-primary-100));
+    .button {
+      block-size:3rem; font-weight:bold;
+      background-image: linear-gradient(90deg, rgb(192, 13, 83) 0%, rgb(240, 46, 101) 100%);
+    }
+  }
+
+  @media #{$break1} {
+    &-content { padding:pxToRem(16); }
+    .heading-level-2 { font-size:pxToRem(20); }
+  }
+}

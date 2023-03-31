@@ -1,0 +1,6 @@
+@use '../abstract' as *;
+.author {
+  display: block;
+  font-size: pxToRem(14);
+  font-weight: 700;
+}

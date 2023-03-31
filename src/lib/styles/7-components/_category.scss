@@ -1,0 +1,44 @@
+@use '../abstract' as *;
+
+.category-main {
+	padding-bottom: pxToRem(16);
+	border-bottom: pxToRem(2) solid hsl(var(--color-neutral-10));
+
+  &-header {
+    border-block-end: #333333 solid pxToRem(2);
+    padding-block-end: pxToRem(40);
+    margin-block-end: pxToRem(40);
+    p {
+      color:#333; font-size:pxToRem(18); line-height:1.8;
+    }
+    @media #{$break1}, #{$break2} {
+      img { inline-size:pxToRem(100); }
+    }
+  }
+
+  h6 {
+    font-size: pxToRem(18);
+    margin-block-start: pxToRem(16);
+  }
+	.content {
+		max-inline-size: pxToRem(630);
+	}
+}
+
+.writer-name {
+  color: black;
+  font-size: pxToRem(84);
+  line-height: 0.9;
+  font-weight: 900;
+
+  @media #{$break1}, #{$break2} {
+    font-size: pxToRem(40);
+  }
+}
+
+.writer-profession {
+  color: #777;;
+  font-size: pxToRem(18);
+  line-height: pxToRem(28);
+  margin-block-start: pxToRem(16);
+}

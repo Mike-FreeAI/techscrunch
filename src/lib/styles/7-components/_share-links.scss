@@ -1,0 +1,71 @@
+@use "../abstract" as *;
+.share-links {
+  &-x-button {
+    position:relative;
+    inline-size:pxToRem(55); block-size:pxToRem(55);
+    margin-block-end:pxToRem(20);
+    border-radius:50%; box-shadow:0 2px 4px 0 rgba(0,0,0,.2);
+    transform:translateX(pxToRem(-3));
+
+    .share-links-x-icon {
+      position:absolute; inset:0; margin:auto; transition:0.2s;
+    }
+    &:hover, &:focus {
+      .share-links-x-icon { scale:1.1; }
+    }
+  }
+  &-list {
+    &.is-horizontal { display:flex; }
+  }
+  &-item {
+    > * {
+      display:grid; place-content:center; inline-size:pxToRem(50); block-size:pxToRem(50);
+      transition:0.3s;
+      &:hover, &:focus {
+        filter: saturate(1.35);
+      }
+    }
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i}) {
+        $a: calc(1 - (0.1 * #{$i}));
+        > * {
+          background-color: hsl(var(--color-primary-dark) / #{$a});
+        }
+      }
+    }
+
+  }
+  @media #{$break1}, #{$break2} {
+    &-list { display:flex;}
+  }
+}
+
+
+
+//@keyframes progress {
+//  0% {
+//    stroke-dasharray: 0 100;
+//  }
+//}
+.circle-svg {
+  display: block;
+  margin: pxToRem(2);
+  max-height: 100px;
+}
+.circle-svg text {
+  text-align:center;
+  color:black;
+  font-size:10px
+}
+.circle-svg path.percent {
+  stroke: #c00d53;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+.circle-svg path.around {
+  stroke: transparent;
+  fill: none;
+  stroke-width: 1.8;
+}

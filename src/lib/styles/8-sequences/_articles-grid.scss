@@ -1,0 +1,95 @@
+@use '../abstract' as *;
+.articles-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: pxToRem(32);
+	&-item {
+		display: contents;
+    .category { margin-block-end:pxToRem(8); }
+    .heading-level-2 { font-size:pxToRem(27); line-height:1.2; }
+		&-article {
+			display: contents;
+		}
+		&-link {
+			display: contents;
+			&::before {
+				content: '';
+				display: block;
+				grid-column: span 3;
+				border-block-start: solid pxToRem(2) hsl(var(--color-border));
+			}
+      &.is-double-image {
+        grid-column:span 2;
+        border-block-start: solid pxToRem(2) hsl(var(--color-border));
+        margin-block-start:pxToRem(32);
+        padding-block-start:pxToRem(32);
+        img {inline-size:100%; }
+      }
+		}
+    &-image {
+      transition:0.3s;
+      &:hover { opacity:0.8; }
+    }
+		&:first-child ::before {
+			display: none;
+		}
+		&-load-more {
+			width: 100%;
+			text-align: center;
+			font-weight: 900;
+
+			color: #f02e65;
+			background-clip: text;
+			font-size: pxToRem(24);
+			margin-top: pxToRem(16);
+			padding-top: pxToRem(16);
+			padding-bottom: pxToRem(16);
+			border-top: 2px solid hsl(var(--color-neutral-10));
+
+			&:hover {
+				cursor: pointer;
+				background-color: hsl(var(--color-neutral-10));
+			}
+		}
+		&-empty {
+			font-weight: 900;
+
+			color: black;
+			background-clip: text;
+			font-size: pxToRem(32);
+			margin-top: pxToRem(16);
+			padding-top: pxToRem(16);
+			padding-bottom: pxToRem(16);
+		}
+	}
+	@media #{$break1}, #{$break2} {
+		grid-template-columns: repeat(2, 1fr);
+    .heading-level-2 { font-size:pxToRem(20); }
+    &-item-link {
+      &.is-double-image {
+        display:flex; flex-direction:column; margin-block-start:0;
+        .articles-grid-item-image { order:-1; }
+        &::before {display:none;}
+      }
+    }
+		&-item-link::before {
+			grid-column: span 2;
+		}
+		&-item-content {
+			display: none !important;
+		}
+	}
+  @media #{$break1} {
+    grid-template-columns: 1fr pxToRem(117);
+    gap: pxToRem(8);
+  }
+  @media #{$break3open} {
+    &-item-link {
+      &.is-double-image {
+        .articles-grid-item-image {
+          grid-column:span 2;
+        }
+      }
+    }
+  }
+}

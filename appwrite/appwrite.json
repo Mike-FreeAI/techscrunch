@@ -1,0 +1,246 @@
+{
+    "projectId": "techCrunchs",
+    "projectName": "TechCrunchs",
+    "collections": [
+        {
+            "$id": "categories",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"team:admins\")",
+                "read(\"team:admins\")",
+                "update(\"team:admins\")",
+                "delete(\"team:admins\")"
+            ],
+            "databaseId": "default",
+            "name": "categories",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "description",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 1024,
+                    "default": null
+                },
+                {
+                    "key": "hidden",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "hidden"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "articles",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"team:admins\")",
+                "read(\"team:admins\")",
+                "update(\"team:admins\")",
+                "delete(\"team:admins\")"
+            ],
+            "databaseId": "default",
+            "name": "articles",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPromoted",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "content",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 100000,
+                    "default": null
+                },
+                {
+                    "key": "categoryId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "title",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "isPinned",
+                    "type": "boolean",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "default": null
+                },
+                {
+                    "key": "authorId",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": [
+                {
+                    "key": "index_1",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "categoryId"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                },
+                {
+                    "key": "index_2",
+                    "type": "key",
+                    "status": "available",
+                    "attributes": [
+                        "isPinned"
+                    ],
+                    "orders": [
+                        "ASC"
+                    ]
+                }
+            ]
+        },
+        {
+            "$id": "authors",
+            "$permissions": [
+                "read(\"any\")",
+                "create(\"users\")"
+            ],
+            "databaseId": "default",
+            "name": "authors",
+            "enabled": true,
+            "documentSecurity": true,
+            "attributes": [
+                {
+                    "key": "name",
+                    "type": "string",
+                    "status": "available",
+                    "required": true,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "twitter",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "bio",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 2048,
+                    "default": null
+                },
+                {
+                    "key": "imageId",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "email",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "teams": [
+        {
+            "$id": "admins",
+            "name": "admins"
+        }
+    ],
+    "functions": [
+        {
+            "$id": "generateArticle",
+            "name": "generateArticle",
+            "runtime": "node-16.0",
+            "path": "functions/generateArticle",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "schedule": "",
+            "timeout": 120
+        }
+    ]
+}
