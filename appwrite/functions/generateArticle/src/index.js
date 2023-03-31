@@ -2,6 +2,20 @@ const axios = require('axios');
 const sdk = require('node-appwrite');
 const { Readable } = require('stream');
 
+function toBase62(n) {
+	if (n === 0) {
+	  return '0';
+	}
+	var digits = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var result = ''; 
+	while (n > 0) {
+	  result = digits[n % digits.length] + result;
+	  n = parseInt(n / digits.length, 10);
+	}
+	
+	return result;
+  }
+
 async function generateTags(topic, req) {
 	const question = 'I need you to generate 3 tech single word news related tags based on this title: `' + topic + '`. Separate them by comma and make words spearated by dash.';
 
@@ -171,7 +185,9 @@ async function handle(req, res) {
 		imageId: '',
 		title,
 		categoryId,
+		shortId: toBase62(Date.now()),
 		isPromoted: Math.random() < 0.2,
+		isPlus: Math.random() < 0.2,
 		isPinned: false,
 		authorId: user.prefs.profileId
 	});

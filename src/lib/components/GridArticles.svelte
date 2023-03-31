@@ -8,6 +8,7 @@
 
 	let articles: Article[] = [];
 	let hasNextPage: boolean = false;
+	let disablePagination = false;
 
 	// Remove last for pagination purposes
 	$: {
@@ -42,7 +43,7 @@
 		{/each}
 	</ul>
 
-	{#if hasNextPage}
+	{#if hasNextPage && !disablePagination}
 		<button on:click={onLoadMore} class="articles-grid-item-load-more">Load More</button>
 	{/if}
 {:else}

@@ -33,13 +33,16 @@ export type Author = {
 } & Models.Document;
 
 export type Article = {
-	title: string;
 	content: string;
-	categoryId: string;
 	imageId: string;
+	isPromoted: boolean;
+	categoryId: string;
+	title: string;
 	authorId: string;
+	isPinned: boolean;
 	published: boolean;
 	shortId: string;
+	isPlus: boolean;
 
 	// Front-end only
 	category?: Category;
@@ -160,12 +163,20 @@ export const AppwriteService = {
 	getCategory: async (categoryId: string) => {
 		return await databases.getDocument<Category>('default', 'categories', categoryId);
 	},
+	getTag: async (tagId: string) => {
+		return await databases.getDocument<Tag>('default', 'tags', tagId);
+	},
 	getAuthor: async (authorId: string) => {
 		return await databases.getDocument<Author>('default', 'authors', authorId);
 	},
-	getArticleTags: async (articleId: string) => {
+	getArticleTagsbyArticle: async (articleId: string) => {
 		return await databases.listDocuments<ArticleTag>('default', 'articleTags', [
 			Query.equal('articleId', articleId)
+		]);
+	},
+	getArticleTagsByTag: async (tagId: string) => {
+		return await databases.listDocuments<ArticleTag>('default', 'articleTags', [
+			Query.equal('tagId', tagId)
 		]);
 	},
 	getTags: async (tagIds: string[]) => {
@@ -180,7 +191,7 @@ export const AppwriteService = {
 			AppwriteService.getCategory(article.categoryId),
 			AppwriteService.getAuthor(article.authorId),
 			(async () => {
-				const relationships = await AppwriteService.getArticleTags(article.$id);
+				const relationships = await AppwriteService.getArticleTagsbyArticle(article.$id);
 
 				const tagIds = [
 					...new Set(relationships.documents.map((relationship) => relationship.tagId))
