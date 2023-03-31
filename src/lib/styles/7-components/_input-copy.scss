@@ -8,7 +8,7 @@
   &:hover, &:focus { input {color:hsl(var(--color-primary-100));} }
   &-button {
     position:absolute; left:170px; top:50%; transform:translateY(-50%);
-    padding-inline:pxToRem(10); font-size:pxToRem(11);
+    padding-inline:pxToRem(10); padding-block:pxToRem(2); font-size:pxToRem(11);
     color:#fff; background-color:#ddd; border-radius:pxToRem(3);
     &.is-copy { background-color:hsl(var(--color-primary-100)); }
   }
