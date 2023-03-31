@@ -330,8 +330,8 @@
 						loading="lazy"
 						class="u-margin-block-start-4"
 						alt=""
-						src={AppwriteService.getThumbnail(article.imageId, 750, 400)}
-						width="750"
+						src={AppwriteService.getThumbnail(article.imageId, 1280, 680)}
+						width="1280"
 					/>
 					<!-- <figcaption>Took by the greatest Pikachu</figcaption> -->
 				</figure>
