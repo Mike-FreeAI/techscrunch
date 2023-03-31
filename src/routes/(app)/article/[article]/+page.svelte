@@ -12,6 +12,12 @@
 
 <article class="main-article u-margin-block-start-32">
 	<header class="main-article-header">
+    <div class="ts-plus">
+      <span class="ts-plus-title">TechScrunch</span>
+      <span class="ts-plus-sign"></span>
+      <span class="ts-plus-text">Yellow text</span>
+    </div>
+
 		<a href={`/category/${data.article.categoryId}`} class="category"
 			>{data.article.category?.name ?? 'Unknown Category'}</a
 		>

@@ -1,0 +1,30 @@
+@use "../abstract" as *;
+.ts-plus {
+  display:flex; align-items:baseline; flex-wrap:wrap;
+  &-title {
+    font-size:pxToRem(22); font-weight:900;
+    background-image: linear-gradient(90deg, rgb(192, 13, 83) 0%, rgb(240, 46, 101) 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  &-sign {
+    position:relative; margin-inline-start:pxToRem(2);
+    display: block; inline-size:pxToRem(11); block-size:pxToRem(11);
+    &::before,
+    &::after {
+      position: absolute;
+      content:""; display:block; background-color:#fdc006;
+    }
+    &::before {
+      inline-size:pxToRem(3); block-size:pxToRem(11);
+      inset-block-start:0; inset-inline-start:pxToRem(4);
+    }
+    &::after {
+      inline-size:pxToRem(11); block-size:pxToRem(3);
+      inset-block-start:pxToRem(4); inset-inline-start:0;
+    }
+  }
+  &-text { color:#dca946; margin-inline-start:pxToRem(8); }
+}
