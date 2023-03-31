@@ -344,6 +344,20 @@
       <li><a href="" class="link">hackers</a></li>
     </ul>
   </section>
+
+  <section class="register-box">
+    <div class="register-box-side">
+      <img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch">
+    </div>
+    <div class="register-box-content">
+      <h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
+      <p class="heading-level-2 u-margin-block-start-12">Generate your own fake Ai news fool your friends and followers!</p>
+
+      <button class="button u-margin-block-start-16">
+        <span class="u-padding-inline-32">Register Now</span>
+      </button>
+    </div>
+  </section>
 </div>
 
 <section>
