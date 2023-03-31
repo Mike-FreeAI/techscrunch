@@ -1,6 +1,6 @@
 # 📰 Tech Scrunch
 
-> Website for all your very reliable tech news.
+> Website for all your very relAIble tech news.
 
 ![TechScrunch logo](static/favicon.png)
 
