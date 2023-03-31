@@ -13,7 +13,7 @@
 	<header class="category-main-header">
 		<div class="u-flex u-flex-vertical-mobile-reverse u-gap-32">
 			<div class="u-stretch">
-				<h1 class="writer-name">{data.author.name}</h1>
+				<h1 class="writer-name">{data.author.name ?? 'Anonymous'}</h1>
 				<h6 class="writer-profession">Reporter</h6>
 			</div>
 			<div>
@@ -39,7 +39,7 @@
 				{/if}
 			</div>
 		</div>
-		<p class="u-margin-block-start-20">{data.author.bio}</p>
+		<p class="u-margin-block-start-20">{data.author.bio ?? ''}</p>
 
 		<section class="u-flex u-main-end u-gap-24 u-margin-block-start-8">
 			{#if data.author.twitter}
@@ -75,11 +75,11 @@
 
 	<section>
 		<h2 class="heading-level-1 u-padding-block-12 u-sep-block-end u-margin-block-start-32">
-			The Latest from {data.author.name}
+			The Latest from {data.author.name ?? 'Anonymous'}
 		</h2>
 
 		<GridArticles queries={[Query.equal('authorId', data.author.$id)]} initData={data.articles} />
 	</section>
 </section>
 
-<Tags title={'TechScrunch | ' + data.author.name} description={data.author.bio} />
+<Tags title={'TechScrunch | ' + (data.author.name ?? 'Anonymous')} description={data.author.bio ?? undefined} />
