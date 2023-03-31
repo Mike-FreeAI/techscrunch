@@ -354,7 +354,7 @@
       <p class="heading-level-2 u-margin-block-start-12">Generate your own fake Ai news fool your friends and followers!</p>
 
       <button class="button u-margin-block-start-16">
-        <span class="u-padding-inline-32">Register Now</span>
+        <span class="u-padding-inline-48">Register Now</span>
       </button>
     </div>
   </section>
