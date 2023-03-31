@@ -1,15 +1,29 @@
 @use '../abstract' as *;
 .page-grid-2-1 {
+	&-column-1 {
+		background: #f02e65;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-  &-column-1 { background: rgb(192, 13, 83); }
-  @media #{$break1}, #{$break2} {
-    display:flex; flex-direction:column; justify-content:center;
-    min-block-size: 100vh; min-block-size: 100lvh;
-    max-inline-size: pxToRem(650); margin-inline:auto;
-  }
-  @media #{$break3open} {
-    display: grid;
-    grid-template-columns:2fr 1fr;
-    min-block-size: 100vh;
-  }
+    @media #{$break1}, #{$break2} {
+      display: none;
+    }
+	}
+	@media #{$break1}, #{$break2} {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		min-block-size: 100vh;
+		min-block-size: 100lvh;
+		max-inline-size: pxToRem(650);
+		margin-inline: auto;
+	}
+	@media #{$break3open} {
+		display: grid;
+		grid-template-columns: 2fr 1fr;
+		min-block-size: 100vh;
+	}
 }
