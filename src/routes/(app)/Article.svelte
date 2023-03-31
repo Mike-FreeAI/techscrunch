@@ -64,13 +64,12 @@
 	use:scrollingProgress={(p) => (progress = p)}
 >
 	<header class="main-article-header">
-		Progress: {progress}
 		{#if article.isPlus}
 			<div class="ts-plus">
 				<span class="ts-plus-title">TechScrunch</span>
 				<span class="ts-plus-sign" />
 				<a href={`/category/${article.categoryId}`}
-					><span style="color: #dca946;" class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
+					><span class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
 				>
 			</div>
 		{:else}
