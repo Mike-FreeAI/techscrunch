@@ -26,7 +26,7 @@
       inset-block-start:pxToRem(4); inset-inline-start:0;
     }
   }
-  &-text { color:#dca946; margin-inline-start:pxToRem(8); }
+  &-text { color:#dca946; margin-inline-start:pxToRem(8); font-weight: 300; }
 
   /* state */
   &.is-small {

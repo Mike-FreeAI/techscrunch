@@ -82,4 +82,4 @@
 	</section>
 </section>
 
-<Tags title={'TechsCrunch | ' + data.author.name} description={data.author.bio} />
+<Tags title={'TechScrunch | ' + data.author.name} description={data.author.bio} />

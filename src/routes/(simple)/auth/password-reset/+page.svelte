@@ -30,7 +30,7 @@
 <img
 	src="/img/techscrunch-logo.svg"
 	class="u-block u-margin-inline-auto"
-	alt="Tech Scrunch"
+	alt="TechScrunch"
 	width="70"
 	height="43"
 />

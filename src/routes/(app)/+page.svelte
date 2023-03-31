@@ -42,7 +42,7 @@
 											height="12"
 											src="/img/techscrunch-logo.svg"
 											class="logo"
-											alt="Tech Scrunch"
+											alt="TechScrunch"
 										/>
 									</span>
 									<span class="ts-plus-sign" />
@@ -58,7 +58,7 @@
 								>
 							{/if}
 
-							<h3 class="heading-level-2">
+							<h3 class="heading-level-2" style="font-size: 1.6rem;">
 								{topSideArticle.title}
 							</h3>
 							<a href={`/author/${topSideArticle.authorId}`} class="author">

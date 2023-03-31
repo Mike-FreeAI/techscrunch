@@ -20,4 +20,4 @@
 
 
 
-<Tags title={'TechsCrunch | ' + data.tag.name} />
+<Tags title={'TechScrunch | ' + data.tag.name} />
