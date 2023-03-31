@@ -46,8 +46,8 @@ When contributing to backend-related logic, sync up `appwrite/appwrite.json` by 
 
 ## 🖼️ Screenshots
 
-![Screenshot](docs/screenshot1.png)
-![Screenshot](docs/screenshot2.png)
+![Screenshot](docs/banner2.png)
+![Screenshot](docs/banner3.png)
 
 ## 🤖 Auto-generated documentation
 
