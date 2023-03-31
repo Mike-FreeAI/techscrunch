@@ -28,7 +28,6 @@
 						src={AppwriteService.getThumbnail(article.imageId, 300, 160)}
 						alt=""
 						width="300"
-						height="160"
 					/>
 				</figure>
 			</a>
@@ -55,7 +54,6 @@
 						src={AppwriteService.getThumbnail(article.imageId, 600, 300)}
 						alt=""
 						width="600"
-						height="300"
 					/>
 				</figure>
 			</a>
