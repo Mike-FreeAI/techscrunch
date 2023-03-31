@@ -1,13 +1,32 @@
 <script lang="ts">
-	import { AppwriteService, type Article } from '$lib/AppwriteService';
+	import { AppwriteService, type Article as ArticleType } from '$lib/AppwriteService';
+	import { last } from '$lib/helpers/array';
+	import Article from '../../routes/(app)/Article.svelte';
+	import { readingArticle } from '../../routes/(app)/readingArticle';
 
-	export let article: Article;
+	export let article: ArticleType;
+
+	const onLinkClick = (e: MouseEvent) => {
+		const anchorEl = e.currentTarget as HTMLAnchorElement;
+		const href = anchorEl.getAttribute('href');
+		if (!href) return;
+		e.preventDefault();
+		const id = last(href.split('/'));
+
+		readingArticle.setId(id);
+	};
+
+	$: isReading = $readingArticle?.$id === article.$id;
 </script>
 
 <li class="articles-grid-item">
-	{#if !article.isPromoted}
+	{#if isReading && $readingArticle}
+		<div class="u-flex u-flex-vertical" style:grid-column="span 3">
+			<Article article={$readingArticle} />
+		</div>
+	{:else if !article.isPromoted}
 		<article class="articles-grid-item-article">
-			<a href={`/article/${article.$id}`} class="articles-grid-item-link">
+			<a href={`/article/${article.$id}`} class="articles-grid-item-link" on:click={onLinkClick}>
 				<header class="articles-grid-item-header">
 					{#if article.isPlus}
 						<div class="ts-plus is-small">
@@ -46,7 +65,11 @@
 		</article>
 	{:else}
 		<article class="articles-grid-item-article">
-			<a href={`/article/${article.$id}`} class="articles-grid-item-link is-double-image">
+			<a
+				href={`/article/${article.$id}`}
+				class="articles-grid-item-link is-double-image"
+				on:click={onLinkClick}
+			>
 				<header class="articles-grid-item-header">
 					<p class="category-featured">Featured Article</p>
 
