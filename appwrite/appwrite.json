@@ -375,12 +375,7 @@
             ]
         }
     ],
-    "teams": [
-        {
-            "$id": "admins",
-            "name": "admins"
-        }
-    ],
+    "teams": [],
     "functions": [
         {
             "$id": "generateArticle",

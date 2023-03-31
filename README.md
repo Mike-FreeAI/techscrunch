@@ -2,7 +2,7 @@
 
 # 📰 TechScrunch
 
-> Website for all your very reliable tech news.
+> Very relAIble open source alternative for TechCrunch.
 
 ![TechScrunch logo](static/favicon.png)
 
@@ -26,17 +26,17 @@
 ## 👀 Setup Client
 
 1. Install libraries `npm install`
-2. Update `endpoint` in `src/lib/AppwriteService.tsts` (Appwrite endpoint from server setup)
+2. Update `endpoint` in `src/lib/AppwriteService.ts` (Appwrite endpoint from server setup)
 3. Start server `npm run dev`
 
 ## 🚀 Deploy client
 
-1. Deploy frontend and backend on the same domain. For example, `myapp.com` and `appwrite.myapp.com`
+1. Deploy frontend and backend on the same domain. For example, `techscrunch.dev` and `appwrite.techscrunch.dev`
 2. Add frontend hostname as a platform in the Appwrite project
 
 ## 🚨 Moderation
 
-All moderation can be done in Appwrite Console. `mods` team is present, but the frontend does not provide you with the logic for editing/deleting articles nor categories.
+All moderation can be done in Appwrite Console.
 
 ## 🤝 Contributing
 
