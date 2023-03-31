@@ -4,7 +4,7 @@
 	import { scrollingProgress } from '$lib/actions/scrollingProgress';
 	import { AppwriteService, type Article } from '$lib/AppwriteService';
 	import { readingArticle } from '$routes/(app)/readingArticle';
-	import { onDestroy, onMount } from 'svelte';
+	import { onDestroy, onMount, tick } from 'svelte';
 
 	export let article: Article;
 	export let changesUrl = true;
@@ -53,14 +53,25 @@
 	let articleEl: HTMLElement | null = null;
 
 	onMount(() => {
-		if (!browser) return;
-		articleEl?.scrollIntoView();
+		if (!browser || !articleEl) return;
+		scrollTo(0, articleEl.offsetTop - 32);
 	});
 
 	onDestroy(() => {
 		if (!browser) return;
 		// Change the url to the article's shortId
 		window.history.replaceState({}, '', prevUrl);
+
+		tick().then(() => {
+			const listArticleEl = document.querySelector(`[data-article-id="${article.$id}"] header`);
+			if (
+				listArticleEl &&
+				'offsetTop' in listArticleEl &&
+				typeof listArticleEl.offsetTop === 'number'
+			) {
+				scrollTo(0, listArticleEl.offsetTop - 32);
+			}
+		});
 	});
 </script>
 
@@ -114,7 +125,7 @@
 					readingArticle.reset();
 				}}
 			>
-				<svg viewBox="0 0 36 36" class="circle-svg">
+				<svg viewBox="0 0 36 36" class="circle-svg absolute-center">
 					<path
 						class="around"
 						stroke-dasharray="100, 100"
@@ -130,7 +141,7 @@
 				</svg>
 
 				<svg
-					class="share-links-x-icon"
+					class="share-links-x-icon absolute-center"
 					height="35%"
 					width="35%"
 					viewBox="0 0 500 500"
@@ -516,3 +527,17 @@
 		{/if}
 	</div>
 {/if}
+
+<style>
+	.circle-svg {
+		width: 95%;
+	}
+
+	.absolute-center {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		margin: 0;
+	}
+</style>

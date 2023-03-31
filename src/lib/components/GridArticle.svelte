@@ -19,7 +19,7 @@
 	$: isReading = $readingArticle?.$id === article.$id;
 </script>
 
-<li class="articles-grid-item">
+<li class="articles-grid-item" data-article-id={article.$id}>
 	{#if isReading && $readingArticle}
 		<div class="u-flex u-flex-vertical" style:grid-column="span 3">
 			<Article article={$readingArticle} />

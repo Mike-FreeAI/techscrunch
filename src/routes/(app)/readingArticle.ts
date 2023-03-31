@@ -6,7 +6,6 @@ const createReadingArticleStore = () => {
 
 	const setId = async (articleId: string) => {
 		const article = await AppwriteService.getArticle(articleId);
-		console.log(article);
 		store.set(article);
 	};
 
