@@ -20,7 +20,6 @@ export const scrollingProgress: Action<HTMLElement, (progress: number) => void> 
 	};
 
 	const handleEvent = () => {
-		console.log('handleEvent', getScrollProgress());
 		callback?.(getScrollProgress());
 	};
 

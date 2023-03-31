@@ -4,12 +4,12 @@
 	import { scrollingProgress } from '$lib/actions/scrollingProgress';
 	import { AppwriteService, type Article } from '$lib/AppwriteService';
 	import { readingArticle } from '$routes/(app)/readingArticle';
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount, tick } from 'svelte';
 
 	export let article: Article;
 	export let changesUrl = true;
 
-	$: parahraphs = article.content.split('\n').filter((p) => p === '' ? false : true);
+	$: parahraphs = article.content.split('\n').filter((p) => (p === '' ? false : true));
 
 	let copyClasses = '';
 	let copyText = 'copy';
@@ -49,19 +49,37 @@
 		}
 	};
 
+	let progress = 0;
+	let articleEl: HTMLElement | null = null;
+
+	onMount(() => {
+		if (!browser || !articleEl) return;
+		scrollTo(0, articleEl.offsetTop - 32);
+	});
+
 	onDestroy(() => {
 		if (!browser) return;
 		// Change the url to the article's shortId
 		window.history.replaceState({}, '', prevUrl);
-	});
 
-	let progress = 0;
+		tick().then(() => {
+			const listArticleEl = document.querySelector(`[data-article-id="${article.$id}"] header`);
+			if (
+				listArticleEl &&
+				'offsetTop' in listArticleEl &&
+				typeof listArticleEl.offsetTop === 'number'
+			) {
+				scrollTo(0, listArticleEl.offsetTop - 32);
+			}
+		});
+	});
 </script>
 
 <article
 	class="main-article u-margin-block-start-32"
 	use:onVisible={handleVisible}
 	use:scrollingProgress={(p) => (progress = p)}
+	bind:this={articleEl}
 >
 	<header class="main-article-header">
 		{#if article.isPlus}
@@ -107,7 +125,7 @@
 					readingArticle.reset();
 				}}
 			>
-				<svg viewBox="0 0 36 36" class="circle-svg">
+				<svg viewBox="0 0 36 36" class="circle-svg absolute-center">
 					<path
 						class="around"
 						stroke-dasharray="100, 100"
@@ -123,7 +141,7 @@
 				</svg>
 
 				<svg
-					class="share-links-x-icon"
+					class="share-links-x-icon absolute-center"
 					height="35%"
 					width="35%"
 					viewBox="0 0 500 500"
@@ -321,23 +339,25 @@
 						{parahraph}
 					</p>
 					{#if index === 3}
-					<section class="register-box u-max-width-750 u-margin-inline-auto u-margin-block-start-32 u-margin-block-end-32">
-						<div class="register-box-side">
-							<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="TechScrunch" />
-						</div>
-						<div class="register-box-content">
-							<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
-							<p class="heading-level-2 u-margin-block-start-12">
-								Generate your own fake AI news fool your friends and followers!
-							</p>
-					
-							<a href="/auth/login">
-								<button class="button u-margin-block-start-16">
-									<span class="u-padding-inline-32">Register Now</span>
-								</button></a
-							>
-						</div>
-					</section>
+						<section
+							class="register-box u-max-width-750 u-margin-inline-auto u-margin-block-start-32 u-margin-block-end-32"
+						>
+							<div class="register-box-side">
+								<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="TechScrunch" />
+							</div>
+							<div class="register-box-content">
+								<h5 class="heading-level-2 u-color-text-pink">Sign Up to TS!</h5>
+								<p class="heading-level-2 u-margin-block-start-12">
+									Generate your own fake AI news fool your friends and followers!
+								</p>
+
+								<a href="/auth/login">
+									<button class="button u-margin-block-start-16">
+										<span class="u-padding-inline-32">Register Now</span>
+									</button></a
+								>
+							</div>
+						</section>
 					{/if}
 				{/each}
 			</div>
@@ -507,3 +527,17 @@
 		{/if}
 	</div>
 {/if}
+
+<style>
+	.circle-svg {
+		width: 95%;
+	}
+
+	.absolute-center {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		margin: 0;
+	}
+</style>
