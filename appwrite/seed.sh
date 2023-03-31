@@ -3,7 +3,6 @@
 # Schema Setup
 
 appwrite deploy collection --all --yes
-appwrite deploy team --all --yes
 appwrite deploy function --all --yes
 
 appwrite storage createBucket --bucketId 'thumbnails' --name 'thumbnails' --fileSecurity 'true' --permissions 'read("any")' --permissions 'update("team:admins")' --permissions 'delete("team:admins")'  --maximumFileSize '5242880' --allowedFileExtensions 'png' --allowedFileExtensions 'jpg' --allowedFileExtensions 'jpeg'
@@ -24,3 +23,5 @@ appwrite databases createDocument --databaseId 'default' --collectionId 'categor
 appwrite databases createDocument --databaseId 'default' --collectionId 'categories' --documentId 'apps' --data '{"name":"Apps","description":"The app economy continues to grow, having produced a record number of downloads and consumer spending across both the iOS and Google Play stores. Keep up with this fast-moving industry in one place, with the latest from the world of apps, including news, updates, startup fundings, mergers and acquisitions, and much more.","hidden":false}'
 
 appwrite databases createDocument --databaseId 'default' --collectionId 'categories' --documentId 'events' --data '{"name":"Events","description":"Be the first to hear about the latest TechScrunch events and opportunities.","hidden":false}'
+
+appwrite databases createDocument --databaseId 'default' --collectionId 'categories' --documentId 'code' --data '{"name":"Code","description":"All news about your most favourite coding language, framework or technology. It's trendy? We got it!","hidden":false}'
