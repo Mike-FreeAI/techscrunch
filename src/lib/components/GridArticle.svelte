@@ -15,7 +15,7 @@
 								<img height="12" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
 							</span>
 							<span class="ts-plus-sign" />
-							<a href={`/category/${article.categoryId}`} class="category">
+							<a href={`/category/${article.categoryId}`} style="font-weight:300">
 								<span class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
 							>
 						</div>
