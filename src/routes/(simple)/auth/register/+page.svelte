@@ -85,8 +85,12 @@
 	</ul>
 
 	<p class="u-margin-block-start-16 u-text-center">
-		By clicking "Next", you agree to the Terms and acknowledge the Privacy Policy to create a
-		TechScrunch account
+		By registering, you agree that you have read, understand, and acknowledge our <a
+			class="u-underline"
+			href="https://appwrite.io/policy/privacy">Privacy Policy</a
+		>
+		and accept our
+		<a class="u-underline" href="https://appwrite.io/policy/terms">General Terms of Use</a>.
 	</p>
 
 	<button type="submit" class="button u-margin-block-start-24 u-width-full-line">

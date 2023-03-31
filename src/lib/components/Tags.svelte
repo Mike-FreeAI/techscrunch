@@ -7,6 +7,8 @@
 
 <svelte:head>
 	<meta property="og:image" content={cover} />
+	<meta property="og:image:secure_url" content={cover} />
+
 	<meta name="twitter:image" content={cover} />
 
 	<title>{title}</title>
