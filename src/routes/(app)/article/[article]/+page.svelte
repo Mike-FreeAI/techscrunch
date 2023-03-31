@@ -459,7 +459,6 @@
 				</ul>
 			</section>
 		{/if}
-
 		<section class="register-box">
 			<div class="register-box-side">
 				<img height="35" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
