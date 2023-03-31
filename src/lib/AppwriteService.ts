@@ -257,7 +257,7 @@ export const AppwriteService = {
 
 		return articles;
 	},
-	getThumbnail: (fileId: string, width?: number, height?: number) => {
+	getThumbnail: (fileId: string, width?: number, height?: number, format = 'webp') => {
 		return storage
 			.getFilePreview(
 				'thumbnails',
@@ -272,7 +272,7 @@ export const AppwriteService = {
 				undefined,
 				undefined,
 				undefined,
-				'webp'
+				format
 			)
 			.toString();
 	},
