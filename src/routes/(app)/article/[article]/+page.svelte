@@ -208,7 +208,7 @@
 
 </article>
 <div class="u-max-width-750 u-margin-block-start-40 u-margin-inline-auto">
-  <section class="share-links u-sep-block-end u-padding-block-end-4" style="grid-column:span 2">
+  <section class="u-flex share-links u-sep-block-end u-padding-block-end-4" style="grid-column:span 2">
     <ul class="share-links-list is-horizontal">
       <li class="share-links-item">
         <a
@@ -329,6 +329,12 @@
         </a>
       </li>
     </ul>
+    <div class="input-copy">
+      <input type="url" value="https://eladsc.blog" aria-label="page url">
+      <button class="input-copy-button">
+        <span>copy</span>
+      </button>
+    </div>
   </section>
   <section class="u-margin-block-start-32" style="grid-column: span 2">
     <h2 class="heading-level-2">Tags</h2>
