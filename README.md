@@ -1,3 +1,5 @@
+![Banner](docs/banner.png)
+
 # 📰 TechScrunch
 
 > Website for all your very reliable tech news.
@@ -46,10 +48,6 @@ When contributing to backend-related logic, sync up `appwrite/appwrite.json` by 
 
 ![Screenshot](docs/screenshot1.png)
 ![Screenshot](docs/screenshot2.png)
-![Screenshot](docs/screenshot3.png)
-![Screenshot](docs/screenshot4.png)
-![Screenshot](docs/screenshot5.png)
-![Screenshot](docs/screenshot6.png)
 
 ## 🤖 Auto-generated documentation
 
