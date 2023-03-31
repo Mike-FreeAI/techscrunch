@@ -187,13 +187,15 @@
 				</div>
 			</section>
 			<section class="u-margin-block-start-12">
-				<img
+				<a href="https://appwrite.io/cloud" target="_blank">
+					<img
 					height="270"
 					width="270"
 					src="/img/cloud-banner.webp"
 					class="u-aspect-1-1"
 					alt="Cloud banner"
 				/>
+				</a>
 			</section>
 		</section>
 	</aside>
@@ -261,7 +263,7 @@
 				</svg>
 			</button>
 
-			<img width="114" height="20" src="/img/banner-logo.webp" alt="OSS fund" />
+			<img width="114" height="20" src="/img/banner-logo.svg" alt="OSS fund" />
 			<div class="divider" />
 			<h1>Have a cool open source project and want to get some support? Join our funding.</h1>
 			<a class="button" href="https://appwrite.io/oss-fund"> Apply now </a>

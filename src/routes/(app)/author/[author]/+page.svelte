@@ -33,7 +33,7 @@
 						class="u-block"
 						width="200"
 						height="200"
-						src="img/profile.webp"
+						src="/img/profile.webp"
 						alt=""
 					/>
 				{/if}
