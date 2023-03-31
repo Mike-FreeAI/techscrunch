@@ -9,6 +9,10 @@
   &-content {
     padding-block:pxToRem(32); padding-inline:pxToRem(48);
     border:solid pxToRem(2) hsl(var(--color-primary-100));
+    .button {
+      block-size:3rem; font-weight:bold;
+      background-image: linear-gradient(90deg, rgb(192, 13, 83) 0%, rgb(240, 46, 101) 100%);
+    }
   }
 
   @media #{$break1} {
