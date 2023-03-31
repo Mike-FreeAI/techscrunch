@@ -81,6 +81,7 @@
 	}
   @media #{$break1} {
     grid-template-columns: 1fr pxToRem(117);
+    gap: pxToRem(8);
   }
   @media #{$break3open} {
     &-item-link {
