@@ -54,7 +54,7 @@ export type Article = {
 } & Models.Document;
 
 export const PageSize = {
-	Articles: 10
+	Articles: 25
 };
 
 function getVerboseDate(dateStr: string) {
