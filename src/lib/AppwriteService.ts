@@ -268,7 +268,7 @@ export const AppwriteService = {
 				undefined,
 				undefined,
 				undefined,
-				'webp'
+				'png'
 			)
 			.toString();
 	},
@@ -287,7 +287,7 @@ export const AppwriteService = {
 				undefined,
 				undefined,
 				undefined,
-				'webp'
+				'png'
 			)
 			.toString();
 	}

@@ -9,16 +9,21 @@
 		<article class="articles-grid-item-article">
 			<a href={`/article/${article.$id}`} class="articles-grid-item-link">
 				<header class="articles-grid-item-header">
-					<a href={`/category/${article.categoryId}`} class="category"
-						>{article.category?.name ?? 'Unknown Category'}</a
-					>
-          <div class="ts-plus is-small">
-            <span class="ts-plus-title">
-              <img height="12" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch">
-            </span>
-            <span class="ts-plus-sign"></span>
-            <span class="ts-plus-text">Yellow text</span>
-          </div>
+					{#if article.isPlus}
+						<div class="ts-plus is-small">
+							<span class="ts-plus-title">
+								<img height="12" src="/img/techscrunch-logo.svg" class="logo" alt="Tech Scrunch" />
+							</span>
+							<span class="ts-plus-sign" />
+							<a href={`/category/${article.categoryId}`} class="category">
+								<span class="ts-plus-text">{article.category?.name ?? 'Unknown Category'}</span></a
+							>
+						</div>
+					{:else}
+						<a href={`/category/${article.categoryId}`} class="category"
+							>{article.category?.name ?? 'Unknown Category'}</a
+						>
+					{/if}
 					<h3 class="heading-level-2 category-heading">{article.title}</h3>
 					<a href={`/author/${article.authorId}`} class="author u-margin-block-start-12">
 						<span>{article.author?.name ?? 'Anonymous'}</span>
