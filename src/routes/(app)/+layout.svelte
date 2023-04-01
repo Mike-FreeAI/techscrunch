@@ -13,7 +13,7 @@
 	import { readingArticle } from './readingArticle';
 
 	let isMenuOpened = false;
-	let footerBanner = true;
+	let footerBanner = false;
 
 	export let data: LayoutData;
 
