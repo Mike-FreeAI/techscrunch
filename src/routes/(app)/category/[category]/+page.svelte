@@ -20,4 +20,5 @@
 
 
 
-<Tags title={'TechScrunch | ' + data.category.name} description={data.category.description} />
+<Tags 
+url={`https://techscrunch.dev/category/${data.category.$id}`} title={'TechScrunch | ' + data.category.name} description={data.category.description} />

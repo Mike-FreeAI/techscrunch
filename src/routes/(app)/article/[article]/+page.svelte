@@ -18,6 +18,7 @@
 </section>
 
 <Tags
+	url={`https://techscrunch.dev/article/${data.article.$id}`}
 	title={'TechScrunch | ' + data.article.title}
 	cover={AppwriteService.getThumbnail(data.article.imageId, 1200, 627, 'png')}
 	description={data.article.content.substring(0, 150) + '...'}

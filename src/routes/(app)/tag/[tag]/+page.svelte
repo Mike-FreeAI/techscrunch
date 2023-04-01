@@ -20,4 +20,5 @@
 
 
 
-<Tags title={'TechScrunch | ' + data.tag.name} />
+<Tags 
+url={`https://techscrunch.dev/tag/${data.tag.$id}`} title={'TechScrunch | ' + data.tag.name} />

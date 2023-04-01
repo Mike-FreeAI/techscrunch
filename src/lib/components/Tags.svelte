@@ -1,4 +1,5 @@
 <script lang="ts">
+	export let url = 'https://techscrunch.dev/';
 	export let cover = 'https://techscrunch.dev/cover.png';
 	export let title = 'TechScrunch | Startup and Technology News';
 	export let description =
@@ -18,10 +19,10 @@
 	<meta name="description" content={description} />
 	<meta name="twitter:description" content={description} />
 
-	<meta property="og:url" content="https://techscrunch.dev/" />
-	<meta property="twitter:url" content="https://techscrunch.dev/" />
-	<meta property="twitter:domain" content="techscrunch.dev" />
+	<meta property="og:url" content={url} />
+	<meta property="twitter:url" content={url} />
 
+	<meta property="twitter:domain" content="techscrunch.dev" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image:alt" content="TechScrunch" />
 	<meta property="og:type" content="website" />
