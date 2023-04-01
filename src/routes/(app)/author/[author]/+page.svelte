@@ -82,4 +82,5 @@
 	</section>
 </section>
 
-<Tags title={'TechScrunch | ' + (data.author.name ?? 'Anonymous')} description={data.author.bio ?? undefined} />
+<Tags 
+url={`https://techscrunch.dev/author/${data.author.$id}`} title={'TechScrunch | ' + (data.author.name ?? 'Anonymous')} description={data.author.bio ?? undefined} />
