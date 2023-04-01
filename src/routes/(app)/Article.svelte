@@ -3,7 +3,6 @@
 	import { onVisible } from '$lib/actions/onVisible';
 	import { scrollingProgress } from '$lib/actions/scrollingProgress';
 	import { AppwriteService, type Article } from '$lib/AppwriteService';
-	import { readingArticle } from '$routes/(app)/readingArticle';
 	import { onDestroy, onMount, tick } from 'svelte';
 	import { fade } from 'svelte/transition';
 
@@ -120,12 +119,6 @@
 					style:display="block"
 					href="/"
 					class="share-links-x-button"
-					on:click={(e) => {
-						if (changesUrl) {
-							e.preventDefault();
-						}
-						readingArticle.reset();
-					}}
 				>
 					<svg viewBox="0 0 36 36" class="circle-svg absolute-center">
 						<path

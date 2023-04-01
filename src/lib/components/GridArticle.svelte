@@ -26,7 +26,7 @@
 		</div>
 	{:else if !article.isPromoted}
 		<article class="articles-grid-item-article">
-			<a href={`/article/${article.$id}`} class="articles-grid-item-link" on:click={onLinkClick}>
+			<a href={`/article/${article.$id}`} class="articles-grid-item-link">
 				<header class="articles-grid-item-header">
 					{#if article.isPlus}
 						<div class="ts-plus is-small">

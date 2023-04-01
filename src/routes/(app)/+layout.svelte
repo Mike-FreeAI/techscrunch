@@ -10,7 +10,6 @@
 	import '$lib/styles/index.scss';
 	import { onMount } from 'svelte';
 	import type { LayoutData } from './$types';
-	import { readingArticle } from './readingArticle';
 
 	let isMenuOpened = false;
 	let footerBanner = false;
@@ -28,10 +27,6 @@
 				}
 			}
 		}
-	});
-
-	page.subscribe(() => {
-		readingArticle.reset();
 	});
 </script>
 
