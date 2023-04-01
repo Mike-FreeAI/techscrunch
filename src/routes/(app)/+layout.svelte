@@ -175,15 +175,13 @@
 			<section class="side-register">
 				<div>
 					<section>
-						<h1>Appwrite Cloud Private Beta</h1>
+						<h1>We're Live on Product Hunt</h1>
 						<p>
-							Join the
-							<br />
-							Waiting List
+							Share your <br> Feedback
 						</p>
 					</section>
 					<div class="divider" />
-					<a href="https://appwrite.io/cloud" target="_blank">Register Now</a>
+					<a href="https://www.producthunt.com/posts/techscrunch" target="_blank">Show Your Support</a>
 				</div>
 			</section>
 			<section class="u-margin-block-start-12">

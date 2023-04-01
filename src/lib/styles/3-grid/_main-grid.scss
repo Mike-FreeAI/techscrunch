@@ -57,8 +57,8 @@
 
 	.side-register {
 		padding: pxToRem(2);
-		background: rgb(192, 13, 83);
-		background: linear-gradient(135deg, rgba(192, 13, 83, 1) 0%, rgba(240, 46, 101, 1) 100%);
+		background: rgb(218, 85, 47);
+		background: linear-gradient(135deg, rgba(218, 85, 47, 1) 0%, rgb(185, 65, 32) 100%);
 
 		div {
 			background-color: white;
@@ -75,8 +75,8 @@
 
 					background: -webkit-linear-gradient(
 						135deg,
-						rgba(192, 13, 83, 1) 0%,
-						rgba(240, 46, 101, 1) 100%
+						rgba(218, 85, 47, 1) 0%,
+						rgba(185, 65, 32, 1) 100%
 					);
 					-webkit-background-clip: text;
 					-webkit-text-fill-color: transparent;
@@ -91,8 +91,8 @@
 			.divider {
 				width: 100%;
 				height: pxToRem(2);
-				background: rgb(192, 13, 83);
-				background: linear-gradient(90deg, rgba(192, 13, 83, 1) 0%, rgba(240, 46, 101, 1) 100%);
+				background: rgb(218, 85, 47);
+				background: linear-gradient(90deg, rgba(218, 85, 47, 1) 0%, rgba(185, 65, 32, 1) 100%);
 			}
 
 			a {
@@ -108,8 +108,8 @@
 				cursor: pointer;
 
 				&:hover {
-					background: rgb(192, 13, 83);
-					background: linear-gradient(90deg, rgba(192, 13, 83, 1) 0%, rgba(240, 46, 101, 1) 100%);
+					background: rgb(218, 85, 47);
+					background: linear-gradient(90deg, rgba(218, 85, 47, 1) 0%, rgba(185, 65, 32, 1) 100%);
 					color: white;
 				}
 			}

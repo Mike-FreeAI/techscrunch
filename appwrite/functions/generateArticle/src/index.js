@@ -34,7 +34,7 @@ async function generateTags(topic, req) {
 	);
 
 	const tags = res.data.choices[0].message.content.split(',').map((tag) => {
-		return tag.trim().split(' ').join('-').toLowerCase();
+		return tag.trim().split(' ').join('-').toLowerCase().split('"').join("").split(".").join("").split("\\").join("");
 	});
 
 	return tags;
@@ -75,7 +75,7 @@ async function getDalleUrl(topic, req) {
 }
 
 async function generateThumbnail(topic, storage, req) {
-	const question = 'stock picture in 2 words for article with title: ' + topic;
+	const question = `Choose one word that will make a good article cover image from this title and has good chances to find a free stock image for: \`${topic}\``;
 
 	const res0 = await axios.default.post(
 		'https://api.openai.com/v1/chat/completions',
@@ -91,7 +91,7 @@ async function generateThumbnail(topic, storage, req) {
 		}
 	);
 
-	const imgTopic = res0.data.choices[0].message.content;
+	const imgTopic = res0.data.choices[0].message.content.split('"').join("").split(".").join("").split("\\").join("");
 
 	let url = await getPixabayUrl(imgTopic, req);
 
